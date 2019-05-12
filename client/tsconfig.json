@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "lib": [
+          "es2015",
+          "dom"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitAny": true,
+      "sourceMap": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "target": "es5",
+      "baseUrl": "src",
+      "paths": {
+          "@/*": [
+              "app/*"
+          ],
+          "@services/*": [
+            "src/app/services/*"
+          ],
+          "@login/*":[
+            "src/app/components/login/*"
+          ],
+          "@register/*":[
+            "src/app/components/register/*"
+          ],
+          "@alert/*":[
+            "src/app/components/alert/*"
+          ]
+      }
+  }
+}

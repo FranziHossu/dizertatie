@@ -1,0 +1,52 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+            <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/dashboard']">Dashboard
+                    <span class="sr-only">(current)</span>
+                </a>
+               
+            </li>
+            <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a class="nav-link" [routerLink]="['/statistics']">Statistics
+                        <span class="sr-only">(current)</span>
+                    </a>
+                   
+            </li>
+            <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/alerts']">Alerts
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav navbar-nav">
+            <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/notification']">Notifications
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+
+            <li *ngIf="!authService.loggedIn()" class="nav-item " [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/login']">Login
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li *ngIf="authService.showForSuperAdmin()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a class="nav-link" [routerLink]="['/register']">Create user
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li *ngIf="authService.loggedIn()" class="nav-item">
+                <a class="nav-link" href="#" (click)="onLogoutClick()">Logout
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

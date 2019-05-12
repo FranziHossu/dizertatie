@@ -1,0 +1,14 @@
+canvas {
+  min-width: 400px;
+  min-height: 400px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.button {
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,28 @@
+<html>
+
+<head>
+  <title>Bar Chart</title>
+</head>
+
+<body>
+  <canvas id="canvas">{{ chart }}</canvas>
+
+  <div class="buttons"></div>
+  <div class="button" (click)="increaseInterval()">
+    INCREASE INTERVAL
+  </div>
+
+  <div class="button" (click)="decreaseInterval()">
+    DECREASE INTERVAL
+  </div>
+
+  <select [(ngModel)]="chartType" (change)="changeChartType()">
+    <option [value]="CHART.Bar">{{CHART.Bar}}</option>
+    <option [value]="CHART.Pie">{{CHART.Pie}}</option>
+    <option [value]="CHART.Radar">{{CHART.Radar}}</option>
+    <option [value]="CHART.Doughnut">{{CHART.Doughnut}}</option>
+  </select>
+  <br>
+</body>
+
+</html>
