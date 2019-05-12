@@ -7,15 +7,19 @@ import { AlertComponent } from './components/alert/alert.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ROUTES } from '@/app.routes'
 import { HttpService } from './http.service';
 import { UserService } from './services/user.service';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LocalStorageService } from './services/local-storage.service';
-import { ChartComponent } from './chart/chart.component';
+import { ChartComponent } from './components/chart/chart.component';
 import { DataService } from './services/data.service';
+import { HeaderComponent } from './components/header/header.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { PanelComponent } from './components/panel/panel.component';
+import { MailSenderComponent } from './components/mail-sender/mail-sender.component';
+import { ListsComponent } from './components/lists/lists.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -33,9 +37,13 @@ const appRoutes: Routes = ROUTES;
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        NavbarComponent,
         LoadingComponent,
-        ChartComponent
+        ChartComponent,
+        HeaderComponent,
+        MenuComponent,
+        PanelComponent,
+        MailSenderComponent,
+        ListsComponent
     ],
     providers: [
         HttpService,        

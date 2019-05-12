@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+
+    <div class="item to">
+      <div class="label">To:</div>
+      <div class="to-items">
+        <div class="item" *ngFor="let to of tos">{{to}}</div>
+      </div>
+      <input [(ngModel)]="to" type="text">
+      <div (click)="addEmailTo()" class="button">+</div>
+    </div>
+    <div class="item cc">
+      <div class="label">CC:</div>
+      <div class="to-items">
+        <div class="item" *ngFor="let cc of ccs">{{cc}}</div>
+      </div>
+      <input [(ngModel)]="cc" type="text">
+      <div (click)="addEmailCc()" class="button">+</div>
+    </div>
+    <div class="item subject">
+      <div class="label">Subject:</div>
+      <input type="text">
+    </div>
+    <div class="item text">
+      <div class="label">Text:</div>
+      <input type="text">
+    </div>
+  </div>
+</div>
