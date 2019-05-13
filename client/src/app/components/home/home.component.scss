@@ -1,15 +1,8 @@
-
-body,
-html {
-  margin: 0;
-  padding: 0;
-}
-
 .container {
   margin: 0;
   padding: 0;
   min-width: 100%;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
@@ -24,16 +17,19 @@ html {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: calc(100% - 40px);
+    min-height: calc(100% - 40px);
 
     .menu-left {
-      max-width: 80px;
-      height: 100%;
+      display: flex;
+      width: 80px;
+      min-height: 100%;
       background: rgb(228, 138, 138);
     }
 
     .panel {  
-      width: calc(100% -80px);
+      display: flex;
+      background: #ccc;
+      min-width: calc(100% - 80px);
       height: 100%;
     }
   }

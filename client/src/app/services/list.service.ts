@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "@/http.service";
 import { UserService } from "./user.service";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class ListService {
@@ -12,7 +13,7 @@ export class ListService {
         this.userService = userService;
     }
 
-    public getListsByUser() {
-        this.httpService.get(`/lists/${this.userService.currentUser.id}`);
+    public getListsByUser(): Observable<any> {
+        return this.httpService.get(`/lists/${this.userService.currentUser.id}`);
     }
 }

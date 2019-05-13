@@ -1,3 +1,26 @@
 <div class="container">
-    <div class="create"></div>
+    <div class="left-side">
+        <div class="row bar">
+            <div class="section-title">
+                <p>My lists</p>
+            </div>
+            <div class="button align-right">Create</div>
+        </div>
+        <div class="content">
+            <div *ngIf="lists.length === 0">
+                <p>There are no lists..</p>
+            </div>
+
+            <div class="list">
+                <div class="row">
+                    <div class="row-item">#</div>
+                    <div class="row-item">List Name</div>
+                    <div class="row-item">Emails</div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="right-side"></div>
 </div>

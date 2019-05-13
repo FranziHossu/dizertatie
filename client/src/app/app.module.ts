@@ -20,6 +20,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { MailSenderComponent } from './components/mail-sender/mail-sender.component';
 import { ListsComponent } from './components/lists/lists.component';
+import { ListService } from './services/list.service';
 
 const appRoutes: Routes = ROUTES;
 
@@ -49,7 +50,8 @@ const appRoutes: Routes = ROUTES;
         HttpService,        
         UserService,
         LocalStorageService,
-        DataService
+        DataService,
+        ListService
     ],
     bootstrap: [AppComponent]
 })
