@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ListService } from '@/services/list.service';
-import { UserService } from '@/services/user.service';
-import { List } from './list.model';
+import {Component, OnInit} from '@angular/core';
+import {ListService} from '@/services/list.service';
+import {UserService} from '@/services/user.service';
+import {List} from './list.model';
 
 @Component({
   selector: 'lists',
@@ -23,7 +23,10 @@ export class ListsComponent implements OnInit {
       this.lists = data;
     }, () => {
 
-    })
+    });
   }
 
+  public create() {
+
+  }
 }

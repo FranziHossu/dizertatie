@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.row-line {
+  display: flex;
+  width: 100%;
+  height: auto;
+
+  margin: 0 auto auto auto;
+  flex-direction: row;
+}
+
+.name {
+  margin: 10px;
+  padding: 5px;
+  background: #ffffff;
+  border: 1px solid #afafaf;
+  height: 30px;
+}
