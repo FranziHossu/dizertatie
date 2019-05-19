@@ -7,7 +7,7 @@ export const listSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
     },
-    lists: [String],
+    emails: [String],
     name: String
 }, {
         toJSON: {
@@ -21,7 +21,7 @@ export const listSchema: Schema = new Schema({
 
 export interface IList extends Document {
     user: IUser;
-    lists: [string]
+    emails: [string]
     name: string
 }
 

@@ -3,7 +3,7 @@ import { Application } from 'express';
 
 /** Routers */
 import { UserRouter } from '../user/user.router';
-import { DataRouter } from '../data/data.router';
+import { ListRouter } from '../list/list.router';
 
 
 class RouterService {
@@ -17,7 +17,7 @@ class RouterService {
 
 	private initRouters() {
 		new UserRouter(this.app);
-		new DataRouter(this.app);
+		new ListRouter(this.app);
 	}
 }
 

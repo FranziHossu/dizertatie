@@ -1,7 +1,7 @@
 export class List {
   public id: string;
-  public user: string;
-  public lists: Array<string>;
+  public user: any;
+  public emails: Array<string> = new Array<string>();
   public name: string;
 
   constructor() {
@@ -10,7 +10,7 @@ export class List {
 
   public getEmails() {
     let str = '';
-    this.lists.forEach((e) => {
+    this.emails.forEach((e) => {
       str += e + ',';
     });
   }

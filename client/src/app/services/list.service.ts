@@ -16,4 +16,8 @@ export class ListService {
     public getListsByUser(): Observable<any> {
         return this.httpService.get(`/lists/${this.userService.currentUser.id}`);
     }
+
+    public addList(list: any): Observable<any>{
+        return this.httpService.post(`/list`, list);
+    }
 }

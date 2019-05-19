@@ -12,9 +12,12 @@ export class ListManager extends AbstractManager {
 		this.List = this.connection.model<IList>('List', listSchema);
 	}
 
-
 	public getListsByUser(id: string, success: Function, fail: Function) {
 		this.List.find({ user: id }).exec(this.replay(success, fail));
+	}
+
+	public addList(list: any, success: Function, fail: Function) {
+		this.List.create(list, this.replay(success, fail));
 	}
 
 }
