@@ -16,7 +16,6 @@ export class DataRouter extends AbstractRouter {
 
 	private getData(request: Request, response: Response) {
 		this.dataManager.getData((data) => {
-			console.log(data);
 			response.status(200).json(data);
 		}, () => {
 			response.status(500).json(null);

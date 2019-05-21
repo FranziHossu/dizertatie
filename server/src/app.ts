@@ -42,7 +42,6 @@ class App {
 		routerService.setApplication(this.app);
 
 		this.app.listen(config.server, (error) => {
-			console.log(error);
 			console.log(`Listening on port ${config.server.port}`);
 		});
 

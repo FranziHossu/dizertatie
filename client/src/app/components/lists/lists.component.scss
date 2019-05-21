@@ -36,48 +36,116 @@
 .content {
   display: flex;
   flex-direction: column;
+  padding: 20px;
   width: calc(100% - 20px);
   height: calc(100% - 5px);
   margin: 0 10px 5px 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.input-item {
-  padding: 10px;
-  display: flex;
-  height: 50px;
-  width: 100%;
+.element {
+  height: 400px;
+  width: 400px;
 }
 
-.label {
-  width: 20%;
-  min-width: 100px;
-  margin: auto 30px auto 0;
-}
-
-input {
-  margin: auto 0;
-  padding: 5px;
-  width: 100%;
-  height: 30px;
-}
-
-.mybutton {
-  padding: 10px;
-  border: 1px solid #ccc;
+.widget {
   border-radius: 5px;
-  font-size: 15px;
-  font-weight: bolder;
-  margin: auto 10px;
-  cursor: pointer;
-}
+  background: #cccccc;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 0.5px solid #002f5e;
 
-.btn{
-  cursor: pointer;
+  &:hover .name .actions {
+    display: block;
+  }
+
+  .name {
+    width: 100%;
+    height: 10%;
+    font-size: 20px;
+    font-weight: bolder;
+    background: #002f5e;
+    color: #ffffff;
+    display: flex;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    position: relative;
+
+    p {
+      margin: auto;
+      cursor: pointer;
+    }
+
+    .actions {
+      border-radius: 5px;
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+
+      i {
+        color: #ffffff;
+        padding: 5px;
+      }
+    }
+  }
+
+  .description {
+    padding: 10px;
+    width: 100%;
+    height: 30%;
+    background: #ffffff;
+    display: flex;
+    text-align: center;
+
+    p {
+      height: 100%;
+      margin: auto;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+  }
+
+  .emails {
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    background: #ffffff;
+    height: 60%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    flex-wrap: wrap;
+
+    .email {
+      border: 0.5px solid #002f5e;
+      width: 50%;
+      border-radius: 5px;
+      margin-right: 5px;
+      height: 30px;
+      display: flex;
+      padding: 2px;
+      flex: 1 0 50%;
+      box-sizing: border-box;
+
+      p {
+         margin: auto;
+      }
+
+    }
+  }
+
+
 }
 
 .list {
-  padding:30px;
+  padding: 30px;
   display: flex;
   width: 100%;
 }
@@ -98,7 +166,6 @@ input {
 // }
 
 
-
 // .bar {
 //   padding: 10px 30px;
 //   margin: 0;
@@ -108,17 +175,17 @@ input {
 // }
 
 
- .row-line {
-   display: flex;
-   width: 100%;
-   flex-direction: row;
- }
+.row-line {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
 
- .row-item {
-   display: flex;
-   font-size: 15px;
-   font-weight: bolder;
- }
+.row-item {
+  display: flex;
+  font-size: 15px;
+  font-weight: bolder;
+}
 
 // .row-item.index{
 //   max-width: 100px;

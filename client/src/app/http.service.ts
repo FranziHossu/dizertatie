@@ -15,7 +15,6 @@ export class HttpService {
   }
 
   public get(url: string, params?: any): Observable<any> {
-    console.log(`${baseUrl}${url}`);
     if (params != undefined) {
       return this.httpClient.get(`${baseUrl}${url}`, {
         params: params

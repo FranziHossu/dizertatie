@@ -31,9 +31,7 @@ export class ChartComponent implements OnInit {
   private getData() {
     this.dataService.getData().subscribe((data) => {
       this.data = data;
-      console.log(data);
     }, (error: Error) => {
-      console.log('error data', error);
     })
   }
 
@@ -77,8 +75,6 @@ export class ChartComponent implements OnInit {
 
 
   public changeChartType() {
-    console.log('ce')
-    this.chartType = this.chartType;
     this.initChart();
   }
 
@@ -102,7 +98,6 @@ export class ChartComponent implements OnInit {
     if (!this.intervalValue) return 2;
     for (let i: number = this.intervalValue + 2; i <= 12; i += 2) {
       if (24 % i == 0) {
-        console.log(i);
         return i;
       }
     }
@@ -113,7 +108,6 @@ export class ChartComponent implements OnInit {
     if (this.intervalValue == 2) return 0;
     for (let i: number = this.intervalValue - 2; i >= 0; i -= 2) {
       if (24 % i == 0) {
-        console.log(i);
         return i;
       }
     }

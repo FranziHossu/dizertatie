@@ -13,18 +13,21 @@ export class ListComponent implements OnInit {
   private userService: UserService;
   private listService: ListService;
   private router: Router;
+  private route: ActivatedRoute;
 
   public list: List = new List();
   public allEmails: Array<string> = new Array();
   public listName: string;
   public email: string;
   public title: string;
+  public description: string;
   public button: string;
 
-  constructor(userService: UserService, listService: ListService, router: Router, private route: ActivatedRoute) {
+  constructor(userService: UserService, listService: ListService, router: Router, route: ActivatedRoute) {
     this.userService = userService;
     this.listService = listService;
-    this.listService = listService;
+    this.route = route;
+    this.router = router;
   }
 
   ngOnInit() {
@@ -56,9 +59,10 @@ export class ListComponent implements OnInit {
 
   public saveList() {
     this.list.name = this.listName;
+    this.list.description = this.description;
     this.list.user = this.userService.currentUser.id;
     this.listService.addList(this.list).subscribe(() => {
-      // this.router.navigate['list'];
+      this.router.navigate(['lists']);
     }, () => {
 
     });

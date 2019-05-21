@@ -9,14 +9,21 @@
           <div class="label">List name</div>
           <input [(ngModel)]="listName" type="text" placeholder="Your list name">
         </div>
+
+        <div class="input-item">
+          <div class="label">List description</div>
+          <input [(ngModel)]="description" type="text" placeholder="Your list description">
+        </div>
+
         <div class="input-item">
           <div class="label">List email</div>
           <input [(ngModel)]="email" type="text" placeholder="Insert email"
                  (keyup.enter)="addEmailToList()">
         </div>
+
         <div class="input-item">
           <div class="mybutton" (click)="saveList()">Create List</div>
-          <div class="mybutton" >Cancel</div>
+          <div class="mybutton">Cancel</div>
         </div>
       </div>
       <div class="right-side">
