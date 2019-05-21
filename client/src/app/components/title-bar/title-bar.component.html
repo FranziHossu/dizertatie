@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row-line">
     <div class="section-title" *ngIf="title">{{title}}</div>
-    <div class="button" *ngIf="button">{{button}}</div>
+    <div class="button" (click)="navigateTo()" *ngIf="button"><p>{{button}}</p></div>
   </div>
 </div>

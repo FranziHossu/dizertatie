@@ -1,3 +1,8 @@
+:host{
+  height: 100%;
+  width: 100%;
+}
+
 .container {
   margin: 0;
   padding: 0;
@@ -9,7 +14,7 @@
   .header {
     height: 40px;
     color: #ffffff;
-    background: #000000;
+    background: #002f5e;
     width: 100%;
   }
 
@@ -22,8 +27,8 @@
     .menu-left {
       display: flex;
       width: 80px;
-      min-height: 100%;
-      background: rgb(228, 138, 138);
+      height: 100%;
+      position: relative;
     }
 
     .panel {

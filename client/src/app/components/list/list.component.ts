@@ -28,7 +28,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.title = this.route.snapshot.data['section'];
+    this.title = this.route.snapshot.data.section;
   }
 
   public addEmailToList() {

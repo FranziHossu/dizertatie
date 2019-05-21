@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SectionRoutes} from '@/enums/section-routes.enum';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'menu',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  public sectionRoutes = SectionRoutes;
 
-  constructor() { }
+  private router: Router;
 
-  ngOnInit() {
+  constructor(router: Router) {
+    this.router = router;
   }
 
+  ngOnInit() {
+    console.log(this.sectionRoutes);
+  }
+
+  public navigateTo(route: any) {
+    console.log('---', route);
+    this.router.navigate([route]);
+  }
 }

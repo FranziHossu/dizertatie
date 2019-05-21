@@ -15,25 +15,28 @@
 .section-title {
   margin: auto auto auto 0;
   font-size: 20px;
-  padding: 0 20px;
   font-family: monospace;
   font-weight: bolder;
   text-align: center;
 }
 
-.section-title p {
+p {
   margin: auto;
 }
 
 .button {
-  padding: 5px 20px;
-  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+  display: flex;
+  border-radius: 5px;
+  font-weight: bold;
   border: 2px solid #ccc;
   cursor: pointer;
 }
 
 .row-line {
   display: flex;
+  padding: 5px 10px;
   width: 100%;
   flex-direction: row;
 }
