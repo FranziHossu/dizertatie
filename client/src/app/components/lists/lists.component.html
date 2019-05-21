@@ -1,33 +1,28 @@
-<!-- <div class="container">
-    <div class="left-side">
-        <div class="row-line bar">
-            <div class="section-title">
-                <p>My lists</p>
-            </div>
-            <div class="button align-right" (click)="create()">Create</div>
-        </div>
-        <div class="content"> -->
 
 <div class="container">
-    <div *ngIf="lists.length === 0" class="label">
-        <p>There are no lists..</p>
+  <div class="left-container">
+    <div class="bar">
+      <title-bar [title]="title" [button]="button"></title-bar>
     </div>
+    <div class="content">
+      <div *ngIf="lists.length == 0" class="empty-label">
+        <p>There are no lists..</p>
+      </div>
 
-    <div class="list">
+      <div class="list" *ngIf="lists.length != 0">
         <div class="row-line">
-            <div class="row-item index">#</div>
-            <div class="row-item title">List Name</div>
-            <div class="row-item emails">Emails</div>
+          <div class="row-item index">#</div>
+          <div class="row-item title">List Name</div>
+          <div class="row-item emails">Emails</div>
         </div>
 
         <div class="row-line" *ngFor="let item of lists; let i = index">-->
-            <div class="row-item index">i</div>
-            <div class="row-item title">{{item.name}}</div>
-            <div class="row-item emails">{{item.getEmails()}}</div>
+          <div class="row-item index">i</div>
+          <div class="row-item title">{{item.name}}</div>
+          <div class="row-item emails">{{item.getEmails()}}</div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="right-container"></div>
 </div>
-
-<!--         
-    <div class="right-side"></div>
-</div> -->

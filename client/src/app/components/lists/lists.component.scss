@@ -1,6 +1,7 @@
-:host{
-  width: 100%;
+:host {
   height: 100%;
+  width: 100%;
+  background: #ffffff;
 }
 
 .container {
@@ -10,6 +11,88 @@
   min-height: 100%;
   padding: 0;
   margin: 0;
+}
+
+.left-container {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+}
+
+.right-container {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  background: aqua;
+}
+
+.bar {
+  width: 100%;
+  height: 5%;
+  min-height: 50px;
+  background: #ffffff;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 20px);
+  height: calc(100% - 5px);
+  margin: 0 10px 5px 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left-side {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+}
+
+.right-side {
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  background: #ffe89f;
+}
+
+.input-item {
+  padding: 10px;
+  display: flex;
+  height: 50px;
+  width: 100%;
+}
+
+.label {
+  width: 20%;
+  min-width: 100px;
+  margin: auto 30px auto 0;
+}
+
+input {
+  margin: auto 0;
+  padding: 5px;
+  width: 100%;
+  height: 30px;
+}
+
+.mybutton {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: bolder;
+  margin: auto 10px;
+  cursor: pointer;
+}
+
+.btn{
+  cursor: pointer;
+}
+
+.list {
+  padding:30px;
+  display: flex;
+  width: 100%;
 }
 
 // .left-side {
@@ -27,9 +110,7 @@
 //   min-height: 100%;
 // }
 
-// .label{
-//   padding: 30px 30px;
-// }
+
 
 // .bar {
 //   padding: 10px 30px;
@@ -39,23 +120,18 @@
 //   width: calc(100% - 60px);
 // }
 
-// .list {
-//   padding:30px;
-//   display: flex;
-//   width: 100%;
-// }
 
-// .row-line {
-//   display: flex;
-//   width: 100%;
-//   flex-direction: row;
-// }
+ .row-line {
+   display: flex;
+   width: 100%;
+   flex-direction: row;
+ }
 
-// .row-item {
-//   display: flex;
-//   font-size: 15px;
-//   font-weight: bolder;
-// }
+ .row-item {
+   display: flex;
+   font-size: 15px;
+   font-weight: bolder;
+ }
 
 // .row-item.index{
 //   max-width: 100px;

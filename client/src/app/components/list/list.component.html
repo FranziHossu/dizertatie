@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row-line">
-    <title-bar [title]="title" [button]="button"></title-bar>
-  </div>
-  <div class="content">
-    <div class="container">
+  <div class="left-container">
+    <div class="bar">
+      <title-bar [title]="title" [button]="button"></title-bar>
+    </div>
+    <div class="content">
       <div class="left-side">
         <div class="input-item">
           <div class="label">List name</div>
@@ -11,12 +11,12 @@
         </div>
         <div class="input-item">
           <div class="label">List email</div>
-          <input [(ngModel)]="email" type="text" placeholder="Insert email" (focus)="toggleSearchList()"
-            (blur)="toggleSearchList()" (keyup.enter)="addEmailToList()">
+          <input [(ngModel)]="email" type="text" placeholder="Insert email"
+                 (keyup.enter)="addEmailToList()">
         </div>
         <div class="input-item">
           <div class="mybutton" (click)="saveList()">Create List</div>
-          <div class="mybutton">Cancel</div>
+          <div class="mybutton" >Cancel</div>
         </div>
       </div>
       <div class="right-side">
@@ -24,10 +24,11 @@
         <ul *ngIf="list.emails.length" class="emails-list">
           <li *ngFor="let email of list.emails; let i = index">
             <div class="title">{{email}}</div>
-            <div class="delete" (click)="removeEmailFromList(email)"><i class="fa fa-trash"></i></div>
+            <div class="btn delete" (click)="removeEmailFromList(email)"><i class="fa fa-trash"></i></div>
           </li>
         </ul>
       </div>
     </div>
   </div>
+  <div class="right-container"></div>
 </div>

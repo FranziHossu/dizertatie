@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { List } from '../lists/list.model';
-import { UserService } from '@/services/user.service';
-import { ListService } from '@/services/list.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {List} from '../lists/list.model';
+import {UserService} from '@/services/user.service';
+import {ListService} from '@/services/list.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'list',
@@ -18,6 +18,8 @@ export class ListComponent implements OnInit {
   public allEmails: Array<string> = new Array();
   public listName: string;
   public email: string;
+  public title: string;
+  public button: string;
 
   constructor(userService: UserService, listService: ListService, router: Router, private route: ActivatedRoute) {
     this.userService = userService;
@@ -26,10 +28,13 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.data['section'])
+    this.title = this.route.snapshot.data['section'];
   }
 
   public addEmailToList() {
+    if (!this.email) {
+      return;
+    }
     for (let i: number = 0; i < this.list.emails.length; i++) {
       if (this.list.emails[i] === this.email) {
         this.email = '';
