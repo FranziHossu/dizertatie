@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { List } from '../lists/list.model';
 import { UserService } from '@/services/user.service';
 import { ListService } from '@/services/list.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'create-list',
-  templateUrl: './create-list.component.html',
-  styleUrls: ['./create-list.component.scss']
+  selector: 'list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
-export class CreateListComponent implements OnInit {
+export class ListComponent implements OnInit {
   private userService: UserService;
   private listService: ListService;
   private router: Router;
@@ -19,13 +19,14 @@ export class CreateListComponent implements OnInit {
   public listName: string;
   public email: string;
 
-  constructor(userService: UserService, listService: ListService, router: Router) {
+  constructor(userService: UserService, listService: ListService, router: Router, private route: ActivatedRoute) {
     this.userService = userService;
     this.listService = listService;
     this.listService = listService;
   }
 
   ngOnInit() {
+    console.log(this.route.snapshot.data['section'])
   }
 
   public addEmailToList() {

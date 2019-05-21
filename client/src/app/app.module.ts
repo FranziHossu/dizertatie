@@ -21,7 +21,8 @@ import { PanelComponent } from './components/panel/panel.component';
 import { MailSenderComponent } from './components/mail-sender/mail-sender.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { ListService } from './services/list.service';
-import { CreateListComponent } from './components/create-list/create-list.component';
+import { ListComponent } from './components/list/list.component';
+import { TitleBarComponent } from './components/title-bar/title-bar.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -46,7 +47,8 @@ const appRoutes: Routes = ROUTES;
         PanelComponent,
         MailSenderComponent,
         ListsComponent,
-        CreateListComponent
+        ListComponent,
+        TitleBarComponent
     ],
     providers: [
         HttpService,        
