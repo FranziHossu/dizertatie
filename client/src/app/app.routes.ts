@@ -9,6 +9,7 @@ import {AuthGuard} from '@/guards/auth.guards';
 import {ListsComponent} from './components/lists/lists.component';
 import {ListComponent} from './components/list/list.component';
 import {SectionTitle} from './enums/section-title.enum';
+import {MailSenderComponent} from "@/components/mail-sender/mail-sender.component";
 
 
 export const ROUTES: Routes = [{
@@ -25,7 +26,6 @@ export const ROUTES: Routes = [{
     path: 'lists',
     component: ListsComponent,
     data: {section: SectionTitle.Lists}
-
   }, {
     path: 'list/create',
     component: ListComponent,
@@ -34,6 +34,10 @@ export const ROUTES: Routes = [{
     path: 'list/edit/:id',
     component: ListComponent,
     data: {section: SectionTitle.UpdateList}
+  }, {
+    path: 'email/create',
+    component: MailSenderComponent,
+    data: {section: SectionTitle.CreateEmail}
   }]
 },
 

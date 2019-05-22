@@ -23,6 +23,8 @@ import { ListsComponent } from './components/lists/lists.component';
 import { ListService } from './services/list.service';
 import { ListComponent } from './components/list/list.component';
 import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { WidgetComponent } from './components/widget/widget.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -48,7 +50,9 @@ const appRoutes: Routes = ROUTES;
         MailSenderComponent,
         ListsComponent,
         ListComponent,
-        TitleBarComponent
+        TitleBarComponent,
+        WidgetComponent,
+        ConfirmationComponent,
     ],
     providers: [
         HttpService,        

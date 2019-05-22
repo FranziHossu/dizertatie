@@ -11,7 +11,7 @@ export class TitleBarComponent implements OnInit {
   @Input() public title: string;
   @Input() public button: string;
 
-  private SectionTitles: any = SectionTitle;
+  private SectionTitles = SectionTitle;
   private router: Router;
   private route: ActivatedRoute;
 

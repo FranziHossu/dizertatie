@@ -1,29 +1,88 @@
 <div class="container">
-  <div class="row">
+  <div class="bar">
+    <title-bar [title]="title" [button]="button"></title-bar>
+  </div>
+  <div class="content">
 
-    <div class="item to">
+    <div class="senders-actions">
+      <div class="action" [class.selected]="displayCC" (click)="toggleCC()">
+        <p>CC</p>
+      </div>
+      <div class="action" [class.selected]="displayBCC" (click)="toggleBCC()">
+        <p>BCC</p>
+      </div>
+    </div>
+
+    <div class="element">
       <div class="label">To:</div>
-      <div class="to-items">
-        <div class="item" *ngFor="let to of tos">{{to}}</div>
+
+      <div class="to-items" *ngIf="tos.length">
+        <div class="item" *ngFor="let to of tos; let i = index">
+          <p>{{to}}</p>
+          <i class="fa fa-times" (click)="removeEmailFromTo(i)"></i>
+        </div>
       </div>
-      <input [(ngModel)]="to" type="text">
-      <div (click)="addEmailTo()" class="button">+</div>
+
+      <input (keyup.enter)="addEmailTO()" [(ngModel)]="to" type="text">
+
+      <div (click)="addEmailTO()" class="button">
+        <i class="fa fa-plus"></i>
+      </div>
     </div>
-    <div class="item cc">
+
+    <div class="element" *ngIf="displayCC">
       <div class="label">CC:</div>
-      <div class="to-items">
-        <div class="item" *ngFor="let cc of ccs">{{cc}}</div>
+
+      <div class="to-items" *ngIf="ccs.length">
+        <div class="item" *ngFor="let cc of ccs; let i = index">
+          <p>{{cc}}</p>
+          <i class="fa fa-times" (click)="removeEmailFromCc(i)"></i>
+        </div>
       </div>
-      <input [(ngModel)]="cc" type="text">
-      <div (click)="addEmailCc()" class="button">+</div>
+
+      <input (keyup.enter)="addEmailCC()" [(ngModel)]="cc" type="text">
+
+      <div (click)="addEmailCC()" class="button">
+        <i class="fa fa-plus"></i>
+      </div>
     </div>
-    <div class="item subject">
+
+    <div class="element" *ngIf="displayBCC">
+      <div class="label">BCC:</div>
+
+      <div class="to-items" *ngIf="bccs.length">
+        <div class="item" *ngFor="let bcc of bccs; let i = index">
+          <p>{{bcc}}</p>
+          <i class="fa fa-times" (click)="removeEmailFromBcc(i)"></i>
+        </div>
+      </div>
+
+      <input (keyup.enter)="addEmailBCC()" [(ngModel)]="bcc" type="text">
+
+      <div (click)="addEmailBCC()" class="button">
+        <i class="fa fa-plus"></i>
+      </div>
+    </div>
+
+    <div class="element">
       <div class="label">Subject:</div>
-      <input type="text">
+      <input [(ngModel)]="subject" type="text">
     </div>
-    <div class="item text">
-      <div class="label">Text:</div>
-      <input type="text">
+
+    <div class="element-textarea">
+      <div class="label">Content:</div>
+
+      <div class="element-wrapper">
+        <div class="element-content">
+          <textarea  rows="10" [(ngModel)]="content" type="text"></textarea>
+        </div>
+      </div>
     </div>
+
+    <div class="btns">
+      <div class="btn" (click)="sendEmail()">Send Email</div>
+      <div class="btn">Cancel</div>
+    </div>
+
   </div>
 </div>
