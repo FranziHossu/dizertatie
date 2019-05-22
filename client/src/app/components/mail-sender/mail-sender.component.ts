@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Route} from "@angular/router";
+import {ConfirmationService} from "@/services/confirmation.service";
+import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
 
 @Component({
   selector: 'mail-sender',
@@ -8,6 +10,7 @@ import {ActivatedRoute, Route} from "@angular/router";
 })
 export class MailSenderComponent implements OnInit {
   private route: ActivatedRoute;
+  private confirmationService: ConfirmationService;
 
   public tos: Array<string> = new Array<string>();
   public ccs: Array<string> = new Array<string>();
@@ -22,8 +25,9 @@ export class MailSenderComponent implements OnInit {
   public subject: any;
   public content: any;
 
-  constructor(route: ActivatedRoute) {
+  constructor(route: ActivatedRoute, confirmationService: ConfirmationService) {
     this.route = route;
+    this.confirmationService = confirmationService;
   }
 
   ngOnInit() {
@@ -93,6 +97,9 @@ export class MailSenderComponent implements OnInit {
   }
 
   public sendEmail() {
-
+    this.confirmationService.setMessage(ConfirmationMessage.SendEmail);
+    this.confirmationService.answerObservable.subscribe((answer)=>{
+      console.log('response:' , answer);
+    });
   }
 }

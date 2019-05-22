@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfirmationService} from "@/services/confirmation.service";
+import {ConfirmationService} from '@/services/confirmation.service';
 
 @Component({
   selector: 'confirmation',
@@ -16,13 +16,16 @@ export class ConfirmationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.message = this.confirmationService.message;
   }
 
-  confirm() {
-    this.confirmationService.next(true);
+  public confirm() {
+    this.confirmationService.nextConfirmation(false);
+    this.confirmationService.nextAnswer(true);
   }
 
-  reject() {
-      this.confirmationService.next(false);
+  public reject() {
+    this.confirmationService.nextConfirmation(false);
+    this.confirmationService.nextAnswer(false);
   }
 }
