@@ -4,9 +4,8 @@
   </div>
   <div class="content">
 
-
     <!-- List name input-->
-    <div class="element">
+    <div class="element" [class.error]="nameError">
       <div class="label">Name:</div>
       <input placeholder="Insert your list name" [(ngModel)]="listName" type="text">
     </div>
@@ -31,14 +30,14 @@
     <div class="element list">
       <div class="label">Current emails:</div>
       <div *ngIf="!list.emails.length" class="empty-list"> You have no email entered yet :)</div>
-      <div class="list">
-        <ul *ngIf="list.emails.length" class="emails-list">
-          <li *ngFor="let email of list.emails; let i = index">
-            <div class="title">{{email}}</div>
-            <div class="btn delete" (click)="removeEmailFromList(email)"><i class="fa fa-trash"></i></div>
-          </li>
-        </ul>
-      </div>
+      <ul *ngIf="list.emails.length" class="emails-list">
+        <li *ngFor="let email of list.emails; let i = index">
+          <div class="item">
+            <p>{{email}}</p>
+            <i class="fa fa-times" (click)="removeEmailFromList(email)"></i>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <!-- Action buttons -->
@@ -47,7 +46,4 @@
       <div class="btn">Cancel</div>
     </div>
   </div>
-  <!--    <div class="right-side">-->
-  <!--
-  <!--    </div>-->
 </div>

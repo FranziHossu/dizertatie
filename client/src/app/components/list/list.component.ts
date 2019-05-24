@@ -3,6 +3,8 @@ import {List} from '../lists/list.model';
 import {UserService} from '@/services/user.service';
 import {ListService} from '@/components/lists/list.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import {AlertService} from "@/components/alert/alert.service";
+import {AlertMessage} from "@/components/alert/alert-message";
 
 @Component({
   selector: 'list',
@@ -14,6 +16,7 @@ export class ListComponent implements OnInit {
   private listService: ListService;
   private router: Router;
   private route: ActivatedRoute;
+  private alertService: AlertService;
 
   public list: List = new List();
   public allEmails: Array<string> = new Array();
@@ -23,8 +26,11 @@ export class ListComponent implements OnInit {
   public description: string;
   public button: string;
   public showAddButton: any;
+  public nameError = true;
+  public emailsListError = true;
 
-  constructor(userService: UserService, listService: ListService, router: Router, route: ActivatedRoute) {
+  constructor(userService: UserService, listService: ListService, router: Router, route: ActivatedRoute, alertService: AlertService) {
+    this.alertService = alertService;
     this.userService = userService;
     this.listService = listService;
     this.route = route;
@@ -60,17 +66,36 @@ export class ListComponent implements OnInit {
   }
 
   public saveList() {
-    this.list.name = this.listName;
-    this.list.description = this.description;
-    this.list.user = this.userService.currentUser.id;
-    this.listService.addList(this.list).subscribe(() => {
-      this.router.navigate(['lists']);
-    }, () => {
+    if (this.verify()) {
+      this.list.name = this.listName;
+      this.list.description = this.description;
+      this.list.user = this.userService.currentUser.id;
+      this.listService.addList(this.list).subscribe(() => {
+        this.router.navigate(['lists']);
+      }, () => {
 
-    });
+      });
+    }
   }
 
   public toggleShowAddButton() {
     this.showAddButton = !this.showAddButton;
+  }
+
+  private verify() {
+    if (!this.list.name || this.list.name === '' || !this.list.emails.length) {
+      this.alertService.setMessage(AlertMessage.CreateListError);
+
+      if (!this.list.name || this.list.name === '') {
+        this.nameError = true;
+      }
+
+      if (!this.list.emails.length) {
+        this.emailsListError = true;
+      }
+
+      return false;
+    }
+    return true;
   }
 }
