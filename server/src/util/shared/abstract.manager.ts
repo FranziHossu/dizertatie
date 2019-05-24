@@ -2,10 +2,12 @@ import { Connection } from 'mongoose';
 import { Subscription } from 'rxjs';
 
 import { databaseService } from '../database.service';
+import {MailService} from "./mail.service";
 
 export abstract class AbstractManager {
 	protected connection:Connection;
 	private subscription:Subscription;
+	public emailService: MailService = new MailService();
 
 	constructor() {
 		this.subscription = databaseService.connectionObservable.subscribe(this.init.bind(this));

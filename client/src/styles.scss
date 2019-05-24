@@ -1,8 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
-// html,
-// body {
-//   margin: 0;
-//   padding: 0;
-//   width: 100vw;
-//   height: 100vh;
-// }
+
+.btns {
+  margin: auto 0 0 0;
+
+
+
+  .btn {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bolder;
+    margin: auto 10px auto 0;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+      background: #002f5e;
+      border: 0.5px solid #002f5e;
+    }
+  }
+}
+
+.bar-top {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  min-height: 50px;
+  background: #ffffff;
+}

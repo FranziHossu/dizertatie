@@ -2,6 +2,10 @@
   <router-outlet></router-outlet>
 </div>
 
-<div *ngIf="displayConfirmation" class="confirmation">
+<div *ngIf="displayConfirmation" class="popUp">
   <confirmation></confirmation>
+</div>
+
+<div *ngIf="displayAlert" class="popUp">
+  <alert></alert>
 </div>

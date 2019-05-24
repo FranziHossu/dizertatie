@@ -20,12 +20,13 @@ import {MenuComponent} from './components/menu/menu.component';
 import {PanelComponent} from './components/panel/panel.component';
 import {MailSenderComponent} from './components/mail-sender/mail-sender.component';
 import {ListsComponent} from './components/lists/lists.component';
-import {ListService} from './services/list.service';
+import {ListService} from './components/lists/list.service';
 import {ListComponent} from './components/list/list.component';
 import {TitleBarComponent} from './components/title-bar/title-bar.component';
 import {WidgetComponent} from './components/widget/widget.component';
 import {ConfirmationComponent} from './components/confirmation/confirmation.component';
-import {ConfirmationService} from '@/services/confirmation.service';
+import {ConfirmationService} from '@/components/confirmation/confirmation.service';
+import {EmailService} from '@/components/mail-sender/email.service';
 
 const appRoutes: Routes = ROUTES;
 
@@ -61,7 +62,8 @@ const appRoutes: Routes = ROUTES;
     LocalStorageService,
     DataService,
     ListService,
-    ConfirmationService
+    ConfirmationService,
+    EmailService
   ],
   bootstrap: [AppComponent]
 })

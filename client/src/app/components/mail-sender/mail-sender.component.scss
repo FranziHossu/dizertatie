@@ -74,7 +74,7 @@
   }
 
   .btns {
-      margin: 0;
+    margin: 0;
 
     .btn {
       padding: 10px;
@@ -84,11 +84,15 @@
       font-weight: bolder;
       margin: auto 10px auto 0;
       cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background: #002f5e;
+      }
     }
   }
 
 }
-
 
 .element-textarea {
   height: 400px;
@@ -101,9 +105,8 @@
   width: 100%;
 
   .label {
-    width: 70px;
+    width: 100px;
     padding: 10px 0 0 0;
-
     margin: 0 auto auto 0;
     font-weight: bolder;
   }
@@ -121,6 +124,7 @@
       flex-direction: row;
 
       textarea {
+        all:unset;
         width: calc(100% - 20px);
         height: calc(100% - 20px);
         padding: 10px;
@@ -146,7 +150,7 @@
   .label {
     margin: auto auto auto 0;
     font-weight: bolder;
-    width: 70px;
+    width: 150px;
   }
 
   .to-items {
@@ -190,6 +194,7 @@
   }
 
   input {
+    all:unset;
     padding-right: 50px;
     padding-left: 10px;
     border: none;

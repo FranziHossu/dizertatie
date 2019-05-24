@@ -3,7 +3,7 @@ import {SectionTitle} from "@/enums/section-title.enum";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'title-bar',
+  selector: ' title-bar',
   templateUrl: './title-bar.component.html',
   styleUrls: ['./title-bar.component.scss']
 })

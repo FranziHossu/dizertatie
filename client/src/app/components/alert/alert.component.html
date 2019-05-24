@@ -1,6 +1,11 @@
-<!-- html for displaying alert messages at the top of the page -->
+<div class="container-confirmation"></div>
+<div class="content">
 
-<div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success',
-'alert-danger': message.type === 'error' }">{{message.text}}
- </div>
+  <div class="message">
+    <p>{{message}}</p>
+  </div>
 
+  <div class="btns">
+    <div class="btn" (click)="close()">Ok</div>
+  </div>
+</div>

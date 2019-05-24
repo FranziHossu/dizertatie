@@ -1,10 +1,10 @@
 /** Angular */
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 
-const baseUrl: string = 'http://localhost:6083/api';
+const baseUrl = 'http://localhost:6083/api';
 
 @Injectable()
 export class HttpService {
@@ -17,7 +17,7 @@ export class HttpService {
   public get(url: string, params?: any): Observable<any> {
     if (params != undefined) {
       return this.httpClient.get(`${baseUrl}${url}`, {
-        params: params
+        params
       });
     } else {
       return this.httpClient.get(`${baseUrl}${url}`);
@@ -26,7 +26,7 @@ export class HttpService {
 
   public post(url: string, data: any, params?: any): Observable<any> {
     return this.httpClient.post(`${baseUrl}${url}`, data, {
-      params: params
+      params
     });
   }
 

@@ -24,7 +24,7 @@ export class ConfirmationService {
     this.answerSubject.next(value);
   }
 
-  setMessage(SendEmail: ConfirmationMessage) {
+  public setMessage(SendEmail: ConfirmationMessage) {
     this.message = SendEmail;
     this.nextConfirmation(true);
   }

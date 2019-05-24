@@ -1,4 +1,7 @@
 {
 	"baseUrl": "types",
-	"tyepeRoots": ["types"]
+	"tyepeRoots": ["types"],
+	"types": [
+		"node"
+	]
 }

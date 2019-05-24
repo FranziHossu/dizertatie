@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="bar">
+  <div class="bar-top">
     <title-bar [title]="title" [button]="button"></title-bar>
   </div>
   <div class="content">
@@ -16,16 +16,17 @@
     <div class="element">
       <div class="label">To:</div>
 
-      <div class="to-items" *ngIf="tos.length">
-        <div class="item" *ngFor="let to of tos; let i = index">
+      <div class="to-items" *ngIf="toElements.length">
+        <div class="item" *ngFor="let to of toElements; let i = index">
           <p>{{to}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromTo(i)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromTo(to)"></i>
         </div>
       </div>
 
-      <input (keyup.enter)="addEmailTO()" [(ngModel)]="to" type="text">
+      <input placeholder="Who do you want to send this email to?" (focusout)="toggleShowToAddButton()" (focus)="toggleShowToAddButton()" (blur)="addToElement()"
+             (keyup.enter)="addToElement()" [(ngModel)]="to" type="text">
 
-      <div (click)="addEmailTO()" class="button">
+      <div *ngIf="showToAddButton" (click)="addToElement()" class="button">
         <i class="fa fa-plus"></i>
       </div>
     </div>
@@ -33,16 +34,17 @@
     <div class="element" *ngIf="displayCC">
       <div class="label">CC:</div>
 
-      <div class="to-items" *ngIf="ccs.length">
-        <div class="item" *ngFor="let cc of ccs; let i = index">
+      <div class="to-items" *ngIf="ccElements.length">
+        <div class="item" *ngFor="let cc of ccElements; let i = index">
           <p>{{cc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromCc(i)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromCc(cc)"></i>
         </div>
       </div>
 
-      <input (keyup.enter)="addEmailCC()" [(ngModel)]="cc" type="text">
+      <input (focusout)="toggleShowCCAddButton()" (focus)="toggleShowCCAddButton()" (blur)="addEmailCC()"
+             (keyup.enter)="addEmailCC()" [(ngModel)]="cc" type="text">
 
-      <div (click)="addEmailCC()" class="button">
+      <div *ngIf="showCcAddButton" (click)="addEmailCC()" class="button">
         <i class="fa fa-plus"></i>
       </div>
     </div>
@@ -50,23 +52,24 @@
     <div class="element" *ngIf="displayBCC">
       <div class="label">BCC:</div>
 
-      <div class="to-items" *ngIf="bccs.length">
-        <div class="item" *ngFor="let bcc of bccs; let i = index">
+      <div class="to-items" *ngIf="bccElements.length">
+        <div class="item" *ngFor="let bcc of bccElements; let i = index">
           <p>{{bcc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromBcc(i)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromBcc(bcc)"></i>
         </div>
       </div>
 
-      <input (keyup.enter)="addEmailBCC()" [(ngModel)]="bcc" type="text">
+      <input (focusout)="toggleShowBccAddButton()" (focus)="toggleShowBccAddButton()" (blur)="addEmailBCC()"
+             (keyup.enter)="addEmailBCC()" [(ngModel)]="bcc" type="text">
 
-      <div (click)="addEmailBCC()" class="button">
+      <div *ngIf="showBccAddButton" (click)="addEmailBCC()" class="button">
         <i class="fa fa-plus"></i>
       </div>
     </div>
 
     <div class="element">
       <div class="label">Subject:</div>
-      <input [(ngModel)]="subject" type="text">
+      <input placeholder="Type the subject" [(ngModel)]="subject" type="text">
     </div>
 
     <div class="element-textarea">
@@ -74,7 +77,7 @@
 
       <div class="element-wrapper">
         <div class="element-content">
-          <textarea  rows="10" [(ngModel)]="content" type="text"></textarea>
+          <textarea placeholder="Write your message" rows="10" [(ngModel)]="content" type="text"></textarea>
         </div>
       </div>
     </div>

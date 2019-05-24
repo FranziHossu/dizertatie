@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "@/http.service";
-import { UserService } from "./user.service";
+import { UserService } from "../../services/user.service";
 import { Observable } from "rxjs";
 
 @Injectable()

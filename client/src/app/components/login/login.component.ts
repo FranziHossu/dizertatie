@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AlertService } from '@/services/alert.service';
+import { AlertService } from '@/components/alert/alert.service';
 import { UserService } from '@/services/user.service';
 import { User } from '@/models';
 import { AuthenticationService } from '@/services/authentication.service';
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
     public onSubmit() {
         if (!this.loginForm.invalid) {
-            let user: User = new User();
+            const user: User = new User();
             user.username = this.f.username.value;
             user.password = this.f.password.value;
 
@@ -73,13 +73,12 @@ export class LoginComponent implements OnInit {
             this.userService.login(user)
                 .subscribe(
                     (data: any) => {
-                        this.localStorageService.setItem("userID", data.id);
+                        this.localStorageService.setItem('userID', data.id);
                         this.userService.currentUser = data;
                         this.router.navigate(['home']);
                         this.loadingService.next(false);
                     },
                     (error: any) => {
-                        this.alertService.error('Username and password may be wrong');
                         this.loadingService.next(false);
                     });
         }

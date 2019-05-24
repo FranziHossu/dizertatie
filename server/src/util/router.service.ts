@@ -4,6 +4,7 @@ import { Application } from 'express';
 /** Routers */
 import { UserRouter } from '../user/user.router';
 import { ListRouter } from '../list/list.router';
+import {EmailRouter} from "../email/email.router";
 
 
 class RouterService {
@@ -18,6 +19,7 @@ class RouterService {
 	private initRouters() {
 		new UserRouter(this.app);
 		new ListRouter(this.app);
+		new EmailRouter(this.app);
 	}
 }
 

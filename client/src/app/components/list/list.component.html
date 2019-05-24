@@ -1,33 +1,37 @@
 <div class="container">
-  <div class="left-container">
-    <div class="bar">
-      <title-bar [title]="title" [button]="button"></title-bar>
+  <div class="bar-top">
+    <title-bar [title]="title" [button]="button"></title-bar>
+  </div>
+  <div class="content">
+
+
+    <!-- List name input-->
+    <div class="element">
+      <div class="label">Name:</div>
+      <input placeholder="Insert your list name" [(ngModel)]="listName" type="text">
     </div>
-    <div class="content">
-      <div class="left-side">
-        <div class="input-item">
-          <div class="label">List name</div>
-          <input [(ngModel)]="listName" type="text" placeholder="Your list name">
-        </div>
 
-        <div class="input-item">
-          <div class="label">List description</div>
-          <input [(ngModel)]="description" type="text" placeholder="Your list description">
-        </div>
+    <!-- List description input-->
+    <div class="element">
+      <div class="label">Description:</div>
+      <input [(ngModel)]="description" type="text" placeholder="What description do you want for your list?">
+    </div>
 
-        <div class="input-item">
-          <div class="label">List email</div>
-          <input [(ngModel)]="email" type="text" placeholder="Insert email"
-                 (keyup.enter)="addEmailToList()">
-        </div>
-
-        <div class="input-item">
-          <div class="mybutton" (click)="saveList()">Create List</div>
-          <div class="mybutton">Cancel</div>
-        </div>
+    <!-- List emails input-->
+    <div class="element">
+      <div class="label">Email:</div>
+      <input (focus)="toggleShowAddButton()" (focusout)="toggleShowAddButton()" [(ngModel)]="email" type="text"
+             placeholder="You can insert email from here"
+             (keyup.enter)="addEmailToList()">
+      <div *ngIf="showAddButton" (click)="addEmailToList()" class="button">
+        <i class="fa fa-plus"></i>
       </div>
-      <div class="right-side">
-        <div *ngIf="!list.emails.length" class=""> No emails...</div>
+    </div>
+
+    <div class="element list">
+      <div class="label">Current emails:</div>
+      <div *ngIf="!list.emails.length" class="empty-list"> You have no email entered yet :)</div>
+      <div class="list">
         <ul *ngIf="list.emails.length" class="emails-list">
           <li *ngFor="let email of list.emails; let i = index">
             <div class="title">{{email}}</div>
@@ -36,6 +40,14 @@
         </ul>
       </div>
     </div>
+
+    <!-- Action buttons -->
+    <div class="btns">
+      <div class="btn" (click)="saveList()">Create List</div>
+      <div class="btn">Cancel</div>
+    </div>
   </div>
-  <div class="right-container"></div>
+  <!--    <div class="right-side">-->
+  <!--
+  <!--    </div>-->
 </div>

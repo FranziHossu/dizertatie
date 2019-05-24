@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {List} from '../lists/list.model';
 import {UserService} from '@/services/user.service';
-import {ListService} from '@/services/list.service';
+import {ListService} from '@/components/lists/list.service';
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit {
   public title: string;
   public description: string;
   public button: string;
+  public showAddButton: any;
 
   constructor(userService: UserService, listService: ListService, router: Router, route: ActivatedRoute) {
     this.userService = userService;
@@ -69,4 +70,7 @@ export class ListComponent implements OnInit {
     });
   }
 
+  public toggleShowAddButton() {
+    this.showAddButton = !this.showAddButton;
+  }
 }

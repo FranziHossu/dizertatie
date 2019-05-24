@@ -1,31 +1,34 @@
 /** passes alert messages to the template whenever a message is received from the alert service */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs';
 
-import { AlertService } from '@/services/alert.service';
+import {AlertService} from '@/components/alert/alert.service';
 
 @Component({
-    selector: 'alert',
-    templateUrl: 'alert.component.html'
+  selector: 'alert',
+  templateUrl: 'alert.component.html',
+  styleUrls: ['alert.component.scss']
 })
 
 export class AlertComponent implements OnInit, OnDestroy {
-    private subscription: Subscription;
-    private alertService: AlertService;
-    message: any;
+  private alertService: AlertService;
 
-    constructor( alertService: AlertService) { 
-        this.alertService = alertService;
-    }
+  public message: any;
 
-    ngOnInit() {
-        this.subscription = this.alertService.getMessage().subscribe(message => {
-            this.message = message;
-        });
-    }
+  constructor(alertService: AlertService) {
+    this.alertService = alertService;
+  }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
+  ngOnInit() {
+    this.message = this.alertService.message;
+  }
+
+  ngOnDestroy() {
+  }
+
+  public close() {
+    this.alertService.setMessage(null);
+  }
+
 }
