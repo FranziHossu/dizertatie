@@ -5,6 +5,7 @@ import {ListService} from '@/components/lists/list.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AlertService} from "@/components/alert/alert.service";
 import {AlertMessage} from "@/components/alert/alert-message";
+import {SectionTitle} from "@/enums/section-title.enum";
 
 @Component({
   selector: 'list',
@@ -20,14 +21,13 @@ export class ListComponent implements OnInit {
 
   public list: List = new List();
   public allEmails: Array<string> = new Array();
-  public listName: string;
   public email: string;
   public title: string;
-  public description: string;
   public button: string;
   public showAddButton: any;
-  public nameError = true;
-  public emailsListError = true;
+  public nameError = false;
+  public emailsListError = false;
+  public sectionTitle = SectionTitle;
 
   constructor(userService: UserService, listService: ListService, router: Router, route: ActivatedRoute, alertService: AlertService) {
     this.alertService = alertService;
@@ -38,15 +38,22 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.data.section);
     this.title = this.route.snapshot.data.section;
+
+    if (this.title === this.sectionTitle.UpdateList) {
+      this.listService.getListById(this.route.snapshot.params.id).subscribe((data: any) => {
+        this.list = data;
+      }, (error: any) => {
+
+      });
+    }
   }
 
   public addEmailToList() {
     if (!this.email) {
       return;
     }
-    for (let i: number = 0; i < this.list.emails.length; i++) {
+    for (let i = 0; i < this.list.emails.length; i++) {
       if (this.list.emails[i] === this.email) {
         this.email = '';
         return;
@@ -57,7 +64,7 @@ export class ListComponent implements OnInit {
   }
 
   public removeEmailFromList(email: string) {
-    for (let i: number = 0; i < this.list.emails.length; i++) {
+    for (let i = 0; i < this.list.emails.length; i++) {
       if (this.list.emails[i] === email) {
         this.list.emails.splice(i, 1);
         return;
@@ -67,10 +74,18 @@ export class ListComponent implements OnInit {
 
   public saveList() {
     if (this.verify()) {
-      this.list.name = this.listName;
-      this.list.description = this.description;
       this.list.user = this.userService.currentUser.id;
       this.listService.addList(this.list).subscribe(() => {
+        this.router.navigate(['lists']);
+      }, () => {
+
+      });
+    }
+  }
+
+  public updateList() {
+    if (this.verify()) {
+      this.listService.updateList(this.list).subscribe(() => {
         this.router.navigate(['lists']);
       }, () => {
 
@@ -97,5 +112,17 @@ export class ListComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  public toggleErrorName() {
+    this.nameError = false;
+  }
+
+  public toggleEmailListError() {
+    this.emailsListError = false;
+  }
+
+  public cancel() {
+    this.router.navigate((['lists']));
   }
 }

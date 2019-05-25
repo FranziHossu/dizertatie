@@ -46,25 +46,33 @@
   }
 
 
-  ul {
-    all: unset;
+  .wrapper {
+    height: 100%;
+    overflow: auto;
     width: 100%;
 
-    li {
-      margin: 0 10px 10px 0;
-      all: unset;
+    .emails-list {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
 
-      .title {
-        margin: auto auto auto 0;
-        background: red;
-      }
+      .email-list-item {
+        display: flex;
+        flex-direction: row;
+        max-height: 30px;
+        margin: 0 10px 10px 0;
 
-      .delete {
-        margin: auto 0 auto auto;
-        background: lightblue;
+        .title {
+          margin: auto auto auto 0;
+          background: red;
+        }
 
+        .delete {
+          margin: auto 0 auto auto;
+          background: lightblue;
+
+        }
       }
     }
   }

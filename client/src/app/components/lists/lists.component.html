@@ -7,22 +7,10 @@
       <p>There are no lists..</p>
     </div>
 
-    <!--      <div class="list" *ngIf="lists.length != 0">-->
-    <!--        <div class="row-line">-->
-    <!--          <div class="row-item index">#</div>-->
-    <!--          <div class="row-item title">List Name</div>-->
-    <!--          <div class="row-item title">Description</div>-->
-    <!--          <div class="row-item emails">Emails</div>-->
-    <!--        </div>-->
-
-    <!--        <div class="row-line" *ngFor="let item of lists; let i = index">&ndash;&gt;-->
-    <!--          <div class="row-item index">i</div>-->
-    <!--          <div class="row-item title">{{item.name}}</div>-->
-    <!--          <div class="row-item emails">{{item.getEmails()}}</div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-
-
-
+    <div class="wrapper">
+      <div class="list">
+        <widget *ngFor="let item of lists" [list]="item" (delete)="deleteList($event)"></widget>
+      </div>
+    </div>
   </div>
 </div>

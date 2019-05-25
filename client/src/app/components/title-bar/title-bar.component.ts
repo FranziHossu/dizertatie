@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class TitleBarComponent implements OnInit {
   @Input() public title: string;
   @Input() public button: string;
+  @Input() public item: string;
 
   private SectionTitles = SectionTitle;
   private router: Router;

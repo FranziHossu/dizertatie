@@ -15,7 +15,6 @@ export class ListsComponent implements OnInit {
   public title: string;
   public button: string;
   public lists: Array<List> = new Array<List>();
-  public list: List;
 
   constructor(listService: ListService, route: ActivatedRoute) {
     this.listService = listService;
@@ -26,15 +25,27 @@ export class ListsComponent implements OnInit {
     this.title = this.route.snapshot.data.section;
 
     this.listService.getListsByUser().subscribe((data) => {
-      console.log(data);
-      this.list = data[0];
       this.lists = data;
     }, () => {
 
     });
   }
 
-  public create() {
+  public deleteList(id: string) {
+    this.listService.deleteListById(id).subscribe((data: any) => {
+      if (data) {
+        this.removeListById(id);
+      }
+    }, () => {
 
+    });
+  }
+
+  private removeListById(id: string) {
+    for (let i = 0; i < this.lists.length; i++) {
+      if (this.lists[i].id === id) {
+        this.lists.splice(i, 1);
+      }
+    }
   }
 }

@@ -1,25 +1,26 @@
 <div class="container">
   <div class="bar-top">
-    <title-bar [title]="title" [button]="button"></title-bar>
+    <title-bar [title]="title" [button]="button" [item]="list?.name"></title-bar>
   </div>
   <div class="content">
 
     <!-- List name input-->
     <div class="element" [class.error]="nameError">
       <div class="label">Name:</div>
-      <input placeholder="Insert your list name" [(ngModel)]="listName" type="text">
+      <input (keydown)="toggleErrorName()" placeholder="Insert your list name" [(ngModel)]="list.name" type="text">
     </div>
 
     <!-- List description input-->
     <div class="element">
       <div class="label">Description:</div>
-      <input [(ngModel)]="description" type="text" placeholder="What description do you want for your list?">
+      <input [(ngModel)]="list.description" type="text" placeholder="What description do you want for your list?">
     </div>
 
     <!-- List emails input-->
-    <div class="element">
+    <div class="element" [class.error]="emailsListError">
       <div class="label">Email:</div>
-      <input (focus)="toggleShowAddButton()" (focusout)="toggleShowAddButton()" [(ngModel)]="email" type="text"
+      <input (keydown)="toggleEmailListError()" (focus)="toggleShowAddButton()" (focusout)="toggleShowAddButton()"
+             [(ngModel)]="email" type="text"
              placeholder="You can insert email from here"
              (keyup.enter)="addEmailToList()">
       <div *ngIf="showAddButton" (click)="addEmailToList()" class="button">
@@ -27,23 +28,26 @@
       </div>
     </div>
 
-    <div class="element list">
+    <div class="element list" [class.error]="emailsListError">
       <div class="label">Current emails:</div>
       <div *ngIf="!list.emails.length" class="empty-list"> You have no email entered yet :)</div>
-      <ul *ngIf="list.emails.length" class="emails-list">
-        <li *ngFor="let email of list.emails; let i = index">
-          <div class="item">
-            <p>{{email}}</p>
-            <i class="fa fa-times" (click)="removeEmailFromList(email)"></i>
+      <div class="wrapper" *ngIf="list.emails.length">
+        <div class="emails-list">
+          <div class="email-list-item " *ngFor="let email of list.emails; let i = index">
+            <div class="item">
+              <p>{{email}}</p>
+              <i class="fa fa-times" (click)="removeEmailFromList(email)"></i>
+            </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
 
     <!-- Action buttons -->
     <div class="btns">
-      <div class="btn" (click)="saveList()">Create List</div>
-      <div class="btn">Cancel</div>
+      <div class="btn" (click)="saveList()" *ngIf="title === 'Create List'">Create List</div>
+      <div class="btn" (click)="updateList()" *ngIf="title !== 'Create List'">Update List</div>
+      <div class="btn" (click)="cancel()">Cancel</div>
     </div>
   </div>
 </div>
