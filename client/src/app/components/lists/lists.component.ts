@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ListService} from '@/components/lists/list.service';
 import {List} from './list.model';
 import {ActivatedRoute} from '@angular/router';
+import {ConfirmationService} from "@/components/confirmation/confirmation.service";
+import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
 
 @Component({
   selector: 'lists',
@@ -11,14 +13,16 @@ import {ActivatedRoute} from '@angular/router';
 export class ListsComponent implements OnInit {
   private listService: ListService;
   private route: ActivatedRoute;
+  private confirmationService: ConfirmationService;
 
   public title: string;
   public button: string;
   public lists: Array<List> = new Array<List>();
 
-  constructor(listService: ListService, route: ActivatedRoute) {
+  constructor(listService: ListService, route: ActivatedRoute, confirmationService: ConfirmationService) {
     this.listService = listService;
     this.route = route;
+    this.confirmationService = confirmationService;
   }
 
   ngOnInit() {
@@ -32,13 +36,18 @@ export class ListsComponent implements OnInit {
   }
 
   public deleteList(id: string) {
-    this.listService.deleteListById(id).subscribe((data: any) => {
-      if (data) {
-        this.removeListById(id);
+    this.confirmationService.setMessage(ConfirmationMessage.DeleteList);
+    this.confirmationService.answerObservable.subscribe((answer: any) => {
+      if (answer) {
+        this.listService.deleteListById(id).subscribe((data: any) => {
+          if (data) {
+            this.removeListById(id);
+          }
+        }, () => {
+        });
       }
-    }, () => {
-
     });
+
   }
 
   private removeListById(id: string) {

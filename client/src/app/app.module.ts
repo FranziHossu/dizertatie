@@ -27,6 +27,7 @@ import {WidgetComponent} from './components/widget/widget.component';
 import {ConfirmationComponent} from './components/confirmation/confirmation.component';
 import {ConfirmationService} from '@/components/confirmation/confirmation.service';
 import {EmailService} from '@/components/mail-sender/email.service';
+import { EmailsComponent } from './components/emails/emails.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -55,6 +56,7 @@ const appRoutes: Routes = ROUTES;
     TitleBarComponent,
     WidgetComponent,
     ConfirmationComponent,
+    EmailsComponent,
   ],
   providers: [
     HttpService,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Route} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {ConfirmationService} from '@/components/confirmation/confirmation.service';
 import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
 import {EmailService} from '@/components/mail-sender/email.service';
@@ -8,6 +8,8 @@ import {List} from '@/components/lists/list.model';
 import {ListService} from '@/components/lists/list.service';
 import {AlertService} from '@/components/alert/alert.service';
 import {AlertMessage} from '@/components/alert/alert-message';
+import {UserService} from "@/services/user.service";
+import {SectionTitle} from "@/enums/section-title.enum";
 
 @Component({
   selector: 'mail-sender',
@@ -21,11 +23,14 @@ export class MailSenderComponent implements OnInit {
   private lists: Array<List>;
   private listService: ListService;
   private alertService: AlertService;
+  private router: Router;
+  private userService: UserService;
 
   public mail: Mail = new Mail();
   public toElements: Array<string> = new Array<string>();
   public ccElements: Array<string> = new Array<string>();
   public bccElements: Array<string> = new Array<string>();
+  public usedEmails: Array<string> = new Array<string>();
   public to = '';
   public cc = '';
   public bcc = '';
@@ -39,20 +44,44 @@ export class MailSenderComponent implements OnInit {
   public showToAddButton = false;
   public showCcAddButton = false;
   public showBccAddButton = false;
+  public showSuggestionTo = false;
+  public showSuggestionCc = false;
+  public showSuggestionBcc = false;
+  public sectionTitle = SectionTitle;
 
-  constructor(route: ActivatedRoute, confirmationService: ConfirmationService, emailService: EmailService, listService: ListService, alertService: AlertService) {
+  constructor(route: ActivatedRoute, userService: UserService, router: Router,
+              confirmationService: ConfirmationService, emailService: EmailService,
+              listService: ListService, alertService: AlertService) {
     this.alertService = alertService;
+    this.router = router;
     this.listService = listService;
     this.route = route;
+    this.userService = userService;
     this.confirmationService = confirmationService;
     this.emailService = emailService;
   }
 
   ngOnInit() {
-    this.listService.getListsByUser().subscribe((data: any) => {
-      this.lists = data;
-    });
     this.title = this.route.snapshot.data.section;
+
+    if (this.title === this.sectionTitle.ViewEmail) {
+      this.emailService.getEmailById(this.route.snapshot.params.id).subscribe((data: any) => {
+        this.setEmail(data);
+      }, () => {
+
+      });
+    } else {
+      this.listService.getListsByUser().subscribe((data: any) => {
+        this.lists = data;
+      });
+      this.emailService.getUsedEmails(this.userService.currentUser.id).subscribe((data: any) => {
+        this.usedEmails = data;
+      }, () => {
+
+      });
+    }
+
+
   }
 
   private getFromLists(name: any) {
@@ -68,7 +97,7 @@ export class MailSenderComponent implements OnInit {
     if (this.to !== '') {
       const element = this.getFromLists(this.to);
       if (element) {
-        this.mail.toLists.push(element.id);
+        this.mail.toLists.push(element);
       } else {
         this.mail.to.push(this.to);
       }
@@ -81,7 +110,7 @@ export class MailSenderComponent implements OnInit {
     if (this.cc !== '') {
       const element = this.getFromLists(this.cc);
       if (element) {
-        this.mail.ccLists.push(element.id);
+        this.mail.ccLists.push(element);
       } else {
         this.mail.cc.push(this.cc);
       }
@@ -94,7 +123,7 @@ export class MailSenderComponent implements OnInit {
     if (this.bcc !== '') {
       const element = this.getFromLists(this.bcc);
       if (element) {
-        this.mail.bccLists.push(element.id);
+        this.mail.bccLists.push(element);
       } else {
         this.mail.bcc.push(this.bcc);
       }
@@ -107,7 +136,7 @@ export class MailSenderComponent implements OnInit {
     const element = this.getFromLists(to);
     if (element) {
       for (let k = 0; k < this.mail.toLists.length; k++) {
-        if (this.mail.toLists[k] === element.id) {
+        if (this.mail.toLists[k].id === element.id) {
           this.mail.toLists.splice(k, 1);
         }
       }
@@ -131,7 +160,7 @@ export class MailSenderComponent implements OnInit {
     const element = this.getFromLists(cc);
     if (element) {
       for (let k = 0; k < this.mail.ccLists.length; k++) {
-        if (this.mail.ccLists[k] === element.id) {
+        if (this.mail.ccLists[k].id === element.id) {
           this.mail.ccLists.splice(k, 1);
         }
       }
@@ -154,7 +183,7 @@ export class MailSenderComponent implements OnInit {
     const element = this.getFromLists(bcc);
     if (element) {
       for (let k = 0; k < this.mail.bccLists.length; k++) {
-        if (this.mail.bccLists[k] === element.id) {
+        if (this.mail.bccLists[k].id === element.id) {
           this.mail.bccLists.splice(k, 1);
         }
       }
@@ -186,11 +215,13 @@ export class MailSenderComponent implements OnInit {
       this.confirmationService.setMessage(ConfirmationMessage.SendEmail);
       this.confirmationService.answerObservable.subscribe((answer) => {
         if (answer) {
-          this.mail.subject = this.subject;
-          this.mail.content = this.content;
+          this.mail.time = new Date();
+          this.mail.from = this.userService.currentUser.email;
+          this.mail.fromId = this.userService.currentUser.id;
 
           this.emailService.sendEmail(this.mail).subscribe(() => {
             this.alertService.setMessage(AlertMessage.MailSuccessfullySent);
+            this.router.navigate(['home']);
           }, () => {
             console.log('error');
           });
@@ -210,13 +241,41 @@ export class MailSenderComponent implements OnInit {
 
   public toggleShowToAddButton() {
     this.showToAddButton = !this.showToAddButton;
+    this.showSuggestionTo = !this.showSuggestionTo;
   }
 
   public toggleShowCCAddButton() {
     this.showCcAddButton = !this.showCcAddButton;
+    this.showSuggestionCc = !this.showSuggestionCc;
   }
 
   public toggleShowBccAddButton() {
     this.showBccAddButton = !this.showBccAddButton;
+    this.showSuggestionBcc = !this.showSuggestionBcc;
+  }
+
+  private setEmail(data: Mail) {
+    console.log(data);
+    this.mail = data;
+
+    for (let i = 0; i < data.to.length; i++) {
+      this.toElements.push(data.to[i]);
+    }
+
+    for (let i = 0; i < data.cc.length; i++) {
+      this.ccElements.push(data.cc[i]);
+    }
+
+    for (let i = 0; i < data.bcc.length; i++) {
+      this.bccElements.push(data.bcc[i]);
+    }
+
+    if (this.bccElements.length !== 0) {
+      this.displayBCC = true;
+    }
+
+    if (this.ccElements.length !== 0) {
+      this.displayCC = true;
+    }
   }
 }

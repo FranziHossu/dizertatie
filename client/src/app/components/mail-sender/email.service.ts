@@ -13,4 +13,16 @@ export class EmailService {
   public sendEmail(email: any) {
     return this.httpService.post(`/email`, email);
   }
+
+  public getUsedEmails(id: any) {
+    return this.httpService.get(`/emails/user/${id}`);
+  }
+
+  public getUserEmails(id: any) {
+    return this.httpService.get(`/complete-emails/user/${id}`);
+  }
+
+  public getEmailById(id: any) {
+    return this.httpService.get(`/email/${id}`);
+  }
 }

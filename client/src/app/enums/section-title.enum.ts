@@ -3,6 +3,8 @@ export enum SectionTitle {
   UpdateList = 'Update',
   Lists = 'Lists',
   CreateEmail = 'Create Email',
+  ViewEmail = 'View Email',
+  Emails = 'Emails',
   Profile = 'Profile',
   Statistics = 'Statistics'
 }

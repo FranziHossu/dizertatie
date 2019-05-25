@@ -4,7 +4,7 @@
       <i class="fa fa-pen" (click)="edit()"></i>
       <i class="fa fa-trash" (click)="emitDelete()"></i>
     </div>
-    <p>{{list?.name}}</p>
+    <p title="{{list?.name}}">{{list?.name}}</p>
   </div>
   <div *ngIf="list?.description" class="description" title="'{{list?.description}}'"><p>{{list?.description}}</p></div>
   <div class="emails" [class.has-description]="list?.description">

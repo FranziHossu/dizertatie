@@ -9,8 +9,8 @@ import {AuthGuard} from '@/guards/auth.guards';
 import {ListsComponent} from './components/lists/lists.component';
 import {ListComponent} from './components/list/list.component';
 import {SectionTitle} from './enums/section-title.enum';
-import {MailSenderComponent} from "@/components/mail-sender/mail-sender.component";
-
+import {MailSenderComponent} from '@/components/mail-sender/mail-sender.component';
+import {EmailsComponent} from '@/components/emails/emails.component';
 
 export const ROUTES: Routes = [{
   path: '',
@@ -38,6 +38,14 @@ export const ROUTES: Routes = [{
     path: 'email/create',
     component: MailSenderComponent,
     data: {section: SectionTitle.CreateEmail}
+  },{
+    path: 'email/view/:id',
+    component: MailSenderComponent,
+    data: {section: SectionTitle.ViewEmail}
+  }, {
+    path: 'emails',
+    component: EmailsComponent,
+    data: {section: SectionTitle.Emails}
   }]
 },
 

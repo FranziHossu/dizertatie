@@ -27,10 +27,13 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     position: relative;
+    padding: 0 50px 0 10px;
 
     p {
       margin: auto;
       cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .actions {

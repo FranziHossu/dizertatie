@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="bar-top">
+    <title-bar [title]="title" [button]="button" [item]="list?.name"></title-bar>
+  </div>
+  <div class="content">
+    <div class="emails-inbox">
+      <div class="list-header">
+        <div class="index"><p>#</p></div>
+        <div class="subject"><p>Subject</p></div>
+        <div class="content-email"><p>Content</p></div>
+        <div class="date"><p>Date</p></div>
+        <div class="time"><p>Time</p></div>
+      </div>
+      <div class="email-item" [class.even]="i%2!=0" *ngFor="let email of emails; let i = index"
+           (click)="navigateToEmail(email.id)">
+        <div class="index" title="{{i}}">{{i}}</div>
+        <div class="subject" title="{{email.subject}}">{{email.subject}}</div>
+        <div class="content-email" title="{{email.content}}">{{email.content}}</div>
+        <div class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
+        <div class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
+      </div>
+    </div>
+  </div>
+</div>

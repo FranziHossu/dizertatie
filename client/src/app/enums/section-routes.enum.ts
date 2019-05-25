@@ -3,4 +3,5 @@ export enum SectionRoutes {
   Lists = 'lists',
   Statistics = 'statistics',
   SendEmail = 'email/create',
+  Emails = 'emails'
 }
