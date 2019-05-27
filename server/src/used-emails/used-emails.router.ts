@@ -5,22 +5,22 @@ import {AbstractRouter} from '../util/shared/abstract.router';
 import {Request, Response} from 'express';
 
 /** Managers */
-import {EmailManager} from './email.manager';
+import {UsedEmailsManager} from './used-emails.manager';
 
 
-export class EmailRouter extends AbstractRouter {
-    private mailManager: EmailManager = new EmailManager();
+export class UsedEmailsRouter extends AbstractRouter {
+    private usedEmailsManager: UsedEmailsManager = new UsedEmailsManager();
 
     protected initRoutes() {
-        this.router.post(`/api/email`, this.sendEmail.bind(this));
-
+        this.router.get(`/api/emails/user/:id`, this.getEmailsByUserId.bind(this));
     }
 
-    private sendEmail(request: Request, response: Response) {
-        this.mailManager.sendEmail(request.body, (value) => {
-            response.status(200).json(value);
+    private getEmailsByUserId(request: Request, response: Response) {
+        this.usedEmailsManager.getEmailsByUserId(request.params.id, (data) => {
+            response.status(200).json(data);
         }, () => {
-            response.status(500).json(false);
-        });
+            response.status(500).json(null);
+        })
     }
+
 }

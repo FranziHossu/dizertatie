@@ -1,10 +1,12 @@
 /** Mongoose */
 import {Document, Schema} from 'mongoose';
 
-
-//User Schema
 export const emailSchema: Schema = new Schema({
     from: String,
+    fromId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+    },
     to: [String],
     toLists: [{
         type: Schema.Types.ObjectId,
@@ -22,6 +24,7 @@ export const emailSchema: Schema = new Schema({
     }],
     subject: String,
     content: String,
+    time: Date
 }, {
     toJSON: {
         transform: function (doc, ret) {
@@ -34,6 +37,7 @@ export const emailSchema: Schema = new Schema({
 
 export interface IEmail extends Document {
     from: string;
+    fromId: string;
     to: [string];
     toLists: [string],
     cc: [string];
@@ -41,7 +45,8 @@ export interface IEmail extends Document {
     bcc: [string],
     bccLists: [string],
     subject: string,
-    content: string
+    content: string,
+    time: Date
 }
 
 

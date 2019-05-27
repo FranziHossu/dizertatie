@@ -1,27 +1,19 @@
-import {Model, Types} from 'mongoose';
-import {IEmail, emailSchema} from './email.model';
+import {Model} from 'mongoose';
+import {usedEmailsSchema, IUsedEmail} from './used-emails.model';
 import {AbstractManager} from '../util/shared/abstract.manager';
-import {MailService} from "../util/shared/mail.service";
 
-const bCrypt = require("bcrypt-nodejs");
-
-enum Selectors {
-}
-
-export class EmailManager extends AbstractManager {
-    private Email: Model<IEmail>;
+export class UsedEmailsManager extends AbstractManager {
+    private UsedEmails: Model<IUsedEmail>;
 
     protected initModel() {
-        this.Email = this.connection.model<IEmail>('Email', emailSchema);
+        this.UsedEmails = this.connection.model<IUsedEmail>('UsedEmail', usedEmailsSchema);
     }
 
+    public getEmailsByUserId(id: any, success: Function, fail: Function) {
+        this.UsedEmails.find({user: id}).exec(this.replay(success, fail));
+    }
 
-    public sendEmail(body: any, success: Function, fail: Function) {
-        try {
-            this.emailService.send(body.to, body.from, body.subject, body.content);
-            success(true);
-        } catch (e) {
-            fail(e);
-        }
+    public saveMany(array: Array<any>, success: Function, fail: Function) {
+        this.UsedEmails.insertMany(array, this.replay(success, fail));
     }
 }

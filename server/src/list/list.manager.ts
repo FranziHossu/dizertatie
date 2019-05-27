@@ -2,9 +2,6 @@ import {Model} from 'mongoose';
 import {IList, listSchema} from './list.model';
 import {AbstractManager} from '../util/shared/abstract.manager';
 
-enum Selectors {
-}
-
 export class ListManager extends AbstractManager {
     private List: Model<IList>;
 
