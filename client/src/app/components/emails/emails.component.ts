@@ -40,7 +40,7 @@ export class EmailsComponent implements OnInit {
         data[i].timeAsDate = date + '-' + month + '-' + year;
         data[i].timeAsHours = hour + ':' + minutes;
       }
-
+console.log(data);
       this.emails = data;
     }, () => {
 

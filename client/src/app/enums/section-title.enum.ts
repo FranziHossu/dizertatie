@@ -1,4 +1,5 @@
 export enum SectionTitle {
+  None = '',
   CreateList = 'Create List',
   UpdateList = 'Update',
   Lists = 'Lists',

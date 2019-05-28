@@ -28,6 +28,8 @@ import {ConfirmationComponent} from './components/confirmation/confirmation.comp
 import {ConfirmationService} from '@/components/confirmation/confirmation.service';
 import {EmailService} from '@/components/mail-sender/email.service';
 import { EmailsComponent } from './components/emails/emails.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { MenuService } from './components/menu/menu.service';
 
 const appRoutes: Routes = ROUTES;
 
@@ -57,6 +59,7 @@ const appRoutes: Routes = ROUTES;
     WidgetComponent,
     ConfirmationComponent,
     EmailsComponent,
+    MainPageComponent
   ],
   providers: [
     HttpService,
@@ -65,7 +68,8 @@ const appRoutes: Routes = ROUTES;
     DataService,
     ListService,
     ConfirmationService,
-    EmailService
+    EmailService,
+    MenuService
   ],
   bootstrap: [AppComponent]
 })

@@ -26,6 +26,7 @@ export class MailService {
         };
         this.transporter.sendMail(mailOptions, function (error: any, info: any) {
             if (error) {
+                console.log('ERORR MOTHER')
                 return console.log(error);
             }
             console.log('Message sent', info.messageId, info.response, ' | email: ', to);

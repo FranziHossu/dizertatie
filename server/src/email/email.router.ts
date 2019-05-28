@@ -44,7 +44,7 @@ export class EmailRouter extends AbstractRouter {
                     this.mailManager.saveEmail(request.body, (data: any) => {
                         response.status(200).json(value);
 
-                    }, () => {
+                    }, (error) => {
                         response.status(500).json(false);
                     });
                 }, () => {

@@ -6,8 +6,8 @@ export const config = {
         url: 'mongodb://localhost/dizertatie'
     },
     mail: {
-        host: 'smtp.ubbcluj.ro',
-        port: 26,
+        host: 'smtp2.ubbcluj.ro',
+        port: 465,
         auth: {
             user: 'hossu.francesca@ubbcluj.ro',
             pass: 'habdichlieb8'

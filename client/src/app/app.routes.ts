@@ -11,17 +11,15 @@ import {ListComponent} from './components/list/list.component';
 import {SectionTitle} from './enums/section-title.enum';
 import {MailSenderComponent} from '@/components/mail-sender/mail-sender.component';
 import {EmailsComponent} from '@/components/emails/emails.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 export const ROUTES: Routes = [{
   path: '',
   component: HomeComponent,
   canActivate: [AuthGuard],
   children: [{
-    path: 'login',
-    component: LoginComponent
-  }, {
-    path: 'register',
-    component: RegisterComponent
+    path: '',
+    component: MainPageComponent
   }, {
     path: 'lists',
     component: ListsComponent,
@@ -47,6 +45,12 @@ export const ROUTES: Routes = [{
     component: EmailsComponent,
     data: {section: SectionTitle.Emails}
   }]
+},{
+  path: 'login',
+  component: LoginComponent
+}, {
+  path: 'register',
+  component: RegisterComponent
 },
 
 // otherwise redirect to home

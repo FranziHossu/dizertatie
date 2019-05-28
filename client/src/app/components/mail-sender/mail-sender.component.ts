@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Route, Router} from '@angular/router';
-import {ConfirmationService} from '@/components/confirmation/confirmation.service';
-import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
-import {EmailService} from '@/components/mail-sender/email.service';
-import {Mail} from '@/components/mail-sender/mail.model';
-import {List} from '@/components/lists/list.model';
-import {ListService} from '@/components/lists/list.service';
-import {AlertService} from '@/components/alert/alert.service';
-import {AlertMessage} from '@/components/alert/alert-message';
-import {UserService} from "@/services/user.service";
-import {SectionTitle} from "@/enums/section-title.enum";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ConfirmationService } from '@/components/confirmation/confirmation.service';
+import { ConfirmationMessage } from '@/components/confirmation/confirmation-message.enum';
+import { EmailService } from '@/components/mail-sender/email.service';
+import { Mail } from '@/components/mail-sender/mail.model';
+import { List } from '@/components/lists/list.model';
+import { ListService } from '@/components/lists/list.service';
+import { AlertService } from '@/components/alert/alert.service';
+import { AlertMessage } from '@/components/alert/alert-message';
+import { UserService } from "@/services/user.service";
+import { SectionTitle } from "@/enums/section-title.enum";
+import { MenuService } from '../menu/menu.service';
 
 @Component({
   selector: 'mail-sender',
@@ -25,6 +26,7 @@ export class MailSenderComponent implements OnInit {
   private alertService: AlertService;
   private router: Router;
   private userService: UserService;
+  private menuService: MenuService;
 
   public mail: Mail = new Mail();
   public toElements: Array<string> = new Array<string>();
@@ -50,8 +52,8 @@ export class MailSenderComponent implements OnInit {
   public sectionTitle = SectionTitle;
 
   constructor(route: ActivatedRoute, userService: UserService, router: Router,
-              confirmationService: ConfirmationService, emailService: EmailService,
-              listService: ListService, alertService: AlertService) {
+    confirmationService: ConfirmationService, emailService: EmailService,
+    listService: ListService, alertService: AlertService, menuService: MenuService) {
     this.alertService = alertService;
     this.router = router;
     this.listService = listService;
@@ -59,6 +61,7 @@ export class MailSenderComponent implements OnInit {
     this.userService = userService;
     this.confirmationService = confirmationService;
     this.emailService = emailService;
+    this.menuService = menuService;
   }
 
   ngOnInit() {
@@ -72,6 +75,7 @@ export class MailSenderComponent implements OnInit {
       });
     } else {
       this.listService.getListsByUser().subscribe((data: any) => {
+        console.log(data);
         this.lists = data;
       });
       this.emailService.getUsedEmails(this.userService.currentUser.id).subscribe((data: any) => {
@@ -213,16 +217,20 @@ export class MailSenderComponent implements OnInit {
   public sendEmail() {
     if (this.validateMail()) {
       this.confirmationService.setMessage(ConfirmationMessage.SendEmail);
-      this.confirmationService.answerObservable.subscribe((answer) => {
+      const subscribtion = this.confirmationService.answerObservable.subscribe((answer) => {
+        subscribtion.unsubscribe();
         if (answer) {
           this.mail.time = new Date();
           this.mail.from = this.userService.currentUser.email;
           this.mail.fromId = this.userService.currentUser.id;
 
-          this.emailService.sendEmail(this.mail).subscribe(() => {
+          const requestSubscription = this.emailService.sendEmail(this.mail).subscribe(() => {
             this.alertService.setMessage(AlertMessage.MailSuccessfullySent);
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
+            this.menuService.changeSection(SectionTitle.None);
+            requestSubscription.unsubscribe();
           }, () => {
+            requestSubscription.unsubscribe();  
             console.log('error');
           });
         }
@@ -255,7 +263,6 @@ export class MailSenderComponent implements OnInit {
   }
 
   private setEmail(data: Mail) {
-    console.log(data);
     this.mail = data;
 
     for (let i = 0; i < data.to.length; i++) {
@@ -277,5 +284,10 @@ export class MailSenderComponent implements OnInit {
     if (this.ccElements.length !== 0) {
       this.displayCC = true;
     }
+  }
+
+  public cancel() {
+    this.router.navigate(['']);
+    this.menuService.changeSection(SectionTitle.None);
   }
 }

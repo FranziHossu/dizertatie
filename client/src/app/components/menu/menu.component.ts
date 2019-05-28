@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {SectionRoutes} from '@/enums/section-routes.enum';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SectionTitle} from "@/enums/section-title.enum";
+import { Component, OnInit } from '@angular/core';
+import { SectionRoutes } from '@/enums/section-routes.enum';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SectionTitle } from "@/enums/section-title.enum";
+import { MenuService } from './menu.service';
 
 @Component({
   selector: 'menu',
@@ -11,18 +12,23 @@ import {SectionTitle} from "@/enums/section-title.enum";
 export class MenuComponent implements OnInit {
   private router: Router;
   private route: ActivatedRoute;
+  private menuService: MenuService;
 
   public sectionRoutes = SectionRoutes;
   public currentSection: SectionTitle;
   public sectionTitles = SectionTitle;
 
-  constructor(router: Router, route: ActivatedRoute) {
+  constructor(router: Router, route: ActivatedRoute, menuService: MenuService) {
     this.router = router;
     this.route = route;
+    this.menuService = menuService;
   }
 
   ngOnInit() {
     this.setCurrentSection(this.router.url);
+    this.menuService.menuObservable.subscribe((value: string) => {
+      this.setCurrentSectionByGivenValue(value);
+    })
   }
 
   public navigateTo(route: any, value: any) {
@@ -40,6 +46,20 @@ export class MenuComponent implements OnInit {
     } else if (url === 'lists' || url === 'list') {
       this.currentSection = SectionTitle.Lists;
     } else if (url === 'profile') {
+      this.currentSection = SectionTitle.Profile;
+    }
+  }
+
+  private setCurrentSectionByGivenValue(section: string) {
+    if (section === '') {
+      this.currentSection = null;
+    } else if (section === 'email') {
+      this.currentSection = SectionTitle.CreateEmail;
+    } else if (section === 'statistics') {
+      this.currentSection = SectionTitle.Statistics;
+    } else if (section === 'lists' || section === 'list') {
+      this.currentSection = SectionTitle.Lists;
+    } else if (section === 'profile') {
       this.currentSection = SectionTitle.Profile;
     }
   }
