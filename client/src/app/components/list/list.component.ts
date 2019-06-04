@@ -23,6 +23,7 @@ export class ListComponent implements OnInit {
   public allEmails: Array<string> = new Array();
   public email: string;
   public title: string;
+  public listName: string;
   public button: string;
   public showAddButton: any;
   public nameError = false;
@@ -43,6 +44,7 @@ export class ListComponent implements OnInit {
     if (this.title === this.sectionTitle.UpdateList) {
       this.listService.getListById(this.route.snapshot.params.id).subscribe((data: any) => {
         this.list = data;
+        this.listName = this.list.name;
       }, (error: any) => {
 
       });
@@ -85,6 +87,7 @@ export class ListComponent implements OnInit {
 
   public updateList() {
     if (this.verify()) {
+      console.log('update the list');
       this.listService.updateList(this.list).subscribe(() => {
         this.router.navigate(['lists']);
       }, () => {

@@ -11,7 +11,8 @@ import {ListComponent} from './components/list/list.component';
 import {SectionTitle} from './enums/section-title.enum';
 import {MailSenderComponent} from '@/components/mail-sender/mail-sender.component';
 import {EmailsComponent} from '@/components/emails/emails.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
+import {MainPageComponent} from './components/main-page/main-page.component';
+import {ProfileComponent} from "@/components/profile/profile.component";
 
 export const ROUTES: Routes = [{
   path: '',
@@ -25,6 +26,10 @@ export const ROUTES: Routes = [{
     component: ListsComponent,
     data: {section: SectionTitle.Lists}
   }, {
+    path: 'profile',
+    component: ProfileComponent,
+    data: {section: SectionTitle.Profile}
+  },  {
     path: 'list/create',
     component: ListComponent,
     data: {section: SectionTitle.CreateList}
@@ -36,7 +41,7 @@ export const ROUTES: Routes = [{
     path: 'email/create',
     component: MailSenderComponent,
     data: {section: SectionTitle.CreateEmail}
-  },{
+  }, {
     path: 'email/view/:id',
     component: MailSenderComponent,
     data: {section: SectionTitle.ViewEmail}
@@ -45,7 +50,7 @@ export const ROUTES: Routes = [{
     component: EmailsComponent,
     data: {section: SectionTitle.Emails}
   }]
-},{
+}, {
   path: 'login',
   component: LoginComponent
 }, {

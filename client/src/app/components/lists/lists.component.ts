@@ -16,8 +16,10 @@ export class ListsComponent implements OnInit {
   private confirmationService: ConfirmationService;
 
   public title: string;
+  public searchedValue = '';
   public button: string;
   public lists: Array<List> = new Array<List>();
+  public allLists: Array<List> = new Array<List>();
 
   constructor(listService: ListService, route: ActivatedRoute, confirmationService: ConfirmationService) {
     this.listService = listService;
@@ -29,7 +31,11 @@ export class ListsComponent implements OnInit {
     this.title = this.route.snapshot.data.section;
 
     this.listService.getListsByUser().subscribe((data) => {
-      this.lists = data;
+      this.allLists = data;
+      this.allLists.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      this.lists = this.allLists;
     }, () => {
 
     });
@@ -56,5 +62,15 @@ export class ListsComponent implements OnInit {
         this.lists.splice(i, 1);
       }
     }
+  }
+
+  public searchLists() {
+    this.lists = new Array<List>();
+
+    this.allLists.forEach((e) => {
+      if (e.name.includes(this.searchedValue)) {
+        this.lists.push(e);
+      }
+    });
   }
 }

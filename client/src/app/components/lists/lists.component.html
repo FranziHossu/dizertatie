@@ -3,6 +3,12 @@
     <title-bar [title]="title" [button]="button"></title-bar>
   </div>
   <div class="content">
+
+
+    <div class="list-search">
+      <input [(ngModel)]="searchedValue" (keyup)="searchLists()" placeholder="Seach for list" type="text">
+    </div>
+
     <div *ngIf="lists.length == 0" class="empty-label">
       <p>There are no lists..</p>
     </div>

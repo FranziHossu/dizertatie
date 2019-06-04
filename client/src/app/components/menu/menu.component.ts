@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { SectionRoutes } from '@/enums/section-routes.enum';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SectionTitle } from "@/enums/section-title.enum";
-import { MenuService } from './menu.service';
+import {Component, OnInit} from '@angular/core';
+import {SectionRoutes} from '@/enums/section-routes.enum';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SectionTitle} from '@/enums/section-title.enum';
+import {MenuService} from './menu.service';
+import {LocalStorageService} from '@/services/local-storage.service';
 
 @Component({
   selector: 'menu',
@@ -13,22 +14,24 @@ export class MenuComponent implements OnInit {
   private router: Router;
   private route: ActivatedRoute;
   private menuService: MenuService;
+  private localStorageService: LocalStorageService;
 
   public sectionRoutes = SectionRoutes;
   public currentSection: SectionTitle;
   public sectionTitles = SectionTitle;
 
-  constructor(router: Router, route: ActivatedRoute, menuService: MenuService) {
+  constructor(router: Router, route: ActivatedRoute, menuService: MenuService, localStorageService: LocalStorageService) {
     this.router = router;
     this.route = route;
     this.menuService = menuService;
+    this.localStorageService = localStorageService;
   }
 
   ngOnInit() {
     this.setCurrentSection(this.router.url);
     this.menuService.menuObservable.subscribe((value: string) => {
       this.setCurrentSectionByGivenValue(value);
-    })
+    });
   }
 
   public navigateTo(route: any, value: any) {
@@ -67,4 +70,6 @@ export class MenuComponent implements OnInit {
   public setCurrentSectionValue(value: any) {
     this.currentSection = value;
   }
+
+
 }

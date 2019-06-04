@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ConfirmationService } from '@/components/confirmation/confirmation.service';
-import { ConfirmationMessage } from '@/components/confirmation/confirmation-message.enum';
-import { EmailService } from '@/components/mail-sender/email.service';
-import { Mail } from '@/components/mail-sender/mail.model';
-import { List } from '@/components/lists/list.model';
-import { ListService } from '@/components/lists/list.service';
-import { AlertService } from '@/components/alert/alert.service';
-import { AlertMessage } from '@/components/alert/alert-message';
-import { UserService } from "@/services/user.service";
-import { SectionTitle } from "@/enums/section-title.enum";
-import { MenuService } from '../menu/menu.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ConfirmationService} from '@/components/confirmation/confirmation.service';
+import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
+import {EmailService} from '@/components/mail-sender/email.service';
+import {Mail} from '@/components/mail-sender/mail.model';
+import {List} from '@/components/lists/list.model';
+import {ListService} from '@/components/lists/list.service';
+import {AlertService} from '@/components/alert/alert.service';
+import {AlertMessage} from '@/components/alert/alert-message';
+import {UserService} from "@/services/user.service";
+import {SectionTitle} from "@/enums/section-title.enum";
+import {MenuService} from '../menu/menu.service';
 
 @Component({
   selector: 'mail-sender',
@@ -52,8 +52,8 @@ export class MailSenderComponent implements OnInit {
   public sectionTitle = SectionTitle;
 
   constructor(route: ActivatedRoute, userService: UserService, router: Router,
-    confirmationService: ConfirmationService, emailService: EmailService,
-    listService: ListService, alertService: AlertService, menuService: MenuService) {
+              confirmationService: ConfirmationService, emailService: EmailService,
+              listService: ListService, alertService: AlertService, menuService: MenuService) {
     this.alertService = alertService;
     this.router = router;
     this.listService = listService;
@@ -230,7 +230,7 @@ export class MailSenderComponent implements OnInit {
             this.menuService.changeSection(SectionTitle.None);
             requestSubscription.unsubscribe();
           }, () => {
-            requestSubscription.unsubscribe();  
+            requestSubscription.unsubscribe();
             console.log('error');
           });
         }

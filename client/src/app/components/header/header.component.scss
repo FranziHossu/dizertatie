@@ -1,13 +1,33 @@
-:host{
+:host {
   height: 100%;
   width: 100%;
 }
 
-.container{
+.container-header {
   height: 100%;
   width: 100%;
   display: flex;
-  p{
+  padding: 0 20px;
+  position: relative;
+
+  p {
     margin: auto;
+  }
+
+  .logout {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+
+    i {
+      font-size: 25px;
+    }
+
+    & > * {
+      margin: auto 2px;
+    }
   }
 }

@@ -11,13 +11,17 @@
         <div class="date"><p>Date</p></div>
         <div class="time"><p>Time</p></div>
       </div>
-      <div class="email-item" [class.even]="i%2!=0" *ngFor="let email of emails; let i = index"
-           (click)="navigateToEmail(email.id)">
-        <div class="index" title="{{i}}">{{i}}</div>
-        <div class="subject" title="{{email.subject}}">{{email.subject}}</div>
-        <div class="content-email" title="{{email.content}}">{{email.content}}</div>
-        <div class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
-        <div class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
+      <div class="email-items-overflow">
+        <div class="email-items">
+          <div class="email-item" [class.even]="i%2!=0" *ngFor="let email of emails; let i = index"
+               (click)="navigateToEmail(email.id)">
+            <div class="index" title="{{i}}">{{i}}</div>
+            <div class="subject" title="{{email.subject}}">{{email.subject}}</div>
+            <div class="content-email" title="{{email.content}}">{{email.content}}</div>
+            <div class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
+            <div class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

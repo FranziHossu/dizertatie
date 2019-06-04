@@ -27,9 +27,10 @@ import {WidgetComponent} from './components/widget/widget.component';
 import {ConfirmationComponent} from './components/confirmation/confirmation.component';
 import {ConfirmationService} from '@/components/confirmation/confirmation.service';
 import {EmailService} from '@/components/mail-sender/email.service';
-import { EmailsComponent } from './components/emails/emails.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { MenuService } from './components/menu/menu.service';
+import {EmailsComponent} from './components/emails/emails.component';
+import {MainPageComponent} from './components/main-page/main-page.component';
+import {MenuService} from './components/menu/menu.service';
+import {ProfileComponent} from '@/components/profile/profile.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -59,7 +60,8 @@ const appRoutes: Routes = ROUTES;
     WidgetComponent,
     ConfirmationComponent,
     EmailsComponent,
-    MainPageComponent
+    MainPageComponent,
+    ProfileComponent
   ],
   providers: [
     HttpService,

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="bar-top">
+    <title-bar [title]="title" [button]="button" [item]="listName"></title-bar>
+  </div>
+  <div class="content">
+    <div class="user-infos">
+      <div class="user-info-row">
+        <div class="user-info-title">User information</div>
+      </div>
+      <div class="user-info-row">
+        <div class="user-info" [class.editable]="editInfo">
+          <div class="info-label">Username:</div>
+          <input class="info-value" [(ngModel)]="username" [disabled]="!editInfo"/>
+        </div>
+        <div class="user-info" [class.editable]="editInfo">
+          <div class="info-label">Email:</div>
+          <input class="info-value" [(ngModel)]="email" [disabled]="!editInfo"/>
+        </div>
+      </div>
+      <div class="user-info-row">
+        <div class="user-info" [class.editable]="editInfo">
+          <div class="info-label">First name:</div>
+          <input class="info-value" [(ngModel)]="firstName" [disabled]="!editInfo"/>
+        </div>
+        <div class="user-info" [class.editable]="editInfo">
+          <div class="info-label">Last name:</div>
+          <input class="info-value" [(ngModel)]="lastName" [disabled]="!editInfo"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <div class="profile-action" *ngIf="!editInfo">
+        <p class="first" (click)="toggleEdit()">Edit information</p>
+      </div>
+      <div class="profile-action" *ngIf="!editInfo">
+        <p class="second" (click)="changePassword()">Change Password</p>
+      </div>
+      <div class="profile-action" *ngIf="editInfo">
+        <p class="first" (click)="saveEdit()">Save</p>
+      </div>
+      <div class="profile-action" *ngIf="editInfo">
+        <p class="second" (click)="revertEdit()">Cancel Edit</p>
+      </div>
+    </div>
+  </div>
+</div>

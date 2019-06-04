@@ -34,7 +34,6 @@ export class EmailManager extends AbstractManager {
         });
 
         if (err) {
-            console.log('errorrrrr', err);
             fail(false);
         } else {
             success(true);

@@ -13,9 +13,12 @@ export class UserRouter extends AbstractRouter {
 
 	protected initRoutes() {
 		this.router.get('/api/user/:id', this.getUser.bind(this));
+		this.router.get('/api/user/password/:id', this.changePassword.bind(this));
 
 		this.router.post('/api/user/login', this.login.bind(this));
 		this.router.post('/api/user/register', this.register.bind(this));
+
+		this.router.put('/api/user/:id', this.updateUser.bind(this));
 	}
 
 	private login(request: Request, response: Response) {
@@ -49,6 +52,21 @@ export class UserRouter extends AbstractRouter {
 		});
 	}
 
+	private updateUser(request: Request, response: Response) {
+		this.userManager.updateUser(request.params.id, request.body, (data: any) => {
+			response.status(200).json(data);
+		}, (error: Error) => {
+			response.status(500).json(null);
+		});
+	}
+
+	private changePassword(request: Request, response: Response) {
+		this.userManager.changePassword(request.params.id,(data: any) => {
+			response.status(200).json(data);
+		}, (error: Error) => {
+			response.status(500).json(null);
+		});
+	}
 
 	private getUser(request: Request, response: Response) {
 		this.userManager.getUser(request.params.id, (data: any) => {

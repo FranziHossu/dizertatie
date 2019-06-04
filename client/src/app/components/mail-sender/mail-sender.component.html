@@ -19,12 +19,12 @@
       <div class="to-items" *ngIf="toElements.length">
         <div class="item" *ngFor="let to of toElements; let i = index">
           <p>{{to}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromTo(to)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromTo(to)" *ngIf="title !== sectionTitle.ViewEmail"></i>
         </div>
       </div>
 
       <div class="wrapper-input">
-        <input placeholder="Who do you want to send this email to?" (focusout)="toggleShowToAddButton()"
+        <input [disabled]="title === sectionTitle.ViewEmail" (focusout)="toggleShowToAddButton()"
                (focus)="toggleShowToAddButton()" (blur)="addToElement()"
                (keyup.enter)="addToElement()" [(ngModel)]="to" type="text">
         <!--        <div class="suggestion-list"></div>-->
@@ -41,11 +41,12 @@
       <div class="to-items" *ngIf="ccElements.length">
         <div class="item" *ngFor="let cc of ccElements; let i = index">
           <p>{{cc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromCc(cc)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromCc(cc)" *ngIf="title !== sectionTitle.ViewEmail"></i>
         </div>
       </div>
 
-      <input (focusout)="toggleShowCCAddButton()" (focus)="toggleShowCCAddButton()" (blur)="addEmailCC()"
+      <input [disabled]="title === sectionTitle.ViewEmail" (focusout)="toggleShowCCAddButton()"
+             (focus)="toggleShowCCAddButton()" (blur)="addEmailCC()"
              (keyup.enter)="addEmailCC()" [(ngModel)]="cc" type="text">
 
       <div *ngIf="showCcAddButton" (click)="addEmailCC()" class="button">
@@ -59,11 +60,12 @@
       <div class="to-items" *ngIf="bccElements.length">
         <div class="item" *ngFor="let bcc of bccElements; let i = index">
           <p>{{bcc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromBcc(bcc)"></i>
+          <i class="fa fa-times" (click)="removeEmailFromBcc(bcc)" *ngIf="title !== sectionTitle.ViewEmail"></i>
         </div>
       </div>
 
-      <input (focusout)="toggleShowBccAddButton()" (focus)="toggleShowBccAddButton()" (blur)="addEmailBCC()"
+      <input [disabled]="title === sectionTitle.ViewEmail" (focusout)="toggleShowBccAddButton()"
+             (focus)="toggleShowBccAddButton()" (blur)="addEmailBCC()"
              (keyup.enter)="addEmailBCC()" [(ngModel)]="bcc" type="text">
 
       <div *ngIf="showBccAddButton" (click)="addEmailBCC()" class="button">
@@ -73,7 +75,7 @@
 
     <div class="element">
       <div class="label">Subject:</div>
-      <input placeholder="Type the subject" [(ngModel)]="mail.subject" type="text">
+      <input [disabled]="title === sectionTitle.ViewEmail" [(ngModel)]="mail.subject" type="text">
     </div>
 
     <div class="element-textarea">
@@ -81,13 +83,14 @@
 
       <div class="element-wrapper">
         <div class="element-content">
-          <textarea placeholder="Write your message" rows="10" [(ngModel)]="mail.content" type="text"></textarea>
+          <textarea [disabled]="title === sectionTitle.ViewEmail" rows="10" [(ngModel)]="mail.content"
+                    type="text"></textarea>
         </div>
       </div>
     </div>
 
     <div class="btns">
-      <div class="btn" (click)="sendEmail()">Send Email</div>
+      <div class="btn" (click)="sendEmail()" *ngIf="title !== sectionTitle.ViewEmail">Send Email</div>
       <div class="btn" (click)="cancel()">Cancel</div>
     </div>
 

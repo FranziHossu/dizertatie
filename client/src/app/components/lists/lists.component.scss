@@ -36,6 +36,20 @@
   margin: 0 10px 5px 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+
+  .list-search {
+    width: calc(100% - 20px);
+    display: flex;
+    padding: 5px 10px;
+
+    input {
+      font-style: italic;
+      width: 400px;
+      margin: auto;
+      padding: 5px;
+    }
+  }
+
   .wrapper {
     display: flex;
     height: 100%;
