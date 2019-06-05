@@ -1,12 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@/http.service';
 import {UserService} from '../../services/user.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {List} from "@/components/lists/list.model";
 
 @Injectable()
 export class ListService {
   private httpService: HttpService;
   private userService: UserService;
+  private listSubject: BehaviorSubject<List> = new BehaviorSubject(null);
+
+  public listObservable: Observable<List> = this.listSubject.asObservable();
 
   constructor(httpService: HttpService, userService: UserService) {
     this.httpService = httpService;
@@ -15,6 +19,10 @@ export class ListService {
 
   public getListsByUser(): Observable<any> {
     return this.httpService.get(`/lists/${this.userService.currentUser.id}`);
+  }
+
+  public getSharedListsByUser(): Observable<any> {
+    return this.httpService.get(`/lists/shared/${this.userService.currentUser.email}`);
   }
 
   public addList(list: any): Observable<any> {
@@ -31,5 +39,9 @@ export class ListService {
 
   public getListById(id: string): Observable<any> {
     return this.httpService.get(`/list/${id}`);
+  }
+
+  public nextList(list: List) {
+    this.listSubject.next(list);
   }
 }

@@ -3,7 +3,7 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
 import {ConfirmationService} from '@/components/confirmation/confirmation.service';
 import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
 import {EmailService} from '@/components/mail-sender/email.service';
-import {Mail} from '@/components/mail-sender/mail.model';
+import {Email} from '@/components/mail-sender/mail.model';
 import {List} from '@/components/lists/list.model';
 import {ListService} from '@/components/lists/list.service';
 import {AlertService} from '@/components/alert/alert.service';
@@ -28,7 +28,7 @@ export class MailSenderComponent implements OnInit {
   private userService: UserService;
   private menuService: MenuService;
 
-  public mail: Mail = new Mail();
+  public email: Email = new Email();
   public toElements: Array<string> = new Array<string>();
   public ccElements: Array<string> = new Array<string>();
   public bccElements: Array<string> = new Array<string>();
@@ -74,9 +74,16 @@ export class MailSenderComponent implements OnInit {
 
       });
     } else {
+
+      this.listService.listObservable.subscribe((list: List) => {
+        if (list) {
+          this.email.toLists.push(list);
+          this.toElements.push(list.name);
+        }
+      });
       this.listService.getListsByUser().subscribe((data: any) => {
-        console.log(data);
         this.lists = data;
+
       });
       this.emailService.getUsedEmails(this.userService.currentUser.id).subscribe((data: any) => {
         this.usedEmails = data;
@@ -101,9 +108,9 @@ export class MailSenderComponent implements OnInit {
     if (this.to !== '') {
       const element = this.getFromLists(this.to);
       if (element) {
-        this.mail.toLists.push(element);
+        this.email.toLists.push(element);
       } else {
-        this.mail.to.push(this.to);
+        this.email.to.push(this.to);
       }
       this.toElements.push(this.to);
       this.to = '';
@@ -114,9 +121,9 @@ export class MailSenderComponent implements OnInit {
     if (this.cc !== '') {
       const element = this.getFromLists(this.cc);
       if (element) {
-        this.mail.ccLists.push(element);
+        this.email.ccLists.push(element);
       } else {
-        this.mail.cc.push(this.cc);
+        this.email.cc.push(this.cc);
       }
       this.ccElements.push(this.cc);
       this.cc = '';
@@ -127,9 +134,9 @@ export class MailSenderComponent implements OnInit {
     if (this.bcc !== '') {
       const element = this.getFromLists(this.bcc);
       if (element) {
-        this.mail.bccLists.push(element);
+        this.email.bccLists.push(element);
       } else {
-        this.mail.bcc.push(this.bcc);
+        this.email.bcc.push(this.bcc);
       }
       this.bccElements.push(this.bcc);
       this.bcc = '';
@@ -139,16 +146,16 @@ export class MailSenderComponent implements OnInit {
   public removeEmailFromTo(to: any) {
     const element = this.getFromLists(to);
     if (element) {
-      for (let k = 0; k < this.mail.toLists.length; k++) {
-        if (this.mail.toLists[k].id === element.id) {
-          this.mail.toLists.splice(k, 1);
+      for (let k = 0; k < this.email.toLists.length; k++) {
+        if (this.email.toLists[k].id === element.id) {
+          this.email.toLists.splice(k, 1);
         }
       }
     } else {
-      for (let k = 0; k < this.mail.to.length; k++) {
-        if (this.mail.to[k] === to) {
+      for (let k = 0; k < this.email.to.length; k++) {
+        if (this.email.to[k] === to) {
           console.log('here');
-          this.mail.to.splice(k, 1);
+          this.email.to.splice(k, 1);
         }
       }
     }
@@ -163,15 +170,15 @@ export class MailSenderComponent implements OnInit {
   public removeEmailFromCc(cc: any) {
     const element = this.getFromLists(cc);
     if (element) {
-      for (let k = 0; k < this.mail.ccLists.length; k++) {
-        if (this.mail.ccLists[k].id === element.id) {
-          this.mail.ccLists.splice(k, 1);
+      for (let k = 0; k < this.email.ccLists.length; k++) {
+        if (this.email.ccLists[k].id === element.id) {
+          this.email.ccLists.splice(k, 1);
         }
       }
     } else {
-      for (let k = 0; k < this.mail.cc.length; k++) {
-        if (this.mail.cc[k] === cc) {
-          this.mail.cc.splice(k, 1);
+      for (let k = 0; k < this.email.cc.length; k++) {
+        if (this.email.cc[k] === cc) {
+          this.email.cc.splice(k, 1);
         }
       }
     }
@@ -186,15 +193,15 @@ export class MailSenderComponent implements OnInit {
   public removeEmailFromBcc(bcc: any) {
     const element = this.getFromLists(bcc);
     if (element) {
-      for (let k = 0; k < this.mail.bccLists.length; k++) {
-        if (this.mail.bccLists[k].id === element.id) {
-          this.mail.bccLists.splice(k, 1);
+      for (let k = 0; k < this.email.bccLists.length; k++) {
+        if (this.email.bccLists[k].id === element.id) {
+          this.email.bccLists.splice(k, 1);
         }
       }
     } else {
-      for (let k = 0; k < this.mail.bcc.length; k++) {
-        if (this.mail.to[k] === bcc) {
-          this.mail.bcc.splice(k, 1);
+      for (let k = 0; k < this.email.bcc.length; k++) {
+        if (this.email.to[k] === bcc) {
+          this.email.bcc.splice(k, 1);
         }
       }
     }
@@ -220,11 +227,11 @@ export class MailSenderComponent implements OnInit {
       const subscribtion = this.confirmationService.answerObservable.subscribe((answer) => {
         subscribtion.unsubscribe();
         if (answer) {
-          this.mail.time = new Date();
-          this.mail.from = this.userService.currentUser.email;
-          this.mail.fromId = this.userService.currentUser.id;
+          this.email.time = new Date();
+          this.email.from = this.userService.currentUser.email;
+          this.email.fromId = this.userService.currentUser.id;
 
-          const requestSubscription = this.emailService.sendEmail(this.mail).subscribe(() => {
+          const requestSubscription = this.emailService.sendEmail(this.email).subscribe(() => {
             this.alertService.setMessage(AlertMessage.MailSuccessfullySent);
             this.router.navigate(['']);
             this.menuService.changeSection(SectionTitle.None);
@@ -262,8 +269,8 @@ export class MailSenderComponent implements OnInit {
     this.showSuggestionBcc = !this.showSuggestionBcc;
   }
 
-  private setEmail(data: Mail) {
-    this.mail = data;
+  private setEmail(data: Email) {
+    this.email = data;
 
     for (let i = 0; i < data.to.length; i++) {
       this.toElements.push(data.to[i]);

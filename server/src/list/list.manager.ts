@@ -13,6 +13,10 @@ export class ListManager extends AbstractManager {
         this.List.find({user: id}).exec(this.replay(success, fail));
     }
 
+    public getSharedListsByUser(email: string, success: Function, fail: Function) {
+        this.List.find({ emails:  email}).exec(this.replay(success, fail));
+    }
+
     public addList(list: any, success: Function, fail: Function) {
         this.List.create(list, this.replay(success, fail));
     }

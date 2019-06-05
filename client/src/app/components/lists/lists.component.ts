@@ -4,6 +4,7 @@ import {List} from './list.model';
 import {ActivatedRoute} from '@angular/router';
 import {ConfirmationService} from "@/components/confirmation/confirmation.service";
 import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
+import {UserService} from "@/services/user.service";
 
 @Component({
   selector: 'lists',
@@ -14,28 +15,51 @@ export class ListsComponent implements OnInit {
   private listService: ListService;
   private route: ActivatedRoute;
   private confirmationService: ConfirmationService;
+  private userService: UserService;
 
   public title: string;
   public searchedValue = '';
   public button: string;
   public lists: Array<List> = new Array<List>();
   public allLists: Array<List> = new Array<List>();
+  public sharedLists: Array<List> = new Array<List>();
+  public allSharedLists: Array<List> = new Array<List>();
+  public currentTab = false;
 
-  constructor(listService: ListService, route: ActivatedRoute, confirmationService: ConfirmationService) {
+  constructor(listService: ListService, route: ActivatedRoute, userService: UserService, confirmationService: ConfirmationService) {
     this.listService = listService;
+    this.userService = userService;
     this.route = route;
     this.confirmationService = confirmationService;
   }
 
   ngOnInit() {
     this.title = this.route.snapshot.data.section;
+    this.getUserLists();
+    this.getUsersharedLists();
 
+
+  }
+
+  private getUserLists() {
     this.listService.getListsByUser().subscribe((data) => {
       this.allLists = data;
       this.allLists.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
       this.lists = this.allLists;
+    }, () => {
+
+    });
+  }
+
+  private getUsersharedLists() {
+    this.listService.getSharedListsByUser().subscribe((data) => {
+      this.allSharedLists = data;
+      this.allSharedLists.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      this.sharedLists = this.allSharedLists;
     }, () => {
 
     });
@@ -72,5 +96,35 @@ export class ListsComponent implements OnInit {
         this.lists.push(e);
       }
     });
+  }
+
+  public toggleTab(value: boolean) {
+    this.currentTab = value;
+  }
+
+  public unsubscribe(list: List) {
+    const newList: List = new List();
+    newList.emails = list.emails;
+    newList.id = list.id;
+    newList.name = list.name;
+    newList.description = list.description;
+    newList.user = list.user;
+
+    for (let j = 0; j < newList.emails.length; j++) {
+      if (newList.emails[j] === this.userService.currentUser.email) {
+        newList.emails.splice(j, 1);
+        break;
+      }
+    }
+    this.listService.updateList(newList).subscribe((data: any) => {
+        for (let i = 0; i < this.sharedLists.length; i++) {
+          if (this.sharedLists[i].id === list.id) {
+            this.sharedLists.splice(i, 1);
+            break;
+          }
+        }
+      }, () => {
+      }
+    );
   }
 }

@@ -1,6 +1,6 @@
 import {List} from '@/components/lists/list.model';
 
-export class Mail {
+export class Email {
   public from: string;
   public fromId: number;
   public to: Array<string> = new Array<string>();

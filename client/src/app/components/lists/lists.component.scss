@@ -36,6 +36,28 @@
   margin: 0 10px 5px 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+  .lists-toggle{
+    display: flex;
+    width: 100%;
+    padding-bottom:15px ;
+
+    .loggle-button{
+      display: flex;
+      width: 100%;
+      cursor: pointer;
+
+      p{
+        font-size: 15px;
+        font-weight: bolder;
+        margin: auto;
+      }
+
+      p.activated{
+        text-decoration: underline;
+      }
+    }
+  }
+
 
   .list-search {
     width: calc(100% - 20px);
@@ -45,28 +67,24 @@
     input {
       font-style: italic;
       width: 400px;
-      margin: auto;
+      margin: auto auto auto 0;
       padding: 5px;
     }
   }
 
   .wrapper {
     display: flex;
-    height: 100%;
     width: 100%;
     overflow: auto;
 
     .list {
-      height: 100%;
       width: 100%;
       flex-wrap: wrap;
       flex-direction: row;
       display: flex;
 
       widget {
-        display: flex;
         max-width: 350px;
-        height: 300px;
         margin: 10px;
       }
     }

@@ -75,7 +75,7 @@
 
     <div class="element">
       <div class="label">Subject:</div>
-      <input [disabled]="title === sectionTitle.ViewEmail" [(ngModel)]="mail.subject" type="text">
+      <input [disabled]="title === sectionTitle.ViewEmail" [(ngModel)]="email.subject" type="text">
     </div>
 
     <div class="element-textarea">
@@ -83,7 +83,7 @@
 
       <div class="element-wrapper">
         <div class="element-content">
-          <textarea [disabled]="title === sectionTitle.ViewEmail" rows="10" [(ngModel)]="mail.content"
+          <textarea [disabled]="title === sectionTitle.ViewEmail" rows="10" [(ngModel)]="email.content"
                     type="text"></textarea>
         </div>
       </div>

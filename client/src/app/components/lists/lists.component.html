@@ -4,18 +4,33 @@
   </div>
   <div class="content">
 
+    <div class="lists-toggle">
+      <div class="loggle-button" (click)="toggleTab(false)"><p [class.activated]="!currentTab">Personal Lists</p></div>
+      <span>|</span>
+      <div class="loggle-button" (click)="toggleTab(true)"><p [class.activated]="currentTab">Shared Lists</p></div>
+    </div>
+
 
     <div class="list-search">
       <input [(ngModel)]="searchedValue" (keyup)="searchLists()" placeholder="Seach for list" type="text">
     </div>
 
-    <div *ngIf="lists.length == 0" class="empty-label">
-      <p>There are no lists..</p>
-    </div>
 
-    <div class="wrapper">
+    <div *ngIf="!currentTab" class="wrapper">
+      <div *ngIf="lists.length == 0" class="empty-label">
+        <p>There are no lists..</p>
+      </div>
       <div class="list">
         <widget *ngFor="let item of lists" [list]="item" (delete)="deleteList($event)"></widget>
+      </div>
+    </div>
+
+    <div *ngIf="currentTab" class="wrapper">
+      <div *ngIf="sharedLists.length == 0" class="empty-label">
+        <p>There are no lists..</p>
+      </div>
+      <div class="list">
+        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true" (emitUnsubscribe)="unsubscribe($event)"></widget>
       </div>
     </div>
   </div>

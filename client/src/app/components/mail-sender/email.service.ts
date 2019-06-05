@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '@/http.service';
+import {BehaviorSubject} from "rxjs";
+import {List} from "@/components/lists/list.model";
 
 
 @Injectable()
 export class EmailService {
   private httpService: HttpService;
+
 
   constructor(httpService: HttpService) {
     this.httpService = httpService;
@@ -25,4 +28,5 @@ export class EmailService {
   public getEmailById(id: any) {
     return this.httpService.get(`/email/${id}`);
   }
+
 }

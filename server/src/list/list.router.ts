@@ -12,6 +12,7 @@ export class ListRouter extends AbstractRouter {
 
     protected initRoutes() {
         this.router.get('/api/lists/:id', this.getListsByUser.bind(this));
+        this.router.get('/api/lists/shared/:email', this.getSharedListsByUser.bind(this));
         this.router.get('/api/list/:id', this.getListById.bind(this));
 
         this.router.post('/api/list', this.addList.bind(this));
@@ -23,6 +24,14 @@ export class ListRouter extends AbstractRouter {
 
     private getListsByUser(request: Request, response: Response) {
         this.listManager.getListsByUser(request.params.id, (data) => {
+            response.status(200).json(data);
+        }, () => {
+            response.status(500).json(null);
+        });
+    }
+
+    private getSharedListsByUser(request: Request, response: Response) {
+        this.listManager.getSharedListsByUser(request.params.email, (data) => {
             response.status(200).json(data);
         }, () => {
             response.status(500).json(null);

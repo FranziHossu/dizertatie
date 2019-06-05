@@ -1,13 +1,16 @@
 <div class="widget">
   <div class="name">
-    <div class="actions">
+    <div class="actions" *ngIf="!shared">
       <i class="fa fa-pen" (click)="edit()"></i>
       <i class="fa fa-trash" (click)="emitDelete()"></i>
     </div>
-    <p title="{{list?.name}}">{{list?.name}}</p>
+    <div class="actions" *ngIf="shared">
+      <i class="fa fa-user-slash" title="Unsubscribe from this list" (click)="handleUnsubscribe()"></i>
+    </div>
+    <p (click)="sendEmailToList()" title="{{list?.name}}">{{list?.name}}</p>
   </div>
   <div *ngIf="list?.description" class="description" title="'{{list?.description}}'"><p>{{list?.description}}</p></div>
-  <div class="emails" [class.has-description]="list?.description">
+  <div class="emails" >
     <div class="email" *ngFor="let email of list?.emails">
       <p title="{{email}}">{{email}}</p>
     </div>
