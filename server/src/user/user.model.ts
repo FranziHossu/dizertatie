@@ -10,6 +10,7 @@ export const userSchema: Schema = new Schema({
     lastName: String,
     email: String, 
     token: String,
+    passwordToken: String,
 }, {
         toJSON: {
             transform: function (doc, ret) {
@@ -28,6 +29,7 @@ export interface IUser extends Document {
     firstName: string,
     lastName: string,
     email: string
+    passwordToken: string
 }
 
 

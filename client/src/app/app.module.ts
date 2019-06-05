@@ -31,6 +31,7 @@ import {EmailsComponent} from './components/emails/emails.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {MenuService} from './components/menu/menu.service';
 import {ProfileComponent} from '@/components/profile/profile.component';
+import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -61,7 +62,8 @@ const appRoutes: Routes = ROUTES;
     ConfirmationComponent,
     EmailsComponent,
     MainPageComponent,
-    ProfileComponent
+    ProfileComponent,
+    ResetPasswordComponent
   ],
   providers: [
     HttpService,

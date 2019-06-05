@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {UserService} from '@/services/user.service';
 import {User} from '@/models';
-import {AlertService} from "@/components/alert/alert.service";
-import {Message} from "@angular/compiler/src/i18n/i18n_ast";
+import {AlertService} from '@/components/alert/alert.service';
 
 @Component({
   selector: 'profile',

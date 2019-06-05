@@ -33,7 +33,15 @@ export class UserService {
     return this.httpService.put(`/user/${user.id}`, user);
   }
 
+  public updateUserPassword(user: User): Observable<any> {
+    return this.httpService.put(`/user/password/${user.id}`, user);
+  }
+
   public changePassword() {
     return this.httpService.get(`/user/password/${this.currentUser.id}`);
+  }
+
+  public getUserByPasswordToken(token: string) {
+    return this.httpService.get(`/user/password-token/${token}`);
   }
 }

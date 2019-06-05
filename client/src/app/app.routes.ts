@@ -12,7 +12,8 @@ import {SectionTitle} from './enums/section-title.enum';
 import {MailSenderComponent} from '@/components/mail-sender/mail-sender.component';
 import {EmailsComponent} from '@/components/emails/emails.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
-import {ProfileComponent} from "@/components/profile/profile.component";
+import {ProfileComponent} from '@/components/profile/profile.component';
+import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
 
 export const ROUTES: Routes = [{
   path: '',
@@ -29,7 +30,7 @@ export const ROUTES: Routes = [{
     path: 'profile',
     component: ProfileComponent,
     data: {section: SectionTitle.Profile}
-  },  {
+  }, {
     path: 'list/create',
     component: ListComponent,
     data: {section: SectionTitle.CreateList}
@@ -50,6 +51,9 @@ export const ROUTES: Routes = [{
     component: EmailsComponent,
     data: {section: SectionTitle.Emails}
   }]
+}, {
+  path: 'password/:token',
+  component: ResetPasswordComponent
 }, {
   path: 'login',
   component: LoginComponent
