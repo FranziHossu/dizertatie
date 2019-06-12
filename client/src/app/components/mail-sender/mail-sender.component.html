@@ -4,15 +4,6 @@
   </div>
   <div class="content">
 
-    <div class="senders-actions">
-      <div class="action" [class.selected]="displayCC" (click)="toggleCC()">
-        <p>CC</p>
-      </div>
-      <div class="action" [class.selected]="displayBCC" (click)="toggleBCC()">
-        <p>BCC</p>
-      </div>
-    </div>
-
     <div class="element">
       <div class="label">To:</div>
 
@@ -31,44 +22,6 @@
       </div>
 
       <div *ngIf="showToAddButton" (click)="addToElement()" class="button">
-        <i class="fa fa-plus"></i>
-      </div>
-    </div>
-
-    <div class="element" *ngIf="displayCC">
-      <div class="label">CC:</div>
-
-      <div class="to-items" *ngIf="ccElements.length">
-        <div class="item" *ngFor="let cc of ccElements; let i = index">
-          <p>{{cc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromCc(cc)" *ngIf="title !== sectionTitle.ViewEmail"></i>
-        </div>
-      </div>
-
-      <input [disabled]="title === sectionTitle.ViewEmail" (focusout)="toggleShowCCAddButton()"
-             (focus)="toggleShowCCAddButton()" (blur)="addEmailCC()"
-             (keyup.enter)="addEmailCC()" [(ngModel)]="cc" type="text">
-
-      <div *ngIf="showCcAddButton" (click)="addEmailCC()" class="button">
-        <i class="fa fa-plus"></i>
-      </div>
-    </div>
-
-    <div class="element" *ngIf="displayBCC">
-      <div class="label">BCC:</div>
-
-      <div class="to-items" *ngIf="bccElements.length">
-        <div class="item" *ngFor="let bcc of bccElements; let i = index">
-          <p>{{bcc}}</p>
-          <i class="fa fa-times" (click)="removeEmailFromBcc(bcc)" *ngIf="title !== sectionTitle.ViewEmail"></i>
-        </div>
-      </div>
-
-      <input [disabled]="title === sectionTitle.ViewEmail" (focusout)="toggleShowBccAddButton()"
-             (focus)="toggleShowBccAddButton()" (blur)="addEmailBCC()"
-             (keyup.enter)="addEmailBCC()" [(ngModel)]="bcc" type="text">
-
-      <div *ngIf="showBccAddButton" (click)="addEmailBCC()" class="button">
         <i class="fa fa-plus"></i>
       </div>
     </div>

@@ -21,6 +21,8 @@ export class ResetPasswordComponent implements OnInit {
 
   public password = '';
   public confirmedPassword = '';
+  public section: number;
+  public confirmedToken: any;
 
   constructor(alertService: AlertService, route: ActivatedRoute, userService: UserService, router: Router) {
     this.route = route;
@@ -30,18 +32,32 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.section = this.route.snapshot.data.section;
     this.token = this.route.snapshot.params.token;
-    this.userService.getUserByPasswordToken(this.token).subscribe((data: any) => {
-      if (!data) {
-        this.invalidToken = true;
-      } else {
-        this.user = data;
-      }
-    }, (error: any) => {
-      this.invalidToken = true;
-    });
-  }
 
+    if (this.section === 0) {
+      this.userService.getUserByPasswordToken(this.token).subscribe((data: any) => {
+        if (!data) {
+          this.invalidToken = true;
+        } else {
+          this.user = data;
+        }
+      }, (error: any) => {
+        this.invalidToken = true;
+      });
+    } else {
+      this.userService.getAccountToken(this.token).subscribe((data: any) => {
+        if (!data) {
+          this.invalidToken = true;
+        } else {
+          this.user = data;
+          this.confirmAccount();
+        }
+      }, (error: any) => {
+        this.invalidToken = true;
+      });
+    }
+  }
 
   public confirmPassword(): void {
     if (!this.password || this.password === '' || this.confirmedPassword === ''
@@ -57,5 +73,13 @@ export class ResetPasswordComponent implements OnInit {
           this.alertService.setMessage(`Something went wrong, please try again`);
         });
     }
+  }
+
+  public confirmAccount() {
+    this.userService.confirmAccount(this.token).subscribe((data: any) => {
+      this.confirmedToken = true;
+    }, (error: any) => {
+      this.confirmedToken = false;
+    });
   }
 }

@@ -17,6 +17,8 @@ export class UserRouter extends AbstractRouter {
         this.router.get('/api/user/:id', this.getUser.bind(this));
         this.router.get('/api/user/password-token/:token', this.getUserByPasswordToken.bind(this));
         this.router.get('/api/user/password/:id', this.changePassword.bind(this));
+        this.router.get('/api/user/confirmation/:token', this.confirmation.bind(this));
+        this.router.get('/api/user/token/:token', this.getUserByToken.bind(this));
 
         this.router.post('/api/user/login', this.login.bind(this));
         this.router.post('/api/user/register', this.register.bind(this));
@@ -28,31 +30,48 @@ export class UserRouter extends AbstractRouter {
     private login(request: Request, response: Response) {
         this.userManager.findByUsernameAndPassword(request.body, (userDB: any) => {
             if (userDB != null) {
-                bCrypt.compare(request.body.password, userDB.password, (err, isMatch) => {
-                    if (err) {
-                        response.status(500).json(null);
-                    } else {
-                        if (isMatch) {
-                            response.status(200).json(userDB);
-                        } else {
+                if (userDB.token !== '') {
+                    response.status(400).json('Account not confirmed');
+                } else {
+                    bCrypt.compare(request.body.password, userDB.password, (err, isMatch) => {
+                        if (err) {
                             response.status(500).json(null);
+                        } else {
+                            if (isMatch) {
+                                response.status(200).json(userDB);
+                            } else {
+                                response.status(500).json(null);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             } else {
                 response.status(500).json(null);
             }
+
         }, (error: Error) => {
             response.status(500).json(null);
         });
     }
 
     private register(request: Request, response: Response) {
-        this.userManager.createUser(request.body, (data: any) => {
-            response.status(200).json(data);
-        }, (error: Error) => {
+        this.userManager.getUserbyEmail(request.body.email, (data: any) => {
+            if (!data) {
+                this.userManager.createUser(request.body, (data: any) => {
+                    this.emailService.send(data.email, `support@ubbcluj.ro.`,
+                        `Confirmation Account`, `http://localhost:4200/confirmation/${data.token}`);
+
+                    response.status(200).json(data);
+                }, (error: Error) => {
+                    response.status(500).json(null);
+                });
+            } else {
+                response.status(400).json(null);
+            }
+        }, (error: any) => {
             response.status(500).json(null);
         });
+
     }
 
     private updateUser(request: Request, response: Response) {
@@ -80,6 +99,39 @@ export class UserRouter extends AbstractRouter {
         });
     }
 
+    private getUserByToken(request: Request, response: Response) {
+        this.userManager.getUserByToken(request.params.token, (data: any) => {
+            if (data) {
+                response.status(200).json(data);
+            } else {
+                response.status(500).json(null);
+            }
+        }, (error: Error) => {
+            response.status(500).json(null);
+        });
+    }
+
+
+    private confirmation(request: Request, response: Response) {
+        this.userManager.getUserByToken(request.params.token, (data: any) => {
+            if (data) {
+                data.token = '';
+                console.log(data);
+                this.userManager.updateUser(data._id, data, (data: any) => {
+                    response.status(200).json(data);
+                }, (error: Error) => {
+                    response.status(500).json(null);
+                });
+            } else {
+                response.status(500).json(null);
+            }
+        }, (error: any) => {
+            response.status(500).json(null);
+        });
+
+
+    }
+
     private getUser(request: Request, response: Response) {
         this.userManager.getUser(request.params.id, (data: any) => {
             response.status(200).json(data);
@@ -95,6 +147,7 @@ export class UserRouter extends AbstractRouter {
             response.status(500).json(null);
         });
     }
+
 
 
 }

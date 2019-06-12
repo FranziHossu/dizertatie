@@ -53,7 +53,12 @@ export const ROUTES: Routes = [{
   }]
 }, {
   path: 'password/:token',
-  component: ResetPasswordComponent
+  component: ResetPasswordComponent,
+  data: {section: 0}
+}, {
+  path: 'confirmation/:token',
+  component: ResetPasswordComponent,
+  data: {section: 1}
 }, {
   path: 'login',
   component: LoginComponent

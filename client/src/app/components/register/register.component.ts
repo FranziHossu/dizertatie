@@ -23,6 +23,8 @@ export class RegisterComponent implements OnInit {
   private userService: UserService;
   private alertService: AlertService;
   private loadingService: LoadingService;
+  public errorText: string;
+  public displayError = false;
 
   constructor(
     formBuilder: FormBuilder,
@@ -44,7 +46,9 @@ export class RegisterComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]*'), Validators.maxLength(122)]],
       username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(122)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(122)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(122)]]
+      email: ['', [Validators.required, Validators.email,
+        // Validators.pattern(`^[a-z0-9](\\.?[a-z0-9]){0,}@ubbcluj\\.ro$`),
+        Validators.maxLength(122)]]
     });
 
     this.loadingService.loadingObservable.subscribe((value: boolean) => {
@@ -66,9 +70,19 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['login']);
             this.loadingService.next(false);
           },
-          (error: Error) => {
+          (error: any) => {
+            this.displayError = true;
+            if (error.status === 400) {
+              this.errorText = 'This email already exists.';
+            } else {
+              this.errorText = 'Something went wrong';
+            }
             this.loadingService.next(false);
           });
     }
+  }
+
+  public clearSameEmailError() {
+    this.displayError = true;
   }
 }

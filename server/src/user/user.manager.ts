@@ -24,6 +24,7 @@ export class UserManager extends AbstractManager {
             bCrypt.hash(data.password, salt, null, (err, hash) => {
                 if (err) throw err;
                 data.password = hash;
+                data.token = this.generateToken();
                 this.User.create(data, this.replay(success, error));
             });
         });
@@ -48,7 +49,7 @@ export class UserManager extends AbstractManager {
     }
 
     public changePassword(id: any, success: Function, fail: Function) {
-        const passwordToken: string = this.generatePasswordToken();
+        const passwordToken: string = this.generateToken();
 
         this.User.findOne({_id: id}, (err, user) => {
             user.passwordToken = passwordToken;
@@ -64,7 +65,7 @@ export class UserManager extends AbstractManager {
         this.User.findOne({passwordToken: token}).exec(this.replay(success, fail));
     }
 
-    private generatePasswordToken() {
+    private generateToken() {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
@@ -74,5 +75,11 @@ export class UserManager extends AbstractManager {
         return result;
     }
 
+    public getUserByToken(token: any, success: Function, fail: Function) {
+        this.User.findOne({token: token}, this.replay(success, fail));
+    }
 
+    public getUserbyEmail(email: any, success: Function, fail: Function) {
+        this.User.findOne({email: email}, this.replay(success, fail));
+    }
 }

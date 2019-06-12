@@ -3,6 +3,8 @@ import {List} from '@/components/lists/list.model';
 import {Router} from "@angular/router";
 import {EmailService} from "@/components/mail-sender/email.service";
 import {ListService} from "@/components/lists/list.service";
+import {MenuService} from "@/components/menu/menu.service";
+import {SectionTitle} from "@/enums/section-title.enum";
 
 @Component({
   selector: 'widget',
@@ -17,10 +19,12 @@ export class WidgetComponent implements OnInit {
 
   private router: Router;
   private listService: ListService;
+  private menuService: MenuService;
 
-  constructor(router: Router, listService: ListService) {
+  constructor(router: Router, listService: ListService, menuService: MenuService) {
     this.router = router;
     this.listService = listService;
+    this.menuService = menuService;
   }
 
   ngOnInit() {
@@ -35,10 +39,12 @@ export class WidgetComponent implements OnInit {
   }
 
   public edit() {
+    this.menuService.changeSection('email');
     this.router.navigate([`list/edit/${this.list.id}`]);
   }
 
   public sendEmailToList() {
+    this.menuService.changeSection('email');
     this.listService.nextList(this.list);
     this.router.navigate(['email/create']);
   }

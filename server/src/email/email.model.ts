@@ -12,16 +12,6 @@ export const emailSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "List",
     }],
-    cc: [String],
-    ccLists: [{
-        type: Schema.Types.ObjectId,
-        ref: "List",
-    }],
-    bcc: [String],
-    bccLists: [{
-        type: Schema.Types.ObjectId,
-        ref: "List",
-    }],
     subject: String,
     content: String,
     time: Date
@@ -40,10 +30,6 @@ export interface IEmail extends Document {
     fromId: string;
     to: [string];
     toLists: [string],
-    cc: [string];
-    ccLists: [string],
-    bcc: [string],
-    bccLists: [string],
     subject: string,
     content: string,
     time: Date

@@ -44,4 +44,12 @@ export class UserService {
   public getUserByPasswordToken(token: string) {
     return this.httpService.get(`/user/password-token/${token}`);
   }
+
+  public confirmAccount(token: string) {
+    return this.httpService.get(`/user/confirmation/${token}`);
+  }
+
+  public getAccountToken(token: string) {
+    return this.httpService.get(`/user/token/${token}`);
+  }
 }

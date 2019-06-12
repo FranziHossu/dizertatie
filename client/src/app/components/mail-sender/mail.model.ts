@@ -5,10 +5,6 @@ export class Email {
   public fromId: number;
   public to: Array<string> = new Array<string>();
   public toLists: Array<List> = new Array<List>();
-  public cc: Array<string> = new Array<string>();
-  public ccLists: Array<List> = new Array<List>();
-  public bcc: Array<string> = new Array<string>();
-  public bccLists: Array<List> = new Array<List>();
   public subject: string;
   public content: string;
   public time: Date;

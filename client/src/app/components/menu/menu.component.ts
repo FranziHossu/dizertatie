@@ -54,6 +54,7 @@ export class MenuComponent implements OnInit {
   }
 
   private setCurrentSectionByGivenValue(section: string) {
+    console.log(section);
     if (section === '') {
       this.currentSection = null;
     } else if (section === 'email') {

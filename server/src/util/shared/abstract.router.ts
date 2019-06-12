@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import * as Multer from 'multer';
+import {MailService} from "./mail.service";
 
 export abstract class AbstractRouter {
 	protected router: Router;
-	protected storage: Multer.Instance;
+	public emailService: MailService = new MailService();
 
 	constructor(router: Router) {
 		this.router = router;
