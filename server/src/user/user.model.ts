@@ -8,7 +8,8 @@ export const userSchema: Schema = new Schema({
     password: String,
     firstName: String,
     lastName: String,
-    email: String, 
+    email: String,
+    role: Number,
     token: String,
     passwordToken: String,
 }, {
@@ -29,6 +30,7 @@ export interface IUser extends Document {
     firstName: string,
     lastName: string,
     email: string
+    role: number;
     passwordToken: string
 }
 

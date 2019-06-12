@@ -7,6 +7,7 @@ import {AlertService} from "@/components/alert/alert.service";
 import {AlertMessage} from "@/components/alert/alert-message";
 import {SectionTitle} from "@/enums/section-title.enum";
 
+
 @Component({
   selector: 'list',
   templateUrl: './list.component.html',
@@ -52,7 +53,8 @@ export class ListComponent implements OnInit {
   }
 
   public addEmailToList() {
-    if (!this.email) {
+    if (!this.email || !this.verifyEmailRegex()) {
+      this.alertService.setMessage('The email given has incorrect format')
       return;
     }
     for (let i = 0; i < this.list.emails.length; i++) {
@@ -87,7 +89,6 @@ export class ListComponent implements OnInit {
 
   public updateList() {
     if (this.verify()) {
-      console.log('update the list');
       this.listService.updateList(this.list).subscribe(() => {
         this.router.navigate(['lists']);
       }, () => {
@@ -127,5 +128,10 @@ export class ListComponent implements OnInit {
 
   public cancel() {
     this.router.navigate((['lists']));
+  }
+
+  private verifyEmailRegex() {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(this.email).toLowerCase());
   }
 }

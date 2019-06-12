@@ -97,11 +97,19 @@ export class MailSenderComponent implements OnInit, OnDestroy {
       const element = this.getFromLists(this.to);
       if (element) {
         this.email.toLists.push(element);
+        this.toElements.push(this.to);
+        this.to = '';
+
       } else {
-        this.email.to.push(this.to);
+        if (this.verifyEmailRegex()) {
+          this.email.to.push(this.to);
+          this.toElements.push(this.to);
+          this.to = '';
+
+        } else {
+          this.alertService.setMessage('The email given has incorrect format and it is not a list');
+        }
       }
-      this.toElements.push(this.to);
-      this.to = '';
     }
   }
 
@@ -183,5 +191,10 @@ export class MailSenderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.listService.nextList(null);
+  }
+
+  private verifyEmailRegex() {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(this.to).toLowerCase());
   }
 }

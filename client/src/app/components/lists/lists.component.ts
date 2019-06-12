@@ -92,7 +92,7 @@ export class ListsComponent implements OnInit {
     this.lists = new Array<List>();
 
     this.allLists.forEach((e) => {
-      if (e.name.includes(this.searchedValue)) {
+      if (e.name.toLocaleLowerCase().includes(this.searchedValue.toLocaleLowerCase())) {
         this.lists.push(e);
       }
     });
