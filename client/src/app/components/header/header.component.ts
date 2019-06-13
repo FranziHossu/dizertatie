@@ -3,6 +3,10 @@ import {LocalStorageService} from "@/services/local-storage.service";
 import {Router} from "@angular/router";
 import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
 import {ConfirmationService} from "@/components/confirmation/confirmation.service";
+import {MenuService} from "@/components/menu/menu.service";
+import {User} from "@/models";
+import {UserService} from "@/services/user.service";
+import {SectionTitle} from "@/enums/section-title.enum";
 
 @Component({
   selector: 'header',
@@ -15,14 +19,22 @@ export class HeaderComponent implements OnInit {
   private localStorageService: LocalStorageService;
   private router: Router;
   private confirmationService: ConfirmationService;
+  private numberOfNotifications = 0;
+  private menuService: MenuService;
+  private userService: UserService;
 
-  constructor(confirmationService: ConfirmationService, router: Router, localStorageService: LocalStorageService) {
+  public user: User = new User();
+
+  constructor(confirmationService: ConfirmationService, userService: UserService, menuService: MenuService, router: Router, localStorageService: LocalStorageService) {
     this.router = router;
     this.confirmationService = confirmationService;
     this.localStorageService = localStorageService;
+    this.userService = userService;
+    this.menuService = menuService;
   }
 
   ngOnInit() {
+    this.user = this.userService.currentUser;
   }
 
   public logout() {
@@ -33,6 +45,16 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['login']);
       }
     });
+  }
 
+  public navigateTo(target: any) {
+    this.router.navigate([target]);
+
+    if (target === 'notifications') {
+      this.menuService.changeSection('');
+    } else {
+      this.menuService.changeSection(SectionTitle.Profile);
+
+    }
   }
 }

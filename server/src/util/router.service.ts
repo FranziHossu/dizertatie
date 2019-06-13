@@ -6,6 +6,7 @@ import { UserRouter } from '../user/user.router';
 import { ListRouter } from '../list/list.router';
 import {EmailRouter} from "../email/email.router";
 import {UsedEmailsRouter} from "../used-emails/used-emails.router";
+import {NotificationRouter} from "../notification/notification.router";
 
 
 class RouterService {
@@ -22,6 +23,7 @@ class RouterService {
 		new ListRouter(this.app);
 		new EmailRouter(this.app);
 		new UsedEmailsRouter(this.app);
+		new NotificationRouter(this.app);
 	}
 }
 

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpService} from '@/http.service';
 import {UserService} from '../../services/user.service';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {List} from "@/components/lists/list.model";
+import {List} from '@/components/lists/list.model';
 
 @Injectable()
 export class ListService {

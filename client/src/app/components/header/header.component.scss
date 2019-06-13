@@ -22,12 +22,39 @@
     cursor: pointer;
     display: flex;
 
-    i {
-      font-size: 25px;
+    .notification-container {
+      display: flex;
+      margin-right: 10px;
+      position: relative;
+
+      .number {
+        position: absolute;
+        background: red;
+        padding: 0 2px;
+        font-size: 12px;
+        left: 0;
+        top: 0;
+      }
+
+      i {
+        font-size: 25px;
+        margin-right: 20px;
+      }
     }
 
-    & > * {
-      margin: auto 2px;
+
+    .logout-button {
+      display: flex;
+
+      i {
+        font-size: 25px;
+      }
+
+      & > * {
+        margin: auto 2px;
+      }
     }
+
+
   }
 }

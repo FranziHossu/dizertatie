@@ -5,9 +5,11 @@
   <div class="content">
 
     <div class="lists-toggle">
-      <div class="loggle-button" (click)="toggleTab(false)"><p [class.activated]="!currentTab">Personal Lists</p></div>
+      <div class="loggle-button" (click)="toggleTab(0)"><p [class.activated]="currentTab === 0">Personal Lists</p></div>
       <span>|</span>
-      <div class="loggle-button" (click)="toggleTab(true)"><p [class.activated]="currentTab">Shared Lists</p></div>
+      <div class="loggle-button" (click)="toggleTab(1)"><p [class.activated]="currentTab === 1">Shared Lists</p></div>
+      <span>|</span>
+      <div class="loggle-button" (click)="toggleTab(2)"><p [class.activated]="currentTab === 2">Member Of</p></div>
     </div>
 
 
@@ -16,7 +18,7 @@
     </div>
 
 
-    <div *ngIf="!currentTab" class="wrapper">
+    <div *ngIf="currentTab === 0" class="wrapper">
       <div *ngIf="lists.length == 0" class="empty-label">
         <p>There are no lists..</p>
       </div>
@@ -25,13 +27,27 @@
       </div>
     </div>
 
-    <div *ngIf="currentTab" class="wrapper">
+    <div *ngIf="currentTab === 1" class="wrapper">
       <div *ngIf="sharedLists.length == 0" class="empty-label">
         <p>There are no lists..</p>
       </div>
       <div class="list">
-        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true" (emitUnsubscribe)="unsubscribe($event)"></widget>
+        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true"
+                (emitUnsubscribe)="unsubscribe($event)"></widget>
+      </div>
+    </div>
+
+
+    <div *ngIf="currentTab === 2" class="wrapper">
+      <div *ngIf="sharedLists.length == 0" class="empty-label">
+        <p>There are no lists..</p>
+      </div>
+      <div class="list">
+        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true"
+                (emitUnsubscribe)="unsubscribe($event)"></widget>
       </div>
     </div>
   </div>
+
+
 </div>

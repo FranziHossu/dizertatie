@@ -1,5 +1,5 @@
 /** Mongoose */
-import { Document, Schema } from 'mongoose';
+import {Document, Schema} from 'mongoose';
 
 
 //User Schema
@@ -12,16 +12,17 @@ export const userSchema: Schema = new Schema({
     role: Number,
     token: String,
     passwordToken: String,
+    lastNotification: Date
 }, {
-        toJSON: {
-            transform: function (doc, ret) {
-                ret.id = ret._id;
+    toJSON: {
+        transform: function (doc, ret) {
+            ret.id = ret._id;
 
-                delete ret._id;
-                delete ret.password;
-            }
+            delete ret._id;
+            delete ret.password;
         }
-    });
+    }
+});
 
 export interface IUser extends Document {
     username: string;
@@ -32,6 +33,7 @@ export interface IUser extends Document {
     email: string
     role: number;
     passwordToken: string
+    lastNotification: Date
 }
 
 

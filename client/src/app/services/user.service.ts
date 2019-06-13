@@ -7,6 +7,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../models';
 import {Observable} from 'rxjs';
 import {HttpService} from '@/http.service';
+import {UserNotification} from "@/models/notification";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -51,5 +52,13 @@ export class UserService {
 
   public getAccountToken(token: string) {
     return this.httpService.get(`/user/token/${token}`);
+  }
+
+  public sendNotification(notification: UserNotification) {
+    return this.httpService.post(`/notification`, notification);
+  }
+
+  public getUserNotifications() {
+    return this.httpService.get(`/notifications/${this.currentUser.id}`);
   }
 }

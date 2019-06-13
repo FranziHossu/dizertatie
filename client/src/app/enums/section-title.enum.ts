@@ -7,5 +7,6 @@ export enum SectionTitle {
   ViewEmail = 'View Email',
   Emails = 'Emails',
   Profile = 'Profile',
-  Statistics = 'Statistics'
+  Statistics = 'Statistics',
+  Notifications = 'Notifications'
 }

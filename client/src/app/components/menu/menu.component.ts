@@ -54,7 +54,6 @@ export class MenuComponent implements OnInit {
   }
 
   private setCurrentSectionByGivenValue(section: string) {
-    console.log(section);
     if (section === '') {
       this.currentSection = null;
     } else if (section === 'email') {
@@ -63,7 +62,7 @@ export class MenuComponent implements OnInit {
       this.currentSection = SectionTitle.Statistics;
     } else if (section === 'lists' || section === 'list') {
       this.currentSection = SectionTitle.Lists;
-    } else if (section === 'profile') {
+    } else if (section === 'Profile') {
       this.currentSection = SectionTitle.Profile;
     }
   }

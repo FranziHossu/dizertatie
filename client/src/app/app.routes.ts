@@ -14,6 +14,7 @@ import {EmailsComponent} from '@/components/emails/emails.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {ProfileComponent} from '@/components/profile/profile.component';
 import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
+import {NotificationComponent} from "@/components/notification/notification.component";
 
 export const ROUTES: Routes = [{
   path: '',
@@ -26,6 +27,10 @@ export const ROUTES: Routes = [{
     path: 'lists',
     component: ListsComponent,
     data: {section: SectionTitle.Lists}
+  }, {
+    path: 'notifications',
+    component: NotificationComponent,
+    data: {section: SectionTitle.Notifications}
   }, {
     path: 'profile',
     component: ProfileComponent,

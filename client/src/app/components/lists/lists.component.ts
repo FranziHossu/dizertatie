@@ -3,8 +3,9 @@ import {ListService} from '@/components/lists/list.service';
 import {List} from './list.model';
 import {ActivatedRoute} from '@angular/router';
 import {ConfirmationService} from "@/components/confirmation/confirmation.service";
-import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
+import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
 import {UserService} from "@/services/user.service";
+import {UserNotification} from "@/models/notification";
 
 @Component({
   selector: 'lists',
@@ -24,7 +25,7 @@ export class ListsComponent implements OnInit {
   public allLists: Array<List> = new Array<List>();
   public sharedLists: Array<List> = new Array<List>();
   public allSharedLists: Array<List> = new Array<List>();
-  public currentTab = false;
+  public currentTab = 0;
 
   constructor(listService: ListService, route: ActivatedRoute, userService: UserService, confirmationService: ConfirmationService) {
     this.listService = listService;
@@ -98,7 +99,7 @@ export class ListsComponent implements OnInit {
     });
   }
 
-  public toggleTab(value: boolean) {
+  public toggleTab(value: number) {
     this.currentTab = value;
   }
 
@@ -123,6 +124,18 @@ export class ListsComponent implements OnInit {
             break;
           }
         }
+
+        const notification: UserNotification = new UserNotification();
+        notification.author = this.userService.currentUser.id;
+        notification.target = list.user.id;
+        notification.time = new Date();
+
+        this.userService.sendNotification(notification).subscribe((data: any) => {
+
+        }, (error: any) => {
+
+        });
+
       }, () => {
       }
     );
