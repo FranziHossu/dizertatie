@@ -1,6 +1,6 @@
-import {Model, Types} from 'mongoose';
-import {IUser, userSchema} from './user.model';
-import {AbstractManager} from '../util/shared/abstract.manager';
+import { Model, Types } from 'mongoose';
+import { IUser, userSchema } from './user.model';
+import { AbstractManager } from '../util/shared/abstract.manager';
 
 const bCrypt = require("bcrypt-nodejs");
 const passwordTokenLength = 20;
@@ -16,7 +16,7 @@ export class UserManager extends AbstractManager {
     }
 
     public findByUsernameAndPassword(data: any, success: Function, error: Function) {
-        this.User.findOne({username: data.username}).exec(this.replay(success, error));
+        this.User.findOne({ username: data.username }).exec(this.replay(success, error));
     }
 
     public createUser(data: any, success: Function, error: Function) {
@@ -31,11 +31,11 @@ export class UserManager extends AbstractManager {
     }
 
     public getUser(id: string, success: Function, error: Function) {
-        this.User.findOne({_id: id}).exec(this.replay(success, error));
+        this.User.findOne({ _id: id }).exec(this.replay(success, error));
     }
 
     public updateUser(id: any, body: any, success: Function, fail: Function) {
-        this.User.update({_id: id}, body).exec(this.replay(success, fail));
+        this.User.update({ _id: id }, body).exec(this.replay(success, fail));
     }
 
     public updateUserPassword(id: any, body: any, success: Function, fail: Function) {
@@ -43,7 +43,7 @@ export class UserManager extends AbstractManager {
             bCrypt.hash(body.password, salt, null, (err, hash) => {
                 if (err) throw err;
                 body.password = hash;
-                this.User.update({_id: id}, body).exec(this.replay(success, fail));
+                this.User.update({ _id: id }, body).exec(this.replay(success, fail));
             });
         });
     }
@@ -51,9 +51,9 @@ export class UserManager extends AbstractManager {
     public changePassword(id: any, success: Function, fail: Function) {
         const passwordToken: string = this.generateToken();
 
-        this.User.findOne({_id: id}, (err, user) => {
+        this.User.findOne({ _id: id }, (err, user) => {
             user.passwordToken = passwordToken;
-            this.User.update({_id: user.id}, user, (err, data) => {
+            this.User.update({ _id: user.id }, user, (err, data) => {
                 console.log('eror:', err);
                 this.emailService.send(user.email, `support@ubbcluj.ro.`, `Reset password`, `http://localhost:4200/password/${passwordToken}`);
                 success(true);
@@ -62,7 +62,11 @@ export class UserManager extends AbstractManager {
     }
 
     public getUserByPasswordToken(token: any, success: Function, fail: Function) {
-        this.User.findOne({passwordToken: token}).exec(this.replay(success, fail));
+        this.User.findOne({ passwordToken: token }).exec(this.replay(success, fail));
+    }
+
+    public deleteUser(id: any, success: Function, fail: Function) {
+        this.User.deleteOne({ _id: id }).exec(this.replay(success, fail));
     }
 
     private generateToken() {
@@ -76,10 +80,10 @@ export class UserManager extends AbstractManager {
     }
 
     public getUserByToken(token: any, success: Function, fail: Function) {
-        this.User.findOne({token: token}, this.replay(success, fail));
+        this.User.findOne({ token: token }, this.replay(success, fail));
     }
 
     public getUserbyEmail(email: any, success: Function, fail: Function) {
-        this.User.findOne({email: email}, this.replay(success, fail));
+        this.User.findOne({ email: email }, this.replay(success, fail));
     }
 }

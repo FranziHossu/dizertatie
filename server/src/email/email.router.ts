@@ -18,6 +18,8 @@ export class EmailRouter extends AbstractRouter {
 
         this.router.get(`/api/complete-emails/user/:id`, this.getEmails.bind(this));
         this.router.get(`/api/email/:id`, this.getEmail.bind(this));
+        this.router.get(`/api/emails/:userId`, this.getUserNumberEmails.bind(this));
+        this.router.get(`/api/emails/admin`, this.getEmailsNumber.bind(this));
 
         this.router.delete(`/api/email/:id`, this.deleteEmail.bind(this));
 
@@ -78,6 +80,23 @@ export class EmailRouter extends AbstractRouter {
 
     private getEmail(request: Request, response: Response) {
         this.mailManager.getEmail(request.params.id, (data: any) => {
+            response.status(200).json(data);
+        }, () => {
+            response.status(500).json(null);
+        })
+    }
+
+    private getUserNumberEmails(request: Request, response: Response) {
+        this.mailManager.getUserNumberEmails(request.params.id, (data: any) => {
+            response.status(200).json(data);
+        }, () => {
+            response.status(500).json(null);
+        })
+    }
+
+    
+    private getEmailsNumber(request: Request, response: Response) {
+        this.mailManager.getEmailsNumber((data: any) => {
             response.status(200).json(data);
         }, () => {
             response.status(500).json(null);

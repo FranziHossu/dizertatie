@@ -57,6 +57,14 @@ export class EmailManager extends AbstractManager {
         this.Email.findOne({_id: id}).populate('toLists ccLists bccLists').exec((this.replay(success, fail)));
     }
 
+    public getUserNumberEmails(id: any, success: Function, fail: Function) {
+        this.Email.find({fromId: id}, {time: 1}).count().exec((this.replay(success, fail)));
+    }
+
+    public getEmailsNumber( success: Function, fail: Function) {
+        this.Email.find({time: 1}).count().exec((this.replay(success, fail)));
+    }
+
     public deleteEmail(id: any, success: Function, fail: Function) {
         this.Email.deleteOne({_id: id}).exec(this.replay(success, fail));
     }

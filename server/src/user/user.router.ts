@@ -1,12 +1,12 @@
 /** Routers */
-import {AbstractRouter} from '../util/shared/abstract.router';
+import { AbstractRouter } from '../util/shared/abstract.router';
 
 /** Models */
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 
 /** Managers */
-import {UserManager} from './user.manager';
-import {IUser} from "./user.model";
+import { UserManager } from './user.manager';
+import { IUser } from "./user.model";
 
 const bCrypt = require("bcrypt-nodejs");
 
@@ -25,6 +25,8 @@ export class UserRouter extends AbstractRouter {
 
         this.router.put('/api/user/:id', this.updateUser.bind(this));
         this.router.put('/api/user/password/:id', this.updateUserPassword.bind(this));
+
+        this.router.delete('/api/user/:id', this.deleteUser.bind(this));
     }
 
     private login(request: Request, response: Response) {
@@ -98,6 +100,16 @@ export class UserRouter extends AbstractRouter {
             response.status(500).json(null);
         });
     }
+
+
+    private deleteUser(request: Request, response: Response) {
+        this.userManager.deleteUser(request.params.id, (data: any) => {
+            response.status(200).json(data);
+        }, (error: Error) => {
+            response.status(500).json(null);
+        });
+    }
+
 
     private getUserByToken(request: Request, response: Response) {
         this.userManager.getUserByToken(request.params.token, (data: any) => {
