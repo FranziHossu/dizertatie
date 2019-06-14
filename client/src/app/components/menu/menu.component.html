@@ -24,5 +24,10 @@
     <i class="fa fa-inbox"></i>
     <p>Emails</p>
   </div>
+  <div *ngIf="user.role" class="menu-item" (click)="navigateTo(sectionRoutes.Users,  sectionTitles.Users)"
+       [class.active]="currentSection === sectionTitles.Users">
+    <i class="fa fa-users"></i>
+    <p>Users</p>
+  </div>
 
 </div>

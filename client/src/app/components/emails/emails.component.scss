@@ -139,6 +139,16 @@
             height: 100%;
             width: 10%;
           }
+          .actions {
+            height: 100%;
+            width: 10%;
+            display: flex;
+            text-align: center;
+
+            i{
+              margin: auto;
+            }
+          }
         }
       }
     }

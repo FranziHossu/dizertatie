@@ -14,7 +14,8 @@ import {EmailsComponent} from '@/components/emails/emails.component';
 import {MainPageComponent} from './components/main-page/main-page.component';
 import {ProfileComponent} from '@/components/profile/profile.component';
 import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
-import {NotificationComponent} from "@/components/notification/notification.component";
+import {NotificationComponent} from '@/components/notification/notification.component';
+import {UsersComponent} from '@/components/users/users.component';
 
 export const ROUTES: Routes = [{
   path: '',
@@ -55,6 +56,10 @@ export const ROUTES: Routes = [{
     path: 'emails',
     component: EmailsComponent,
     data: {section: SectionTitle.Emails}
+  }, {
+    path: 'users',
+    component: UsersComponent,
+    data: {section: SectionTitle.Users}
   }]
 }, {
   path: 'password/:token',

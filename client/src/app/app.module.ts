@@ -33,6 +33,7 @@ import {MenuService} from './components/menu/menu.service';
 import {ProfileComponent} from '@/components/profile/profile.component';
 import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
 import {NotificationComponent} from "@/components/notification/notification.component";
+import {UsersComponent} from "@/components/users/users.component";
 
 const appRoutes: Routes = ROUTES;
 
@@ -65,7 +66,8 @@ const appRoutes: Routes = ROUTES;
     MainPageComponent,
     ProfileComponent,
     ResetPasswordComponent,
-    NotificationComponent
+    NotificationComponent,
+    UsersComponent
   ],
   providers: [
     HttpService,

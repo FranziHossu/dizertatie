@@ -6,6 +6,7 @@ import {ConfirmationService} from "@/components/confirmation/confirmation.servic
 import {ConfirmationMessage} from '@/components/confirmation/confirmation-message.enum';
 import {UserService} from "@/services/user.service";
 import {UserNotification} from "@/models/notification";
+import {not} from "rxjs/internal-compatibility";
 
 @Component({
   selector: 'lists',
@@ -127,9 +128,11 @@ export class ListsComponent implements OnInit {
 
         const notification: UserNotification = new UserNotification();
         notification.author = this.userService.currentUser.id;
-        notification.target = list.user.id;
+        notification.text = `${this.userService.currentUser.username} unsubscribed from the list: ${list.name}`;
+        notification.target = list.user;
         notification.time = new Date();
 
+        console.log(notification);
         this.userService.sendNotification(notification).subscribe((data: any) => {
 
         }, (error: any) => {

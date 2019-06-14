@@ -14,6 +14,6 @@ export class NotificationManager extends AbstractManager {
     }
 
     getNotifications(id: any, success: Function, fail: Function) {
-        this.Notification.find({target: id}).exec(this.replay(success, fail));
+        this.Notification.find({target: id}).sort({time: -1}).exec(this.replay(success, fail));
     }
 }

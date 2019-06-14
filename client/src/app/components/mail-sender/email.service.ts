@@ -29,4 +29,8 @@ export class EmailService {
     return this.httpService.get(`/email/${id}`);
   }
 
+  public deleteEmail(email: any) {
+    return this.httpService.delete(`/email/${email.id}`);
+
+  }
 }

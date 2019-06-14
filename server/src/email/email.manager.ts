@@ -1,6 +1,6 @@
-import { Model, Types } from 'mongoose';
-import { IEmail, emailSchema } from './email.model';
-import { AbstractManager } from '../util/shared/abstract.manager';
+import {Model, Types} from 'mongoose';
+import {IEmail, emailSchema} from './email.model';
+import {AbstractManager} from '../util/shared/abstract.manager';
 
 export class EmailManager extends AbstractManager {
     private Email: Model<IEmail>;
@@ -50,10 +50,14 @@ export class EmailManager extends AbstractManager {
     }
 
     public getEmailsByUser(id: any, success: Function, fail: Function) {
-        this.Email.find({ fromId: id }).exec((this.replay(success, fail)));
+        this.Email.find({fromId: id}).exec((this.replay(success, fail)));
     }
 
     public getEmail(id: any, success: Function, fail: Function) {
-        this.Email.findOne({ _id: id }).populate('toLists ccLists bccLists').exec((this.replay(success, fail)));
+        this.Email.findOne({_id: id}).populate('toLists ccLists bccLists').exec((this.replay(success, fail)));
+    }
+
+    public deleteEmail(id: any, success: Function, fail: Function) {
+        this.Email.deleteOne({_id: id}).exec(this.replay(success, fail));
     }
 }

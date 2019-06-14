@@ -21,4 +21,23 @@
   margin: 0 10px 5px 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 20px 20px;
+
+
+  .notifications-list{
+    padding: 20px;
+
+
+    .notification{
+      text-align: center;
+      display: flex;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 0.5px solid #002f5e;
+      margin-bottom: 10px;
+
+      p{
+        margin: auto;
+      }
+    }
+  }
 }

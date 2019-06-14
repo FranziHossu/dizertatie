@@ -3,7 +3,12 @@
     <title-bar [title]="title" [button]="button" [item]="listName"></title-bar>
   </div>
   <div class="content">
-
-
+    <div class="notifications-list">
+      <div class="notification" *ngFor="let notification of notifications">
+          <p class="title-notification">{{notification.text}}</p>
+          <p class="title-notification">{{notification.timeAsDate}}</p>
+          <p class="title-notification">{{notification.hour}}</p>
+      </div>
+    </div>
   </div>
 </div>

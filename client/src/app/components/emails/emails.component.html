@@ -10,16 +10,19 @@
         <div class="content-email"><p>Content</p></div>
         <div class="date"><p>Date</p></div>
         <div class="time"><p>Time</p></div>
+        <div class="time"><p>Actions</p></div>
       </div>
       <div class="email-items-overflow">
         <div class="email-items">
-          <div class="email-item" [class.even]="i%2!=0" *ngFor="let email of emails; let i = index"
-               (click)="navigateToEmail(email.id)">
-            <div class="index" title="{{i}}">{{i}}</div>
-            <div class="subject" title="{{email.subject}}">{{email.subject}}</div>
-            <div class="content-email" title="{{email.content}}">{{email.content}}</div>
-            <div class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
-            <div class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
+          <div class="email-item" [class.even]="i%2!=0" *ngFor="let email of emails; let i = index">
+            <div (click)="navigateToEmail(email.id)" class="index" title="{{i}}">{{i}}</div>
+            <div (click)="navigateToEmail(email.id)" class="subject" title="{{email.subject}}">{{email.subject}}</div>
+            <div (click)="navigateToEmail(email.id)" class="content-email" title="{{email.content}}">{{email.content}}</div>
+            <div (click)="navigateToEmail(email.id)" class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
+            <div (click)="navigateToEmail(email.id)" class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
+            <div class="actions" title="Delete this email">
+              <i (click)="deleteEmail(email)" class="fa fa-trash"></i>
+            </div>
           </div>
         </div>
       </div>
