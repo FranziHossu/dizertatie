@@ -19,6 +19,7 @@ export class UserRouter extends AbstractRouter {
         this.router.get('/api/user/password/:id', this.changePassword.bind(this));
         this.router.get('/api/user/confirmation/:token', this.confirmation.bind(this));
         this.router.get('/api/user/token/:token', this.getUserByToken.bind(this));
+        this.router.get('/api/users', this.getUsers.bind(this));
 
         this.router.post('/api/user/login', this.login.bind(this));
         this.router.post('/api/user/register', this.register.bind(this));
@@ -78,6 +79,15 @@ export class UserRouter extends AbstractRouter {
 
     private updateUser(request: Request, response: Response) {
         this.userManager.updateUser(request.params.id, request.body, (data: any) => {
+            response.status(200).json(data);
+        }, (error: Error) => {
+            response.status(500).json(null);
+        });
+    }
+
+
+    private getUsers(request: Request, response: Response) {
+        this.userManager.getUsers((data: any) => {
             response.status(200).json(data);
         }, (error: Error) => {
             response.status(500).json(null);

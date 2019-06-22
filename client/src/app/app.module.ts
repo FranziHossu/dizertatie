@@ -34,6 +34,7 @@ import {ProfileComponent} from '@/components/profile/profile.component';
 import {ResetPasswordComponent} from '@/components/reset-password/reset-password.component';
 import {NotificationComponent} from "@/components/notification/notification.component";
 import {UsersComponent} from "@/components/users/users.component";
+import { UserComponent } from './components/user/user.component';
 
 const appRoutes: Routes = ROUTES;
 
@@ -67,7 +68,8 @@ const appRoutes: Routes = ROUTES;
     ProfileComponent,
     ResetPasswordComponent,
     NotificationComponent,
-    UsersComponent
+    UsersComponent,
+    UserComponent
   ],
   providers: [
     HttpService,

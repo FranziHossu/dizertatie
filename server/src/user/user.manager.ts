@@ -86,4 +86,8 @@ export class UserManager extends AbstractManager {
     public getUserbyEmail(email: any, success: Function, fail: Function) {
         this.User.findOne({ email: email }, this.replay(success, fail));
     }
+
+    public getUsers(success: Function, fail: Function) {
+        this.User.find(this.replay(success, fail));
+    }
 }

@@ -8,7 +8,6 @@ import {Request, Response} from 'express';
 import {EmailManager} from './email.manager';
 import {UsedEmailsManager} from "../used-emails/used-emails.manager";
 
-
 export class EmailRouter extends AbstractRouter {
     private mailManager: EmailManager = new EmailManager();
     private usedEmailsManager: UsedEmailsManager = new UsedEmailsManager();
@@ -22,7 +21,6 @@ export class EmailRouter extends AbstractRouter {
         this.router.get(`/api/emails/admin`, this.getEmailsNumber.bind(this));
 
         this.router.delete(`/api/email/:id`, this.deleteEmail.bind(this));
-
     }
 
     private sendEmail(request: Request, response: Response) {
@@ -93,7 +91,6 @@ export class EmailRouter extends AbstractRouter {
             response.status(500).json(null);
         })
     }
-
     
     private getEmailsNumber(request: Request, response: Response) {
         this.mailManager.getEmailsNumber((data: any) => {

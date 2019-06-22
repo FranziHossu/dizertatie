@@ -82,4 +82,8 @@ export class ResetPasswordComponent implements OnInit {
       this.confirmedToken = false;
     });
   }
+
+  public navigateToLogin(){
+    this.router.navigate(['login'])
+  }
 }

@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="bar-top">
+        <title-bar [title]="title" [button]="button" [item]="list?.name"></title-bar>
+    </div>
+    <div class="content">
+        <div class="emails-inbox">
+            <div class="list-header">
+                <div class="index">
+                    <p>#</p>
+                </div>
+                <div class="subject">
+                    <p>Username</p>
+                </div>
+                <div class="content-email">
+                    <p>Email</p>
+                </div>
+                <div class="content-email">
+                    <p>Role</p>
+                </div>
+                <div class="content-email">
+                    <p>Actions</p>
+                </div>
+            </div>
+            <div class="email-items-overflow">
+                <div class="email-items">
+                    <div class="email-item" [class.even]="i%2!=0" *ngFor="let user of users; let i = index">
+                        <div (click)="navigateToUser(user.id)" class="index" title="{{i}}">{{i}}</div>
+                        <div (click)="navigateToUser(user.id)" class="subject" title="{{user.username}}">
+                            {{user.username}}</div>
+                        <div (click)="navigateToUser(user.id)" class="content-email" title="{{user.email}}">
+                            {{user.email}}</div>
+                        <div (click)="navigateToUser(user.id)" class="content-email" title="{{user.role}}">
+                            {{user.role}}</div>
+                        <div class="actions" title="Delete this user">
+                            <i (click)="deleteUser(user)" class="fa fa-trash"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

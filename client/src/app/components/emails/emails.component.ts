@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {EmailService} from "@/components/mail-sender/email.service";
-import {UserService} from "@/services/user.service";
-import {ConfirmationService} from "@/components/confirmation/confirmation.service";
-import {ConfirmationMessage} from "@/components/confirmation/confirmation-message.enum";
-import {AlertService} from "@/components/alert/alert.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { EmailService } from "@/components/mail-sender/email.service";
+import { UserService } from "@/services/user.service";
+import { ConfirmationService } from "@/components/confirmation/confirmation.service";
+import { ConfirmationMessage } from "@/components/confirmation/confirmation-message.enum";
+import { AlertService } from "@/components/alert/alert.service";
+import { Email } from '../mail-sender/mail.model';
 
 @Component({
   selector: 'app-emails',
@@ -34,9 +35,10 @@ export class EmailsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.title = this.route.snapshot.data.section;
 
-    this.emailService.getUserEmails(this.userService.currentUser.id).subscribe((data: any) => {
+    this.emailService.getUserEmails(this.userService.currentUser.id).subscribe((data: Array<Email>) => {
       for (let i = 0; i < data.length; i++) {
         const time = new Date(data[i].time);
         const date = time.getDate();
@@ -44,8 +46,27 @@ export class EmailsComponent implements OnInit {
         const year = time.getFullYear();
         const hour = time.getHours();
         const minutes = time.getMinutes();
+        let toStringText = '';
+
+        for (let index = 0; index < data[i].to.length; index++) {
+          if (toStringText != '') {
+            toStringText += ', ' + data[i].to[index];
+          } else {
+            toStringText += data[i].to[index];
+          }
+        }
+
+        for (let index = 0; index < data[i].toLists.length; index++) {
+          if (toStringText != '') {
+            toStringText += ', ' + data[i].toLists[index].name;
+          } else {
+            toStringText += ', ' + data[i].toLists[index].name;
+          }
+        }
+
         data[i].timeAsDate = date + '-' + month + '-' + year;
         data[i].timeAsHours = hour + ':' + minutes;
+        data[i].toString = toStringText;
       }
       this.emails = data;
     }, () => {

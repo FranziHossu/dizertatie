@@ -2,14 +2,14 @@
  it acts as the interface between the Angular application and the backend api */
 
 
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {User} from '../models';
-import {Observable} from 'rxjs';
-import {HttpService} from '@/http.service';
-import {UserNotification} from "@/models/notification";
+import { User } from '../models';
+import { Observable } from 'rxjs';
+import { HttpService } from '@/http.service';
+import { UserNotification } from "@/models/notification";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserService {
   private httpService: HttpService;
   public currentUser: User;
@@ -53,6 +53,15 @@ export class UserService {
   public getAccountToken(token: string) {
     return this.httpService.get(`/user/token/${token}`);
   }
+
+  public getUsers() {
+    return this.httpService.get(`/users`);
+  }
+
+  public deleteUser(id: any) {
+    return this.httpService.delete(`/user/${id}`);
+  }
+
 
   public sendNotification(notification: UserNotification) {
     return this.httpService.post(`/notification`, notification);

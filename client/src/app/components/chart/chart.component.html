@@ -1,28 +1,31 @@
-<html>
+<div class="container">
+  <div class="bar-top">
 
-<head>
-  <title>Bar Chart</title>
-</head>
+    <div class="actions-chart">
+      <p>Change chart type</p>
+      <select [(ngModel)]="chartType" (change)="changeChartType()">
+        <option [value]="CHART.Bar">{{CHART.Bar}}</option>
+        <option [value]="CHART.Pie">{{CHART.Pie}}</option>
+        <option [value]="CHART.Radar">{{CHART.Radar}}</option>
+        <option [value]="CHART.Doughnut">{{CHART.Doughnut}}</option>
+      </select>
+    </div>
 
-<body>
-  <canvas id="canvas">{{ chart }}</canvas>
 
-  <div class="buttons"></div>
-  <div class="button" (click)="increaseInterval()">
-    INCREASE INTERVAL
   </div>
+  <div class="content">
+    <canvas id="canvas">{{ chart }}</canvas>
 
-  <div class="button" (click)="decreaseInterval()">
-    DECREASE INTERVAL
+<!-- 
+    <div class="button" (click)="increaseInterval()">
+      INCREASE INTERVAL
+    </div>
+
+    <div class="button" (click)="decreaseInterval()">
+      DECREASE INTERVAL
+    </div> -->
+
+
+    <br>
   </div>
-
-  <select [(ngModel)]="chartType" (change)="changeChartType()">
-    <option [value]="CHART.Bar">{{CHART.Bar}}</option>
-    <option [value]="CHART.Pie">{{CHART.Pie}}</option>
-    <option [value]="CHART.Radar">{{CHART.Radar}}</option>
-    <option [value]="CHART.Doughnut">{{CHART.Doughnut}}</option>
-  </select>
-  <br>
-</body>
-
-</html>
+</div>

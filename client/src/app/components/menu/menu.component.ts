@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {SectionRoutes} from '@/enums/section-routes.enum';
-import {ActivatedRoute, Router} from '@angular/router';
-import {SectionTitle} from '@/enums/section-title.enum';
-import {MenuService} from './menu.service';
-import {LocalStorageService} from '@/services/local-storage.service';
-import {User} from "@/models";
-import {UserService} from "@/services/user.service";
+import { Component, OnInit } from '@angular/core';
+import { SectionRoutes } from '@/enums/section-routes.enum';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SectionTitle } from '@/enums/section-title.enum';
+import { MenuService } from './menu.service';
+import { LocalStorageService } from '@/services/local-storage.service';
+import { User } from "@/models";
+import { UserService } from "@/services/user.service";
 
 @Component({
   selector: 'menu',
@@ -56,6 +56,8 @@ export class MenuComponent implements OnInit {
       this.currentSection = SectionTitle.Lists;
     } else if (url === 'profile') {
       this.currentSection = SectionTitle.Profile;
+    } else if (url === 'users' || url === 'user') {
+      this.currentSection = SectionTitle.Users;
     }
   }
 
@@ -70,12 +72,12 @@ export class MenuComponent implements OnInit {
       this.currentSection = SectionTitle.Lists;
     } else if (section === 'Profile') {
       this.currentSection = SectionTitle.Profile;
+    } else if (section === 'users' || section == 'user') {
+      this.currentSection = SectionTitle.Users;
     }
   }
 
   public setCurrentSectionValue(value: any) {
     this.currentSection = value;
   }
-
-
 }

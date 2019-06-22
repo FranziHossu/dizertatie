@@ -8,6 +8,7 @@
         <div class="index"><p>#</p></div>
         <div class="subject"><p>Subject</p></div>
         <div class="content-email"><p>Content</p></div>
+        <div class="content-email"><p>Sent to</p></div>
         <div class="date"><p>Date</p></div>
         <div class="time"><p>Time</p></div>
         <div class="time"><p>Actions</p></div>
@@ -18,6 +19,7 @@
             <div (click)="navigateToEmail(email.id)" class="index" title="{{i}}">{{i}}</div>
             <div (click)="navigateToEmail(email.id)" class="subject" title="{{email.subject}}">{{email.subject}}</div>
             <div (click)="navigateToEmail(email.id)" class="content-email" title="{{email.content}}">{{email.content}}</div>
+            <div (click)="navigateToEmail(email.id)" class="content-email" title="{{email.toString}}">{{email.toString}}</div>
             <div (click)="navigateToEmail(email.id)" class="time" title="{{email.timeAsDate}}">{{email.timeAsDate}}</div>
             <div (click)="navigateToEmail(email.id)" class="time" title="{{email.timeAsHours}}">{{email.timeAsHours}}</div>
             <div class="actions" title="Delete this email">
