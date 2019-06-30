@@ -1,6 +1,7 @@
 <div class="widget">
   <div class="name">
     <div class="actions" *ngIf="!shared">
+      <i class="fa fa-share" (click)="shareWith()"></i>
       <i class="fa fa-pen" (click)="edit()"></i>
       <i class="fa fa-trash" (click)="emitDelete()"></i>
     </div>

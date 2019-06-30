@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.title = this.route.snapshot.data.section;
     this.user = this.userService.currentUser;
+
     this.username = this.user.username;
     this.firstName = this.user.firstName;
     this.lastName = this.user.lastName;
@@ -44,7 +45,8 @@ export class ProfileComponent implements OnInit {
   }
 
   public saveEdit() {
-    const user: User = this.userService.currentUser;
+    const user: User = new User();
+    user.id = this.user.id;
     user.lastName = this.lastName;
     user.firstName = this.firstName;
     user.email = this.email;

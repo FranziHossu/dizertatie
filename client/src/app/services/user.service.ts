@@ -2,17 +2,20 @@
  it acts as the interface between the Angular application and the backend api */
 
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { User } from '../models';
-import { Observable } from 'rxjs';
-import { HttpService } from '@/http.service';
-import { UserNotification } from "@/models/notification";
+import {User} from '../models';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpService} from '@/http.service';
+import {UserNotification} from "@/models/notification";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class UserService {
+  private userProfileSubject = new BehaviorSubject(null);
   private httpService: HttpService;
+
   public currentUser: User;
+  public userProfileObservable = this.userProfileSubject.asObservable();
 
   constructor(httpService: HttpService) {
     this.httpService = httpService;
@@ -69,5 +72,9 @@ export class UserService {
 
   public getUserNotifications() {
     return this.httpService.get(`/notifications/${this.currentUser.id}`);
+  }
+
+  public setUserProfille(user: any) {
+    this.userProfileSubject.next(user);
   }
 }

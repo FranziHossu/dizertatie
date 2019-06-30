@@ -59,7 +59,7 @@ export class UsersComponent {
     });
   }
 
-  public navigateToUser(id: any) {
-    this.router.navigate([`user/${id}`]);
+  public navigateToUser(user: any) {
+    this.router.navigate([`user/${user.id}`]);
   }
 }

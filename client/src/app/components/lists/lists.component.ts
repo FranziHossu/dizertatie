@@ -57,6 +57,7 @@ export class ListsComponent implements OnInit {
 
   private getUsersharedLists() {
     this.listService.getSharedListsByUser().subscribe((data) => {
+      console.log(data);
       this.allSharedLists = data;
       this.allSharedLists.sort((a, b) => {
         return a.name.localeCompare(b.name);

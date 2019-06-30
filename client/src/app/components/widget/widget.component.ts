@@ -7,6 +7,7 @@ import {MenuService} from "@/components/menu/menu.service";
 import {SectionTitle} from "@/enums/section-title.enum";
 import {ConfirmationService} from "@/components/confirmation/confirmation.service";
 import {Subscription} from "rxjs";
+import {ElementsService} from "@/components/popup-elements/elements.service";
 
 @Component({
   selector: 'widget',
@@ -24,7 +25,7 @@ export class WidgetComponent implements OnInit {
   private menuService: MenuService;
   private confirmationService: ConfirmationService;
 
-  constructor(router: Router, confirmationService: ConfirmationService, listService: ListService, menuService: MenuService) {
+  constructor(router: Router, confirmationService: ConfirmationService, listService: ListService, menuService: MenuService, private elementsService: ElementsService) {
     this.confirmationService = confirmationService;
     this.router = router;
     this.listService = listService;
@@ -57,5 +58,26 @@ export class WidgetComponent implements OnInit {
     this.menuService.changeSection('email');
     this.listService.nextList(this.list);
     this.router.navigate(['email/create']);
+  }
+
+  public shareWith() {
+    this.elementsService.displayElements(2);
+    this.elementsService.elementsAnswerObservable.subscribe((responseArray: Array<any>) => {
+      responseArray.forEach((e) => {
+        let found = false;
+        this.list.shared.forEach((y) => {
+          if (y === e) {
+            found = true;
+          }
+        });
+
+        if (!found) {
+          this.list.shared.push(e);
+        }
+      });
+
+      this.listService.updateList(this.list);
+
+    });
   }
 }

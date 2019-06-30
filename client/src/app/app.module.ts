@@ -35,6 +35,8 @@ import {ResetPasswordComponent} from '@/components/reset-password/reset-password
 import {NotificationComponent} from "@/components/notification/notification.component";
 import {UsersComponent} from "@/components/users/users.component";
 import { UserComponent } from './components/user/user.component';
+import {PopupElementsComponent} from "@/components/popup-elements/popup-elements.component";
+import {ElementsService} from "@/components/popup-elements/elements.service";
 
 const appRoutes: Routes = ROUTES;
 
@@ -69,7 +71,8 @@ const appRoutes: Routes = ROUTES;
     ResetPasswordComponent,
     NotificationComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    PopupElementsComponent
   ],
   providers: [
     HttpService,
@@ -79,7 +82,8 @@ const appRoutes: Routes = ROUTES;
     ListService,
     ConfirmationService,
     EmailService,
-    MenuService
+    MenuService,
+    ElementsService
   ],
   bootstrap: [AppComponent]
 })

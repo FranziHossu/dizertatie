@@ -22,7 +22,7 @@ export class ListService {
   }
 
   public getSharedListsByUser(): Observable<any> {
-    return this.httpService.get(`/lists/shared/${this.userService.currentUser.email}`);
+    return this.httpService.get(`/lists/shared/${this.userService.currentUser.id}`);
   }
 
   public addList(list: any): Observable<any> {

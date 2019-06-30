@@ -9,3 +9,7 @@
 <div *ngIf="displayAlert" class="popUp">
   <alert></alert>
 </div>
+
+<div *ngIf="displayElements" class="popUp">
+  <elements [displayLists]="displayLists" [displayUsers]="displayUsers"></elements>
+</div>
