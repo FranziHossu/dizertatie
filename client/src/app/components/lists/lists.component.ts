@@ -39,8 +39,6 @@ export class ListsComponent implements OnInit {
     this.title = this.route.snapshot.data.section;
     this.getUserLists();
     this.getUsersharedLists();
-
-
   }
 
   private getUserLists() {

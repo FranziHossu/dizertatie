@@ -22,13 +22,13 @@ export class PopupElementsComponent implements OnInit {
   ngOnInit() {
     if (this.displayUsers) {
       this.userService.getUsers().subscribe((data: Array<any>) => {
+        console.log(data);
         for (let i = 0; i < data.length; i++) {
           if (data[i].id === this.userService.currentUser.id) {
             data.splice(i, 1);
           }
           data[i].selected = false;
         }
-
         this.array = data;
       });
     } else {

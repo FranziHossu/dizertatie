@@ -14,8 +14,8 @@ export class ListManager extends AbstractManager {
     }
 
     public getSharedListsByUser(id: string, success: Function, fail: Function) {
-        console.log(id);
-        this.List.find({shared: {$elemMatch: id}}).exec(this.replay(success, fail));
+        console.log(String(id));
+        this.List.find({shared: id}).exec(this.replay(success, fail));
     }
 
     public addList(list: any, success: Function, fail: Function) {

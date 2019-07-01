@@ -8,10 +8,7 @@ export const listSchema: Schema = new Schema({
         ref: "User",
     },
     emails: [String],
-    shared: [{
-        type: Schema.Types.ObjectId,
-        ref: "User",
-    }],
+    shared: [String],
     name: String,
     description: String
 }, {
@@ -25,8 +22,9 @@ export const listSchema: Schema = new Schema({
     });
 
 export interface IList extends Document {
-    user: IUser;
+    user: IUser
     emails: [string]
+    shared: [string]
     name: string
     description: string
 }
