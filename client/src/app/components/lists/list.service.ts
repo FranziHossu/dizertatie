@@ -25,6 +25,10 @@ export class ListService {
     return this.httpService.get(`/lists/shared/${this.userService.currentUser.id}`);
   }
 
+  public getMemberOfLists(): Observable<any> {
+    return this.httpService.get(`/lists/memberOf/${this.userService.currentUser.email}`);
+  }
+
   public addList(list: any): Observable<any> {
     return this.httpService.post(`/list`, list);
   }

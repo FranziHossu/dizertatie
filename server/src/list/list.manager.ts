@@ -14,8 +14,10 @@ export class ListManager extends AbstractManager {
     }
 
     public getSharedListsByUser(id: string, success: Function, fail: Function) {
-        console.log(String(id));
         this.List.find({shared: id}).exec(this.replay(success, fail));
+    }
+    public getMemberOfList(email: string, success: Function, fail: Function) {
+        this.List.find({emails: email}).exec(this.replay(success, fail));
     }
 
     public addList(list: any, success: Function, fail: Function) {
@@ -23,6 +25,7 @@ export class ListManager extends AbstractManager {
     }
 
     public updateList(list: any, success: Function, fail: Function) {
+        this.List.update({_id: list.id}, list, this.replay(success, fail));
         this.List.update({_id: list.id}, list, this.replay(success, fail));
     }
 

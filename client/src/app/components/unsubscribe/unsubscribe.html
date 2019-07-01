@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="header">
+    <header [logoutStatus]="false"></header>
+  </div>
+  <div class="content">
+    <div class="panel">
+
+
+      <div class="invalid-token" *ngIf="invalidToken">
+        Invalid URL
+      </div>
+
+
+      <div class="column">
+
+        <div (click)="navigateToLogin()" class="go-login">
+          Go to login
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

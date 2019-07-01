@@ -1,11 +1,11 @@
 <div class="widget">
   <div class="name">
-    <div class="actions" *ngIf="!shared">
+    <div class="actions" *ngIf="!shared && !memberOf">
       <i class="fa fa-share" (click)="shareWith()"></i>
       <i class="fa fa-pen" (click)="edit()"></i>
       <i class="fa fa-trash" (click)="emitDelete()"></i>
     </div>
-    <div class="actions" *ngIf="shared">
+    <div class="actions" *ngIf="shared || memberOf">
       <i class="fa fa-user-slash" title="Unsubscribe from this list" (click)="handleUnsubscribe()"></i>
     </div>
     <p (click)="sendEmailToList()" title="{{list?.name}}">{{list?.name}}</p>

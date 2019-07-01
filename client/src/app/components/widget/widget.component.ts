@@ -17,8 +17,10 @@ import {ElementsService} from "@/components/popup-elements/elements.service";
 export class WidgetComponent implements OnInit {
   @Input() list: List;
   @Input() shared: boolean;
+  @Input() memberOf: boolean;
   @Output() delete: EventEmitter<string> = new EventEmitter();
   @Output() emitUnsubscribe: EventEmitter<List> = new EventEmitter();
+  @Output() emitRemoveShared: EventEmitter<List> = new EventEmitter();
 
   private router: Router;
   private listService: ListService;
@@ -43,7 +45,13 @@ export class WidgetComponent implements OnInit {
     this.confirmationService.setMessage(`Are you sure you want to unsubscribe from ${this.list.name} ?`);
     const subs: Subscription = this.confirmationService.answerObservable.subscribe((answer: any) => {
       if (answer) {
-        this.emitUnsubscribe.emit(this.list);
+        if (this.shared) {
+          this.emitRemoveShared.emit(this.list);
+
+        } else if (this.memberOf) {
+          this.emitUnsubscribe.emit(this.list);
+
+        }
       }
       subs.unsubscribe();
     });
@@ -72,11 +80,13 @@ export class WidgetComponent implements OnInit {
         });
 
         if (!found) {
-          this.list.shared.push(e);
+          this.list.shared.push(e.id);
         }
       });
 
-      this.listService.updateList(this.list);
+      this.listService.updateList(this.list).subscribe(() => {
+
+      });
 
     });
   }

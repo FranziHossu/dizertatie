@@ -6,6 +6,8 @@ export class Email {
   public fromId: number;
   public to: Array<string> = new Array<string>();
   public toLists: Array<List> = new Array<List>();
+  public attachements: Array<any> = new Array<any>();
+
   public subject: string;
   public content: string;
   public time: Date;

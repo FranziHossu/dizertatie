@@ -26,6 +26,8 @@ export class ListsComponent implements OnInit {
   public allLists: Array<List> = new Array<List>();
   public sharedLists: Array<List> = new Array<List>();
   public allSharedLists: Array<List> = new Array<List>();
+  public memberOfLists: Array<List> = new Array<List>();
+  public allMemberOfLists: Array<List> = new Array<List>();
   public currentTab = 0;
 
   constructor(listService: ListService, route: ActivatedRoute, userService: UserService, confirmationService: ConfirmationService) {
@@ -39,6 +41,7 @@ export class ListsComponent implements OnInit {
     this.title = this.route.snapshot.data.section;
     this.getUserLists();
     this.getUsersharedLists();
+    this.getMemberOfLists();
   }
 
   private getUserLists() {
@@ -55,12 +58,23 @@ export class ListsComponent implements OnInit {
 
   private getUsersharedLists() {
     this.listService.getSharedListsByUser().subscribe((data) => {
-      console.log(data);
       this.allSharedLists = data;
       this.allSharedLists.sort((a, b) => {
         return a.name.localeCompare(b.name);
       });
       this.sharedLists = this.allSharedLists;
+    }, () => {
+
+    });
+  }
+
+  private getMemberOfLists() {
+    this.listService.getMemberOfLists().subscribe((data) => {
+      this.allMemberOfLists = data;
+      this.allMemberOfLists.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
+      this.memberOfLists = this.allMemberOfLists;
     }, () => {
 
     });
@@ -78,7 +92,6 @@ export class ListsComponent implements OnInit {
         });
       }
     });
-
   }
 
   private removeListById(id: string) {
@@ -118,6 +131,45 @@ export class ListsComponent implements OnInit {
       }
     }
     this.listService.updateList(newList).subscribe((data: any) => {
+        for (let i = 0; i < this.memberOfLists.length; i++) {
+          if (this.memberOfLists[i].id === list.id) {
+            this.memberOfLists.splice(i, 1);
+            break;
+          }
+        }
+
+        const notification: UserNotification = new UserNotification();
+        notification.author = this.userService.currentUser.id;
+        notification.text = `${this.userService.currentUser.username} unsubscribed from the list: ${list.name}`;
+        notification.target = list.user;
+        notification.time = new Date();
+
+        this.userService.sendNotification(notification).subscribe((data: any) => {
+
+        }, (error: any) => {
+
+        });
+
+      }, () => {
+      }
+    );
+  }
+
+  public removeShared(list: List) {
+    const newList: List = new List();
+    newList.emails = list.emails;
+    newList.id = list.id;
+    newList.name = list.name;
+    newList.description = list.description;
+    newList.user = list.user;
+
+    for (let j = 0; j < newList.shared.length; j++) {
+      if (newList.shared[j] === String(this.userService.currentUser.id)) {
+        newList.emails.splice(j, 1);
+        break;
+      }
+    }
+    this.listService.updateList(newList).subscribe((data: any) => {
         for (let i = 0; i < this.sharedLists.length; i++) {
           if (this.sharedLists[i].id === list.id) {
             this.sharedLists.splice(i, 1);
@@ -131,7 +183,6 @@ export class ListsComponent implements OnInit {
         notification.target = list.user;
         notification.time = new Date();
 
-        console.log(notification);
         this.userService.sendNotification(notification).subscribe((data: any) => {
 
         }, (error: any) => {

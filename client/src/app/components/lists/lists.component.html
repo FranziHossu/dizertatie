@@ -32,18 +32,18 @@
         <p>There are no lists..</p>
       </div>
       <div class="list">
-        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true"
-                (emitUnsubscribe)="unsubscribe($event)"></widget>
+        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true" [memberOf]="false"
+                (emitRemoveShared)="removeShared($event)"></widget>
       </div>
     </div>
 
 
     <div *ngIf="currentTab === 2" class="wrapper">
-      <div *ngIf="sharedLists.length == 0" class="empty-label">
+      <div *ngIf="memberOfLists.length == 0" class="empty-label">
         <p>There are no lists..</p>
       </div>
       <div class="list">
-        <widget *ngFor="let item of sharedLists" [list]="item" [shared]="true"
+        <widget *ngFor="let item of memberOfLists" [list]="item" [shared]="false" [memberOf]="true"
                 (emitUnsubscribe)="unsubscribe($event)"></widget>
       </div>
     </div>

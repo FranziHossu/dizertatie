@@ -42,6 +42,10 @@
       </div>
     </div>
 
+    <div *ngIf="title !== sectionTitle.ViewEmail"  class="element">
+      <div class="label">Attachements:</div>
+      <input (input)="addAttachement()" type="file">
+    </div>
     <div class="btns">
       <div class="btn" (click)="sendEmail()" *ngIf="title !== sectionTitle.ViewEmail">Send Email</div>
       <div class="btn" (click)="cancel()">Cancel</div>

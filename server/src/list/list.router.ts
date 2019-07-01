@@ -6,6 +6,7 @@ import {Request, Response} from 'express';
 
 /** Managers */
 import {ListManager} from './list.manager';
+import {IList} from "./list.model";
 
 export class ListRouter extends AbstractRouter {
     private listManager: ListManager = new ListManager();
@@ -13,6 +14,7 @@ export class ListRouter extends AbstractRouter {
     protected initRoutes() {
         this.router.get('/api/lists/:id', this.getListsByUser.bind(this));
         this.router.get('/api/lists/shared/:id', this.getSharedListsByUser.bind(this));
+        this.router.get('/api/lists/memberOf/:email', this.getMemberOfList.bind(this));
         this.router.get('/api/list/:id', this.getListById.bind(this));
 
 
@@ -40,8 +42,23 @@ export class ListRouter extends AbstractRouter {
         });
     }
 
+    private getMemberOfList(request: Request, response: Response) {
+        this.listManager.getMemberOfList(request.params.email, (data) => {
+            response.status(200).json(data);
+        }, () => {
+            response.status(500).json(null);
+        });
+    }
+
     private addList(request: Request, response: Response) {
-        this.listManager.addList(request.body, (result) => {
+        this.listManager.addList(request.body, (result: IList) => {
+
+            result.emails.forEach((e) => {
+                if (e.indexOf('ubbcluj') < 0) {
+                    console.log(e);
+                    this.emailService.send(e, 'Support UbbCluj', 'Unsubscribe link', `http://localhost:4200/unsubscribe/${result.id}-${e}` )
+                }
+            });
 
             response.status(200).json(result);
         }, () => {
@@ -65,13 +82,6 @@ export class ListRouter extends AbstractRouter {
         });
     }
 
-    private addSharedUserToList(request: Request, response: Response) {
-        // this.listManager.addSharedUserToList(request.params.id, (data: any) => {
-        //     response.status(200).json(data);
-        // }, () => {
-        //     response.status(500).json(null);
-        // });
-    }
 
     private getListById(request: Request, response: Response) {
         this.listManager.getListsById(request.params.id, (data: any) => {

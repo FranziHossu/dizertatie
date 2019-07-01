@@ -37,6 +37,7 @@ import {UsersComponent} from "@/components/users/users.component";
 import { UserComponent } from './components/user/user.component';
 import {PopupElementsComponent} from "@/components/popup-elements/popup-elements.component";
 import {ElementsService} from "@/components/popup-elements/elements.service";
+import {UnsubscribeComponent} from "@/components/unsubscribe/unsubscribe";
 
 const appRoutes: Routes = ROUTES;
 
@@ -72,7 +73,8 @@ const appRoutes: Routes = ROUTES;
     NotificationComponent,
     UsersComponent,
     UserComponent,
-    PopupElementsComponent
+    PopupElementsComponent,
+    UnsubscribeComponent
   ],
   providers: [
     HttpService,
