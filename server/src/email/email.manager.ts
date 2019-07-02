@@ -50,7 +50,7 @@ export class EmailManager extends AbstractManager {
     }
 
     public getEmailsByUser(id: any, success: Function, fail: Function) {
-        this.Email.find({fromId: id}).exec((this.replay(success, fail)));
+        this.Email.find({fromId: id}).populate('toLists').exec((this.replay(success, fail)));
     }
 
     public getEmail(id: any, success: Function, fail: Function) {

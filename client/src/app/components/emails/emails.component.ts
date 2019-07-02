@@ -53,6 +53,7 @@ export class EmailsComponent implements OnInit {
 
         let toStringText = '';
 
+        console.log(data[i])
         for (let index = 0; index < data[i].to.length; index++) {
           if (toStringText != '') {
             toStringText += ', ' + data[i].to[index];
@@ -63,9 +64,11 @@ export class EmailsComponent implements OnInit {
 
         for (let index = 0; index < data[i].toLists.length; index++) {
           if (toStringText != '') {
+            console.log(1);
             toStringText += ', ' + data[i].toLists[index].name;
           } else {
-            toStringText += ', ' + data[i].toLists[index].name;
+            console.log(2);
+            toStringText +=  data[i].toLists[index].name;
           }
         }
 
