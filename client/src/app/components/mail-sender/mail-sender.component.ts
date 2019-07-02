@@ -198,7 +198,9 @@ export class MailSenderComponent implements OnInit, OnDestroy {
     return regex.test(String(this.to).toLowerCase());
   }
 
-  addAttachement() {
-
+  addAttachement(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+    }
   }
 }
