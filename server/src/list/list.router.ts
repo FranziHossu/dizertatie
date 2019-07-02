@@ -54,10 +54,8 @@ export class ListRouter extends AbstractRouter {
         this.listManager.addList(request.body, (result: IList) => {
 
             result.emails.forEach((e) => {
-                if (e.indexOf('ubbcluj') < 0) {
                     console.log(e);
-                    this.emailService.send(e, 'Support UbbCluj', 'Unsubscribe link', `http://localhost:4200/unsubscribe/${result.id}-${e}` )
-                }
+                    this.emailService.send(e, 'Support UbbCluj', 'Unsubscribe link', `You can unsubscribe from this list using this link: \n http://localhost:4200/unsubscribe/${result.id}-${e}` )
             });
 
             response.status(200).json(result);
