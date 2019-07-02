@@ -4,6 +4,7 @@ import { ChartType } from './chart-type.enum';
 import { DataService } from '@/services/data.service';
 import { UserService } from '@/services/user.service';
 import { EmailService } from '../mail-sender/email.service';
+//import { randomFill } from 'crypto';
 
 @Component({
   selector: 'chart',
@@ -99,7 +100,7 @@ export class ChartComponent implements OnInit {
         datasets: [
           {
             data: this.userEmails,
-            backgroundColor: 'green',
+            backgroundColor: ['blue','yellow','green','pink','orange','lila'],
             fill: false
           },
         ]

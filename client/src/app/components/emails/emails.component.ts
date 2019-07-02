@@ -45,7 +45,12 @@ export class EmailsComponent implements OnInit {
         const month = parseInt(String(time.getMonth())) + 1;
         const year = time.getFullYear();
         const hour = time.getHours();
-        const minutes = time.getMinutes();
+        let minutes:string = String(time.getMinutes());
+
+        if(Number(minutes) < 10){
+          minutes = String('0' + minutes);
+        }
+
         let toStringText = '';
 
         for (let index = 0; index < data[i].to.length; index++) {
@@ -82,7 +87,7 @@ export class EmailsComponent implements OnInit {
     this.confirmationService.setMessage(ConfirmationMessage.DELETE_EMAIL);
     const subs = this.confirmationService.answerObservable.subscribe((answer: any) => {
       if (answer) {
-        this.alertService.setMessage(`Email succsessfully deleted`);
+        this.alertService.setMessage(`Email successfully deleted`);
 
         this.emailService.deleteEmail(email).subscribe((data: any) => {
           for (let i = 0; i < this.emails.length; i++) {

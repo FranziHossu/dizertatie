@@ -39,18 +39,20 @@ export class WidgetComponent implements OnInit {
 
   public emitDelete() {
     this.delete.emit(this.list.id);
+    
   }
 
   public handleUnsubscribe() {
     this.confirmationService.setMessage(`Are you sure you want to unsubscribe from ${this.list.name} ?`);
     const subs: Subscription = this.confirmationService.answerObservable.subscribe((answer: any) => {
+      
       if (answer) {
         if (this.shared) {
           this.emitRemoveShared.emit(this.list);
 
         } else if (this.memberOf) {
-          this.emitUnsubscribe.emit(this.list);
 
+          this.emitUnsubscribe.emit(this.list);
         }
       }
       subs.unsubscribe();

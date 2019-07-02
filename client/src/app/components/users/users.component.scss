@@ -4,6 +4,8 @@
     background: #ffffff;
   }
   
+  p{margin: 0;}
+
   .container {
     display: flex;
     flex-direction: column;
@@ -44,13 +46,12 @@
         color: #ffffff;
   
         & > * {
-          padding: 5px 10px;
-          margin: auto;
+          // padding: 5px 0;
           font-weight: bolder;
           display: flex;
   
           p {
-            margin: auto auto auto 0;
+            margin: auto;
           }
   
         }
@@ -58,27 +59,30 @@
   
         .index {
           height: 100%;
-          width: 5%;
+          width: 100px;
+          flex-shrink: 0;
+          flex-grow: 0;
         }
-  
+
         .subject {
           height: 100%;
-          width: 15%;
+          width: 200px;
+          flex-shrink: 0;
+          flex-grow: 0;
         }
-  
+
         .content-email {
           height: 100%;
-          width: 60%;
+          width: 400px;
+          flex-shrink: 0;
+          flex-grow: 0;
         }
-  
-        .date {
+
+        .actions {
+          width: 100%;
           height: 100%;
-          width: 10%;
-        }
-  
-        .time {
-          height: 100%;
-          width: 10%;
+          display: flex;
+          text-align: center;
         }
       }
   
@@ -105,9 +109,12 @@
             }
   
             & > * {
-              padding: 0 10px;
-              margin: auto;
+              // padding: 0 10px;
               font-weight: normal;
+              text-align: center;
+              p{margin: auto;}
+
+              
             }
   
             &:last-of-type {
@@ -116,31 +123,30 @@
   
             .index {
               height: 100%;
-              width: 5%;
+              width: 100px;
+
+              flex-shrink: 0;
+              flex-grow: 0;
             }
   
             .subject {
               height: 100%;
-              width: 15%;
+              width: 200px;
+              flex-shrink: 0;
+              flex-grow: 0;
             }
   
             .content-email {
               height: 100%;
-              width: 60%;
+              width: 400px;
+              flex-shrink: 0;
+              flex-grow: 0;
             }
   
-            .date {
-              height: 100%;
-              width: 10%;
-            }
-  
-            .time {
-              height: 100%;
-              width: 10%;
-            }
             .actions {
               height: 100%;
-              width: 10%;
+              width: 100%;
+              margin: auto;
               display: flex;
               text-align: center;
   

@@ -17,7 +17,6 @@ export class ListRouter extends AbstractRouter {
         this.router.get('/api/lists/memberOf/:email', this.getMemberOfList.bind(this));
         this.router.get('/api/list/:id', this.getListById.bind(this));
 
-
         this.router.post('/api/list', this.addList.bind(this));
 
         this.router.put('/api/list', this.updateList.bind(this));
@@ -54,10 +53,7 @@ export class ListRouter extends AbstractRouter {
         this.listManager.addList(request.body, (result: IList) => {
 
             result.emails.forEach((e) => {
-                if (e.indexOf('ubbcluj') < 0) {
-                    console.log(e);
                     this.emailService.send(e, 'Support UbbCluj', 'Unsubscribe link', `http://localhost:4200/unsubscribe/${result.id}-${e}` )
-                }
             });
 
             response.status(200).json(result);

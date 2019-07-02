@@ -24,7 +24,7 @@ export class EmailManager extends AbstractManager {
         body.toLists.forEach((element) => {
             element.emails.forEach(email => {
                 try {
-                    console.log('Send to email form list ', email);
+                    console.log('Send to email from list ', email);
 
                     this.emailService.send(email, body.from, body.subject, body.content);
                 } catch (e) {

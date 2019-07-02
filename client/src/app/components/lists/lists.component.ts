@@ -144,11 +144,11 @@ export class ListsComponent implements OnInit {
         notification.target = list.user;
         notification.time = new Date();
 
-        this.userService.sendNotification(notification).subscribe((data: any) => {
+        // this.userService.sendNotification(notification).subscribe((data: any) => {
 
-        }, (error: any) => {
+        // }, (error: any) => {
 
-        });
+        // });
 
       }, () => {
       }

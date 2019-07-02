@@ -6,7 +6,7 @@
         <div class="emails-inbox">
             <div class="list-header">
                 <div class="index">
-                    <p>#</p>
+                    <p>Nr.</p>
                 </div>
                 <div class="subject">
                     <p>Username</p>
@@ -17,20 +17,20 @@
                 <div class="content-email">
                     <p>Role</p>
                 </div>
-                <div class="content-email">
+                <div class="actions">
                     <p>Actions</p>
                 </div>
             </div>
             <div class="email-items-overflow">
                 <div class="email-items">
                     <div class="email-item" [class.even]="i%2!=0" *ngFor="let user of users; let i = index">
-                        <div (click)="navigateToUser(user)" class="index" title="{{i}}">{{i}}</div>
+                        <div (click)="navigateToUser(user)" class="index" title="{{i}}"><p>{{i}}</p></div>
                         <div (click)="navigateToUser(user)" class="subject" title="{{user.username}}">
-                            {{user.username}}</div>
+                            <p>{{user.username}}</p></div>
                         <div (click)="navigateToUser(user)" class="content-email" title="{{user.email}}">
-                            {{user.email}}</div>
+                            <p>{{user.email}}</p></div>
                         <div (click)="navigateToUser(user)" class="content-email" title="{{user.role}}">
-                            {{user.role}}</div>
+                            <p>{{user.role}}</p></div>
                         <div class="actions" title="Delete this user">
                             <i (click)="deleteUser(user)" class="fa fa-trash"></i>
                         </div>
