@@ -15,7 +15,7 @@
     "promise": "^8.0.3",
     "rxjs": "^6.2.2",
     "ts-node": "^7.0.1",
-    "nodemailer": "^3.1.7",
+    "nodemailer": "^6.4.16",
     "pug": "*"
   }
 }
